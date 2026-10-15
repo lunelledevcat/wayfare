@@ -13,7 +13,8 @@ import { cn } from "@/lib/utils";
 import { ModeIcon } from "./mode-icon";
 import { usePrefs } from "./prefs";
 import { buildPlanUrl } from "./search-box";
-import { PRIORITY_EMOJI, TripCard } from "./trip-card";
+import { PriorityIcon } from "./icons";
+import { TripCard } from "./trip-card";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
 import { Card, Skeleton } from "./ui/primitives";
@@ -218,8 +219,8 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
                 prefs.priority === p ? "bg-primary text-white shadow-soft" : "hover:bg-bg",
               )}
             >
-              <span className="text-lg font-bold">
-                <span aria-hidden>{PRIORITY_EMOJI[p]}</span> {t(`priority.${p}`)}
+              <span className="inline-flex items-center gap-1.5 text-lg font-bold">
+                <PriorityIcon priority={p} className="size-5" /> {t(`priority.${p}`)}
               </span>
               <span className={cn("text-xs", prefs.priority === p ? "text-white/85" : "text-muted")}>{t(`priorityHint.${p}`)}</span>
             </button>
@@ -231,7 +232,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
       {top && (
         <Card className="border-primary/40 bg-primary-soft/40 p-4 md:p-5">
           <p className="flex items-center gap-2 text-sm font-bold text-primary">
-            <Sparkles className="size-4" aria-hidden /> {t("best")} · {PRIORITY_EMOJI[prefs.priority]} {t(`priority.${prefs.priority}`)}
+            <Sparkles className="size-4" aria-hidden /> {t("best")} · <PriorityIcon priority={prefs.priority} className="size-4" /> {t(`priority.${prefs.priority}`)}
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-1">

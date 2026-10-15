@@ -1,23 +1,23 @@
-import { Bike, Bus, BusFront, Car, CarTaxiFront, Footprints, Plane, Ship, TrainFront, TramFront, type LucideIcon } from "lucide-react";
 import type { Mode } from "@/lib/planner/types";
 import { cn } from "@/lib/utils";
+import { BoatIcon, CarIcon, CoachIcon, FlightIcon, MetroIcon, MotorbikeIcon, TaxiIcon, TrainIcon, VanIcon, WalkIcon, type Icon } from "./icons";
 
-const ICONS: Record<Mode, LucideIcon> = {
-  walk: Footprints,
-  bts: TramFront,
-  mrt: TramFront,
-  arl: TramFront,
-  red: TramFront,
-  train: TrainFront,
-  bus: Bus,
-  coach: BusFront,
-  van: Car,
-  boat: Ship,
-  flight: Plane,
-  taxi: CarTaxiFront,
-  grab: Car,
-  win: Bike,
-  car: Car,
+const ICONS: Record<Mode, Icon> = {
+  walk: WalkIcon,
+  bts: MetroIcon,
+  mrt: MetroIcon,
+  arl: MetroIcon,
+  red: MetroIcon,
+  train: TrainIcon,
+  bus: CoachIcon,
+  coach: CoachIcon,
+  van: VanIcon,
+  boat: BoatIcon,
+  flight: FlightIcon,
+  taxi: TaxiIcon,
+  grab: CarIcon,
+  win: MotorbikeIcon,
+  car: CarIcon,
 };
 
 /** Colour always paired with an icon (meaning never carried by colour alone). */
@@ -49,7 +49,7 @@ export function ModeIcon({ mode, className, label, color }: { mode: Mode; classN
       aria-label={label}
       aria-hidden={label ? undefined : true}
     >
-      <Icon className="size-[60%]" strokeWidth={2.2} />
+      <Icon className="size-[66%]" />
     </span>
   );
 }

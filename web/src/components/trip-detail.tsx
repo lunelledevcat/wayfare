@@ -13,6 +13,7 @@ import { ModeIcon } from "./mode-icon";
 import { WarningLine } from "./trip-card";
 import { Badge, Card, Skeleton } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
+import { VoiceButton } from "./voice-button";
 import { WeatherChip } from "./weather";
 
 const RouteMap = dynamic(() => import("./route-map"), { ssr: false, loading: () => <Skeleton className="h-full min-h-72" /> });
@@ -33,6 +34,14 @@ export function TripDetail({ trip, query, backHref, fromName, toName }: { trip: 
   const tc = useTranslations("common");
   const { price, time, dur, msg, locale } = useFmt();
   const total = Object.values(trip.breakdown).reduce((a, b) => a + b, 0) || 1;
+  // spoken summary: leave time, steps, total cost, weather warnings (read in the chosen language)
+  const spoken = [
+    t("voice.intro", { from: fromName, to: toName }),
+    t("voice.leave", { time: time(trip.depart), arrive: time(trip.arrive), dur: dur(trip.minutes) }),
+    ...trip.legs.filter((l) => l.kind === "ride" || l.kind === "buffer").slice(0, 8).map((l, i) => t("voice.step", { n: i + 1, text: msg(l.instruction) })),
+    t("voice.total", { price: price(trip.cost.amount * query.pax), n: query.pax }),
+    ...trip.warnings.filter((w) => w.level !== "info").slice(0, 3).map((w) => [msg(w.message), w.alternative ? msg(w.alternative.message) : ""].join(" ")),
+  ].join(" ");
   const fallbacks = [...new Set(trip.legs.filter((l) => l.source.fallback).map((l) => l.source.name))];
   const sources = [...new Map(trip.legs.map((l) => [l.source.id, l.source])).values()].filter((s) => s.id !== "planner");
 
@@ -49,6 +58,7 @@ export function TripDetail({ trip, query, backHref, fromName, toName }: { trip: 
           <p className="mt-2 text-lg font-semibold">
             {t("arriveAt", { time: time(trip.arrive) })} · {t("doorToDoor", { dur: dur(trip.minutes) })}
           </p>
+          <VoiceButton text={spoken} label={t("voice.listen")} className="mt-3" />
           <p className="mt-1 text-sm text-muted">
             {tp(`reliability.${trip.reliability.level}`, { min: trip.reliability.plusMinusMin })} · {tp("transfers", { n: trip.transfers })}
           </p>

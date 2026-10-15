@@ -30,5 +30,12 @@
   "usdc": "≈ {amount} USDC",
   "warnings": "知っておきたいこと",
   "noWarnings": "この旅程に天気や快適さの問題はありません。",
-  "fallbackNote": "この旅程の一部のデータは予備の推定値です：{names}"
+  "fallbackNote": "この旅程の一部のデータは予備の推定値です：{names}",
+  "voice": {
+    "listen": "旅程の要約を聞く",
+    "intro": "{from} から {to} への旅程です。",
+    "leave": "{time} に出発し、{arrive} に到着します。所要時間は {dur} です。",
+    "step": "ステップ {n}：{text}。",
+    "total": "合計 {price}（{n} 名分）です。"
+  }
 }

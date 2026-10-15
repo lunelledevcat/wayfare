@@ -14,6 +14,7 @@ import { pick, usdc } from "@/lib/format";
 import type { PlanQuery, Trip } from "@/lib/planner/types";
 import { saveSnapshot } from "@/lib/trip-store";
 import { cn } from "@/lib/utils";
+import { AvalancheBadge } from "./avalanche-badge";
 import { ModeIcon } from "./mode-icon";
 import { Button } from "./ui/button";
 import { Card } from "./ui/primitives";
@@ -199,6 +200,7 @@ export function BookingBox({ trip, query }: { trip: Trip; query: PlanQuery }) {
             <p className="flex items-center gap-2 font-semibold text-good">
               <CircleCheck className="size-5" aria-hidden /> {t("booked", { n: booked.tickets })}
             </p>
+            <AvalancheBadge tone="plain" />
             <TxStatus state={book.state} />
             <Button asChild className="w-full">
               <Link href="/app?tab=tickets">

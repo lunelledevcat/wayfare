@@ -33,3 +33,9 @@ Every place where Wayfare uses an estimate or a fallback instead of a live sourc
 ## Not done / cut
 
 See the summary in README → "Status".
+
+## UI icons & sponsors
+
+- All UI icons are inline SVG. Wayfare's own set (`web/src/components/icons/`: 24×24, stroke 1.75, currentColor) covers transport modes, the four priorities and weather (sun, cloud, rain, heavy rain, storm, wind, heat, PM2.5); generic UI icons come from lucide-react (also SVG). No emoji in the UI. Favicon/logo are SVG; the PWA manifest also lists 192/512 PNG fallbacks.
+- ElevenLabs voice: `eleven_multilingual_v2` does not list Thai, so Thai text uses `eleven_v3`; on an API error the route retries once with the other model. Audio is cached 24 h per (voice, model, locale, text); uncached requests are limited to 20 per IP per 10 minutes and 1,500 characters, because the endpoint speaks client-supplied text.
+- Tokenomist and U-Bot are not used.

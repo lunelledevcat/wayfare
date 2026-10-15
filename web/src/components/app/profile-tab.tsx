@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Coins, ExternalLink, Wallet } from "lucide-react";
+import { PriorityIcon } from "../icons";
 import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useAccount, usePublicClient, useWriteContract } from "wagmi";
@@ -96,10 +97,11 @@ export function ProfileTab() {
                 aria-pressed={prefs.priority === p}
                 onClick={() => setPrefs({ priority: p })}
                 className={cn(
-                  "min-h-12 rounded-xl border px-3 text-sm font-semibold",
+                  "inline-flex min-h-12 items-center justify-center gap-1.5 rounded-xl border px-3 text-sm font-semibold",
                   prefs.priority === p ? "border-primary bg-primary-soft text-primary" : "border-border bg-card text-fg hover:bg-bg",
                 )}
               >
+                <PriorityIcon priority={p} className="size-4" />
                 {tp(p)}
               </button>
             ))}

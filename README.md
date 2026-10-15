@@ -71,6 +71,17 @@ flowchart LR
 
 Details: [`DECISIONS.md`](DECISIONS.md) and the in-app page `/th/about-data`.
 
+## Sponsor technologies
+
+### Avalanche (C-Chain) — the booking and ticketing core
+- **What:** every bookable leg (flight, intercity train, coach, van, boat) of a trip is paid in **one transaction** to `WayfareBooking` on Avalanche C-Chain (Fuji testnet). The contract escrows money per leg, mints one ERC-721 ticket per leg per passenger (`WayfareTicket`, on-chain SVG), releases the leg's money to the operator the moment the QR is scanned at check-in, and **refunds the holder automatically** if the operator cancels. Every transaction in the UI links to Snowtrace; the landing page, booking success screen and footer carry a "Built on Avalanche C-Chain" badge.
+- **Why:** multi-operator trips today mean several payments, several refund policies and paper or app-specific tickets. A shared escrow contract gives passengers one payment and guaranteed refunds, and gives small operators instant settlement without a payment processor. Avalanche C-Chain offers EVM tooling (Hardhat, viem, wagmi), sub-second finality that makes check-in feel instant at the door, and fees low enough for per-ticket actions.
+
+### ElevenLabs — spoken trip briefings
+- **What:** `POST /api/voice` (server-side, `ELEVENLABS_API_KEY` never reaches the browser) turns text into speech with ElevenLabs' multilingual models (`eleven_multilingual_v2`; Thai uses `eleven_v3`, which supports Thai). The trip page has **"ฟังสรุปทริป / Listen to trip summary"**: when to leave home, each step, the total cost and the weather warnings, in the language the user picked (th/en/zh/ja). In the app's *My trips* tab, each **weather-change alert** has a listen button. Identical text is served from a server cache (and a browser cache), requests are length-capped and rate-limited per IP.
+- **Why:** travellers read the plan once and then are on the move — walking to the station, carrying bags, in the rain. Hearing "leave at 13:20, rain 70 % at the Mo Chit transfer" is safer and more accessible (low vision, low literacy, tourists in their own language) than reading small text.
+- **Graceful fallback:** without a key, or if ElevenLabs fails, the voice buttons are hidden (or show a short note) and everything else works unchanged.
+
 ## Smart contracts (Avalanche C-Chain)
 
 | Contract | Purpose |

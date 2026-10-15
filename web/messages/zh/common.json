@@ -55,5 +55,15 @@
     "connect": "连接钱包",
     "wrongNetwork": "切换到 Avalanche",
     "account": "我的钱包"
+  },
+  "voice": {
+    "listen": "收听",
+    "loading": "正在生成语音…",
+    "stop": "停止",
+    "unavailable": "暂时无法播放语音，其他功能可正常使用。"
+  },
+  "avalanche": {
+    "built": "Built on Avalanche C-Chain",
+    "contract": "在 Snowtrace 查看预订合约"
   }
 }

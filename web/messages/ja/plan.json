@@ -81,7 +81,10 @@
     "temp": "{min}–{max}°C",
     "seasonal": "この日付の予報はまだありません — 季節平均を表示しています。",
     "better": "{time} に出発すれば雨を避けられます（降水確率 {now}% → {prob}%）。",
-    "source": "予報：{source}"
+    "source": "予報：{source}",
+    "windy": "突風 {kmh} km/h",
+    "hot": "猛暑・体感 {c}°C",
+    "pm25": "PM2.5 {v} µg/m³"
   },
   "calendar": {
     "title": "選んだ日付前後の料金",

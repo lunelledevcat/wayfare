@@ -55,5 +55,15 @@
     "connect": "Connect wallet",
     "wrongNetwork": "Switch to Avalanche",
     "account": "My wallet"
+  },
+  "voice": {
+    "listen": "Listen",
+    "loading": "Preparing audio…",
+    "stop": "Stop",
+    "unavailable": "Audio isn't available right now — everything else still works."
+  },
+  "avalanche": {
+    "built": "Built on Avalanche C-Chain",
+    "contract": "View the booking contract on Snowtrace"
   }
 }

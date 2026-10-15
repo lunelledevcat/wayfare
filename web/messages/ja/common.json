@@ -55,5 +55,15 @@
     "connect": "ウォレットを接続",
     "wrongNetwork": "Avalanche に切り替え",
     "account": "マイウォレット"
+  },
+  "voice": {
+    "listen": "読み上げ",
+    "loading": "音声を準備中…",
+    "stop": "停止",
+    "unavailable": "現在音声は利用できません。その他の機能は通常どおり使えます。"
+  },
+  "avalanche": {
+    "built": "Built on Avalanche C-Chain",
+    "contract": "Snowtrace で予約コントラクトを見る"
   }
 }

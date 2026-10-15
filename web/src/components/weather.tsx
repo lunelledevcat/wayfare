@@ -1,18 +1,18 @@
 "use client";
 
-import { Cloud, CloudDrizzle, CloudLightning, CloudRain, CloudSun, Sun, type LucideIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { clock, pick } from "@/lib/format";
 import type { HourlyWeather, WeatherAt } from "@/lib/planner/types";
+import { weatherRules } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { CloudIcon, HeatIcon, HeavyRainIcon, Pm25Icon, RainIcon, StormIcon, SunIcon, WindIcon, type Icon } from "./icons";
 
-export function weatherIcon(w: Pick<WeatherAt, "code" | "precipProb">): LucideIcon {
-  if (w.code >= 95) return CloudLightning;
-  if (w.code >= 61 || w.precipProb >= 60) return CloudRain;
-  if (w.code >= 51 || w.precipProb >= 35) return CloudDrizzle;
-  if (w.code >= 3) return Cloud;
-  if (w.code >= 1) return CloudSun;
-  return Sun;
+export function weatherIcon(w: Pick<WeatherAt, "code" | "precipProb"> & { precipMm?: number }): Icon {
+  if (w.code >= 95) return StormIcon;
+  if (w.code === 65 || w.code === 82 || (w.precipMm ?? 0) >= weatherRules.heavyRainMm) return HeavyRainIcon;
+  if (w.code >= 51 || w.precipProb >= 35) return RainIcon;
+  if (w.code >= 2) return CloudIcon;
+  return SunIcon;
 }
 
 export function rainTone(prob: number) {
@@ -27,9 +27,12 @@ export function WeatherChip({ w, time, className }: { w: WeatherAt; time?: numbe
   return (
     <span className={cn("inline-flex items-center gap-1 rounded-lg bg-bg px-2 py-1 text-xs font-medium tabular", className)} title={w.seasonal ? t("seasonal") : undefined}>
       {time !== undefined && <span className="text-muted">{clock(time, locale)}</span>}
-      <Icon className={cn("size-4", rainTone(w.precipProb))} aria-hidden />
+      <Icon className={cn("size-4", rainTone(w.precipProb))} />
       <span className={rainTone(w.precipProb)}>{t("rain", { prob: Math.round(w.precipProb) })}</span>
       <span className="text-muted">{Math.round(w.tempC)}°</span>
+      {w.gustKmh >= weatherRules.gustBoatKmh && <WindIcon className="size-4 text-warn" label={t("windy", { kmh: Math.round(w.gustKmh) })} />}
+      {w.feelsC >= weatherRules.hotFeelsC && <HeatIcon className="size-4 text-bad" label={t("hot", { c: Math.round(w.feelsC) })} />}
+      {(w.pm25 ?? 0) > weatherRules.pm25 && <Pm25Icon className="size-4 text-warn" label={t("pm25", { v: w.pm25 ?? 0 })} />}
     </span>
   );
 }
@@ -47,7 +50,7 @@ export function WeatherSummary({ label, w, from, to }: { label: string; w: Hourl
   return (
     <div className="min-w-0 rounded-2xl border border-border bg-card p-4">
       <div className="flex items-center gap-3">
-        <Icon className={cn("size-9", rainTone(maxProb))} aria-hidden />
+        <Icon className={cn("size-9", rainTone(maxProb))} />
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase text-muted">{label}</p>
           <p className="truncate font-semibold">{pick(w.place.name, locale)}</p>

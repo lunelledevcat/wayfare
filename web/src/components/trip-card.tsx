@@ -6,12 +6,12 @@ import { Link } from "@/i18n/navigation";
 import { bkkDate } from "@/lib/time";
 import type { Priority, Trip, Warning } from "@/lib/planner/types";
 import { cn } from "@/lib/utils";
+import { PriorityIcon } from "./icons";
 import { ModeIcon } from "./mode-icon";
 import { Badge } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
 import { WeatherChip } from "./weather";
 
-export const PRIORITY_EMOJI: Record<Priority, string> = { fastest: "⚡", cheapest: "💰", value: "⭐", comfort: "🛋️" };
 
 export function WarningLine({ w, onAlternative }: { w: Warning; onAlternative?: (tripId: string) => void }) {
   const { msg } = useFmt();
@@ -74,7 +74,7 @@ export function TripCard({
       <div className="flex flex-wrap items-center gap-1.5">
         {tags.map((p) => (
           <Badge key={p} tone={p === "cheapest" ? "good" : "primary"}>
-            <span aria-hidden>{PRIORITY_EMOJI[p]}</span> {t(`priority.${p}`)}
+            <PriorityIcon priority={p} className="size-3.5" /> {t(`priority.${p}`)}
           </Badge>
         ))}
         {trip.notRecommended && (

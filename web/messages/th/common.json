@@ -55,5 +55,15 @@
     "connect": "เชื่อมกระเป๋า",
     "wrongNetwork": "สลับไป Avalanche",
     "account": "กระเป๋าของฉัน"
+  },
+  "voice": {
+    "listen": "ฟังเสียง",
+    "loading": "กำลังสร้างเสียง…",
+    "stop": "หยุด",
+    "unavailable": "ตอนนี้ฟังเสียงไม่ได้ ข้อมูลอื่นยังใช้ได้ตามปกติ"
+  },
+  "avalanche": {
+    "built": "Built on Avalanche C-Chain",
+    "contract": "ดูสัญญาการจองบน Snowtrace"
   }
 }

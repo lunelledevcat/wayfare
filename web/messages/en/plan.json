@@ -81,7 +81,10 @@
     "temp": "{min}–{max}°C",
     "seasonal": "No forecast yet for this date — showing seasonal averages.",
     "better": "Leave at {time} to avoid the rain (rain chance {prob}% instead of {now}%).",
-    "source": "Forecast: {source}"
+    "source": "Forecast: {source}",
+    "windy": "Gusts {kmh} km/h",
+    "hot": "Very hot, feels like {c}°C",
+    "pm25": "PM2.5 {v} µg/m³"
   },
   "calendar": {
     "title": "Prices around your date",

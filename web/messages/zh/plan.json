@@ -81,7 +81,10 @@
     "temp": "{min}–{max}°C",
     "seasonal": "该日期暂无预报——显示季节平均值。",
     "better": "{time} 出发可避开降雨（降雨概率 {prob}%，而非 {now}%）。",
-    "source": "预报：{source}"
+    "source": "预报：{source}",
+    "windy": "阵风 {kmh} 公里/小时",
+    "hot": "酷热，体感 {c}°C",
+    "pm25": "PM2.5 {v} µg/m³"
   },
   "calendar": {
     "title": "你所选日期前后的价格",

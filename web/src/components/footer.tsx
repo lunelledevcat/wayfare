@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { AvalancheBadge } from "./avalanche-badge";
 import { Logo } from "./logo";
 
 export function Footer() {
@@ -23,10 +24,11 @@ export function Footer() {
           <p className="mb-2 text-sm font-bold">{t("footer.data")}</p>
           <ul className="space-y-1 text-sm text-muted">
             <li><Link href="/about-data" className="hover:text-fg">{t("aboutData")}</Link></li>
-            <li>สนข. GTFS · Open-Meteo · OpenStreetMap</li>
+            <li>สนข. GTFS · Open-Meteo · OpenStreetMap · ElevenLabs</li>
           </ul>
         </div>
         <div className="text-sm text-muted">
+          <AvalancheBadge className="mb-3" />
           <p>{t("footer.demo")}</p>
           <p className="mt-2">© 2026 Wayfare · U-Hackathon</p>
         </div>

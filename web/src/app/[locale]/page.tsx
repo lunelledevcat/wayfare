@@ -1,10 +1,12 @@
-import { ArrowRight, Banknote, Check, CloudSun, Layers, QrCode, ScanLine, Search, SlidersHorizontal, Sparkles, Ticket, TriangleAlert, Trophy } from "lucide-react";
+import { ArrowRight, Banknote, Check, Layers, QrCode, ScanLine, Search, SlidersHorizontal, Sparkles, Ticket, TriangleAlert, Trophy } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ClientMessages } from "@/components/client-messages";
+import { AvalancheBadge } from "@/components/avalanche-badge";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { LandingStats } from "@/components/landing-stats";
+import { PriorityIcon, RainIcon } from "@/components/icons";
 import { ModeIcon } from "@/components/mode-icon";
 import { SearchBox } from "@/components/search-box";
 import { buttonVariants } from "@/components/ui/button";
@@ -72,7 +74,7 @@ const VEHICLES = MENU.flatMap((g) => g.items);
 const HIGHLIGHTS = [
   { key: "compare", icon: Layers },
   { key: "realtime", icon: Banknote },
-  { key: "weather", icon: CloudSun },
+  { key: "weather", icon: RainIcon },
 ] as const;
 
 const STEPS = [
@@ -135,6 +137,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </Link>
               ))}
             </div>
+            <AvalancheBadge className="mt-5" />
           </div>
         </section>
 
@@ -258,7 +261,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                           {t("compare.recommended")}
                         </Badge>
                       )}
-                      <p className="text-sm font-bold uppercase tracking-wide text-primary">{t(`compare.label.${kind}`)}</p>
+                      <p className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-wide text-primary"><PriorityIcon priority={kind} className="size-4" />{t(`compare.label.${kind}`)}</p>
                       <div className="mt-3 flex items-center gap-1.5" aria-label={modeStrip(trip).map((m) => tm(m)).join(" → ")} role="img">
                         {modeStrip(trip).map((m, i) => (
                           <span key={`${m}-${i}`} className="flex items-center gap-1.5">

@@ -30,5 +30,12 @@
   "usdc": "≈ {amount} USDC",
   "warnings": "Things to know",
   "noWarnings": "No weather or comfort issues for this trip.",
-  "fallbackNote": "Some data on this trip is a backup estimate: {names}"
+  "fallbackNote": "Some data on this trip is a backup estimate: {names}",
+  "voice": {
+    "listen": "Listen to trip summary",
+    "intro": "Your trip from {from} to {to}.",
+    "leave": "Leave at {time} and arrive at {arrive}, {dur} door to door.",
+    "step": "Step {n}: {text}.",
+    "total": "Total cost {price} for {n, plural, one {# passenger} other {# passengers}}."
+  }
 }

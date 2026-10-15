@@ -30,5 +30,12 @@
   "usdc": "≈ {amount} USDC",
   "warnings": "注意事项",
   "noWarnings": "此行程没有天气或舒适度问题。",
-  "fallbackNote": "此行程部分数据为备用估算：{names}"
+  "fallbackNote": "此行程部分数据为备用估算：{names}",
+  "voice": {
+    "listen": "收听行程摘要",
+    "intro": "从 {from} 到 {to} 的行程。",
+    "leave": "请在 {time} 出发，{arrive} 到达，全程 {dur}。",
+    "step": "第 {n} 步：{text}。",
+    "total": "总费用 {price}，共 {n} 人。"
+  }
 }

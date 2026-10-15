@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { CalendarClock, CloudRain, Route } from "lucide-react";
+import { CalendarClock, Route } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { useAccount, usePublicClient } from "wagmi";
@@ -13,7 +13,9 @@ import { loadSnapshots, type TripSnapshot } from "@/lib/trip-store";
 import { ModeIcon } from "../mode-icon";
 import { Button } from "../ui/button";
 import { Badge, Card } from "../ui/primitives";
+import { RainIcon } from "../icons";
 import { useFmt } from "../use-fmt";
+import { VoiceButton } from "../voice-button";
 import { loadTrips, operatorMode, statusKey, statusTone, unitsToThb, unitsToUsdc, type LegView, type TripView } from "./chain-data";
 import { ConnectPrompt, EmptyState, ListSkeleton, LoadError } from "./states";
 
@@ -188,10 +190,11 @@ export function TripsTab() {
         <section aria-label={t("alertsTitle")} className="space-y-2">
           {alerts.map((a) => (
             <div key={a.key} role="alert" className="flex gap-3 rounded-2xl border border-warn bg-warn-soft p-4 text-sm">
-              <CloudRain className="mt-0.5 size-5 shrink-0 text-warn" aria-hidden />
+              <RainIcon className="mt-0.5 size-5 shrink-0 text-warn" />
               <div>
                 <p className="font-semibold text-fg">{t("alert", { prob: a.prob, kind: a.kind, name: a.name, min: a.earlier })}</p>
                 <p className="mt-0.5 text-muted tabular">{t("alertDetail", { id: a.tripId, was: a.was, time: time(a.at) })}</p>
+                <VoiceButton text={t("alert", { prob: a.prob, kind: a.kind, name: a.name, min: a.earlier })} className="mt-2" />
               </div>
             </div>
           ))}
