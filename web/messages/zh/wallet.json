@@ -1,0 +1,38 @@
+{
+  "pending": "正在区块链上确认…",
+  "waitingWallet": "请在钱包中确认…",
+  "steps": {
+    "quote": "正在获取今日价格…",
+    "switch": "正在切换到 Avalanche…",
+    "faucet": "正在发送免费测试币…",
+    "approve": "请在钱包中确认付款（第 1 步，共 2 步）…",
+    "book": "请在钱包中确认预订（第 2 步，共 2 步）…",
+    "confirm": "正在区块链上确认…",
+    "sign": "请在钱包中确认以生成车票二维码…",
+    "cancel": "请在钱包中确认取消…",
+    "transfer": "请在钱包中确认车票转让…",
+    "checkin": "请在钱包中确认签到…",
+    "noshow": "请在钱包中确认收款申请…",
+    "cancelTrip": "请在钱包中确认取消班次…"
+  },
+  "success": "完成！",
+  "viewExplorer": "在 Snowtrace 上查看",
+  "localChain": "已记录在本地测试链上",
+  "errorFix": "解决方法",
+  "tryAgain": "重试",
+  "faucet": "领取免费测试币",
+  "faucetDone": "已添加测试币：1,000",
+  "faucetHint": "测试币没有实际价值，每小时可领取一次。",
+  "balance": "测试余额",
+  "switch": "切换到 Avalanche",
+  "connectFirst": "连接钱包以预订",
+  "gasHint": "你的钱包还需要少量测试 AVAX 支付网络费用。",
+  "gasFaucet": "领取测试 AVAX（Fuji 水龙头）",
+  "status": {
+    "booked": "有效",
+    "checkedIn": "已签到",
+    "cancelledByOperator": "运营商已取消 · 已退款",
+    "cancelledByPassenger": "已取消 · 已退款",
+    "noShow": "未登车"
+  }
+}

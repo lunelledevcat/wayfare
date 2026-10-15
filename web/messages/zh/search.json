@@ -1,0 +1,21 @@
+{
+  "formLabel": "搜索行程",
+  "from": "出发地",
+  "to": "目的地",
+  "fromPlaceholder": "车站、地点或地址",
+  "toPlaceholder": "去哪里？",
+  "swap": "交换出发地和目的地",
+  "when": "时间",
+  "depart": "出发时间",
+  "arrive": "需在…前到达",
+  "date": "日期",
+  "time": "时间",
+  "pax": "乘客",
+  "submit": "找出最佳走法",
+  "searching": "搜索中…",
+  "needFrom": "请从建议中选择出发地。",
+  "needTo": "请从建议中选择目的地。",
+  "same": "出发地和目的地相同。",
+  "osm": "OpenStreetMap",
+  "gtfs": "GTFS 车站"
+}

@@ -15,7 +15,7 @@ import { OsrmRoadProvider } from "../providers/road";
 import { GtfsTransitProvider } from "../providers/transit";
 import type { FlightOffer, FlightProvider, IntercityService, RoadProvider, TransitProvider, WeatherProvider } from "../providers/types";
 import { OpenMeteoWeatherProvider, weatherAt } from "../providers/weather";
-import { addDays, bkkHHMM, bkkTime, DAY, HOUR, MIN, todayBkk } from "../time";
+import { addDays, bkkHHMM, bkkTime, HOUR, MIN, todayBkk } from "../time";
 import { routeCity, stopsNear, WALK_M_PER_MIN, type AccessPoint } from "./city-router";
 import { MODE_LABEL } from "./labels";
 import { flightLeg, intercityLeg, roadLeg, roadLegArriving, stopRef, transitLegs, waitLeg, walkLeg, weatherFor, type LegContext } from "./legs";

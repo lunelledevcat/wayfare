@@ -1,0 +1,37 @@
+{
+  "step": {
+    "walk": "步行至 {to}（{min} 分钟，约 {m} 米）",
+    "transferWalk": "步行至 {to} 换乘（{min} 分钟）",
+    "wait": "在 {place} 等候{mode}（{min} 分钟）",
+    "transferWait": "在 {place} 换乘{mode}（{min} 分钟）",
+    "buffer": "在 {place} 预留 {min} 分钟",
+    "bufferFlight": "在 {place} 办理登机和安检——请在起飞前 {min} 分钟到达",
+    "bufferStation": "提前 {min} 分钟到达 {place}，寻找站台并上车",
+    "deplaneFlight": "在 {place} 下机并提取行李（{min} 分钟）",
+    "deplane": "在 {place} 下车（{min} 分钟）",
+    "taxi": "乘计价出租车前往 {to}（{min} 分钟，{km} 公里）",
+    "grab": "叫 Grab 车前往 {to}（{min} 分钟，{km} 公里）",
+    "win": "乘摩的（win）前往 {to}（{min} 分钟，{km} 公里）",
+    "car": "开车前往 {to}（{min} 分钟，{km} 公里）",
+    "ride": "乘{mode} {line}，往 {headsign} 方向，坐 {stops} 站，在 {to} 下车（{min} 分钟，{price}）",
+    "flight": "乘坐 {carrier} {flightNo} 从 {from} 飞往 {to}（{min} 分钟）",
+    "train": "乘 {name}（{cls}）从 {from} 前往 {to}（{min} 分钟）",
+    "coach": "乘{mode} {name}（{cls}）从 {from} 前往 {to}（{min} 分钟）"
+  },
+  "warn": {
+    "winRain": "摩的最便宜（{price}），但 {time} 降雨概率为 {prob}%——不推荐。",
+    "winHeavyRain": "{time} 预计有大雨或雷暴（{mm} 毫米/小时）——不推荐乘摩的。",
+    "walkHeavyRain": "{time} 大雨中步行 {min} 分钟（概率 {prob}%，{mm} 毫米/小时）——不推荐。",
+    "walkUmbrella": "{time} 降雨概率 {prob}%——步行 {min} 分钟请带伞。",
+    "walkHeat": "体感温度 {feels}°C——步行 {min} 分钟会很热，请带水。",
+    "walkPm25": "PM2.5 为 {pm25} µg/m³——步行 {min} 分钟请戴口罩。",
+    "boatWind": "{time} 阵风可达 {gust} 公里/小时——不推荐乘船。",
+    "boatRain": "{time} 有大雨——船可能延误或拥挤。",
+    "roadSlow": "{time} 预计下雨（{prob}%）——道路约慢 {pct}%，已加入额外时间。",
+    "flightStorm": "预报有雷暴——机场预留时间已增加 {extra} 分钟。"
+  },
+  "alt": {
+    "instead": "改乘{mode}（{sign}{delta}，不淋雨）。",
+    "insteadBoat": "改乘{mode}（{sign}{delta}）。"
+  }
+}

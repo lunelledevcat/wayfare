@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "title": "Wayfare — 所有出行方式，一处比较",
+    "description": "用真实时刻表、当天价格和天气，门到门比较火车、公交、船、航班、出租车和摩的。一次付款预订所有行程段。"
+  },
+  "language": "语言",
+  "mainNav": "主导航",
+  "travelTypes": "出行方式",
+  "operators": "运营商专区",
+  "aboutData": "数据与方法",
+  "connectWallet": "连接钱包",
+  "loading": "加载中…",
+  "retry": "重试",
+  "close": "关闭",
+  "back": "返回",
+  "minutes": "{min} 分钟",
+  "duration": "{h, plural, =0 {} other {# 小时 }}{m} 分钟",
+  "hoursShort": "{h} 小时",
+  "perPerson": "每人",
+  "total": "合计",
+  "people": "{n, plural, one {# 位乘客} other {# 位乘客}}",
+  "dataFrom": "数据来源",
+  "estimate": "估算",
+  "fallbackData": "备用数据",
+  "updated": "更新于 {date}",
+  "currency": "显示货币",
+  "menu": {
+    "city": "市内",
+    "intercity": "城际",
+    "popular": "热门路线",
+    "metro": "轻轨和地铁",
+    "bus": "市内公交",
+    "boat": "船和渡轮",
+    "taxiWin": "出租车 / 摩的",
+    "flight": "国内航班",
+    "train": "火车",
+    "coach": "城际大巴",
+    "van": "面包车"
+  },
+  "popular": {
+    "asokBkk": "Asok → 素万那普机场",
+    "bkkCnx": "曼谷 → 清迈",
+    "siamDmk": "Siam → 廊曼机场",
+    "bkkPattaya": "曼谷 → 芭提雅"
+  },
+  "footer": {
+    "tagline": "所有出行方式，一处比较——天气也帮你查好了。",
+    "product": "产品",
+    "plan": "规划行程",
+    "app": "我的行程和车票",
+    "data": "数据",
+    "demo": "黑客松演示。可预订的运营商均为虚构，付款使用 Avalanche Fuji 上的测试代币。"
+  },
+  "wallet": {
+    "connect": "连接钱包",
+    "wrongNetwork": "切换到 Avalanche",
+    "account": "我的钱包"
+  }
+}

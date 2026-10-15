@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "title": "Wayfare — 所有出行方式，一处比较"
+  },
+  "hero": {
+    "badge": "真实时刻表 · 当天价格 · 逐小时天气",
+    "title": "怎么去最好？",
+    "titleAccent": "交给 Wayfare 来算",
+    "subtitle": "门到门比较轻轨、公交、船、出租车、摩的、火车、大巴和航班。了解何时出门、每一步要多久、全程花多少钱，然后一次付款预订所有行程段。",
+    "trySearch": "试试"
+  },
+  "modes": {
+    "title": "按出行方式浏览",
+    "subtitle": "点击查看使用该方式的示例路线",
+    "seeMore": "查看更多",
+    "hint": {
+      "metro": "BTS · MRT · 机场快线 · 红线",
+      "bus": "BMTA 及合作市内公交",
+      "boat": "湄南河快船和运河船",
+      "taxiWin": "计价出租车 · Grab · 摩的",
+      "flight": "国内航班",
+      "train": "长途火车",
+      "coach": "城际大巴",
+      "van": "客运面包车"
+    }
+  },
+  "highlights": {
+    "title": "为什么选择 Wayfare",
+    "compare": {
+      "title": "所有选择一处看",
+      "body": "不用再切换多个网站、自己算账。一次搜索，就按你最在意的因素为所有出行方式排名。"
+    },
+    "realtime": {
+      "title": "当天真实的时间和价格",
+      "body": "步行、等候、乘车、换乘和预留时间逐项拆分，价格对应你出行的日期和时间。"
+    },
+    "weather": {
+      "title": "天气已帮你查好",
+      "body": "如果行程某段预计下雨，我们会提前提醒，并推荐不淋雨的替代方案。"
+    }
+  },
+  "how": {
+    "title": "简单四步",
+    "search": {
+      "title": "搜索",
+      "body": "输入出发地、目的地、日期、时间和乘客人数。"
+    },
+    "priority": {
+      "title": "选择优先项",
+      "body": "最快、最便宜、最划算或最舒适。结果即时重新排序。"
+    },
+    "best": {
+      "title": "查看最佳方案",
+      "body": "每一步的时间、总费用、天气，以及准确的出门时间。"
+    },
+    "book": {
+      "title": "一次预订，一次付款",
+      "body": "一次付款预订所有可预订的行程段，车票都保存在应用中，班次取消时自动退款。"
+    }
+  },
+  "compare": {
+    "title": "同一段旅程的三种方案",
+    "subtitle": "Asok → 清迈 · {date} · 08:00 出发 · 1 位乘客",
+    "sample": "来自真实搜索的示例",
+    "recommended": "推荐",
+    "label": {
+      "cheapest": "最便宜",
+      "fastest": "最快",
+      "value": "最划算"
+    },
+    "doorToDoor": "门到门 {duration}",
+    "perPerson": "每人",
+    "mainMode": "主要行程：{mode}",
+    "edge": {
+      "cheapest": "比最快方案便宜 {amount}",
+      "fastest": "比最便宜方案快 {duration}",
+      "value": "兼顾价格和时间（时间价值按每小时 {rate} 计）"
+    },
+    "transfers": "{n, plural, =0 {无需换乘} one {换乘 # 次} other {换乘 # 次}}",
+    "walk": "{min, plural, =0 {几乎不用步行} other {共步行 # 分钟}}",
+    "weatherOk": "天气不影响此行程",
+    "weatherRisk": "有一定天气风险，出发前请查看提醒",
+    "bookOnChain": "一次付款提前预订 {amount}",
+    "refundFull": "取消可全额退款",
+    "refundPartial": "出发前 {hours} 小时内可取消，退款 {pct}%",
+    "refundNone": "现场支付，无需预订",
+    "cta": "查看此方案"
+  },
+  "operator": {
+    "eyebrow": "面向交通运营商",
+    "title": "扫票即收款",
+    "body": "乘客预先付款并托管。登车时扫描车票，票款直接到账。取消班次后，所有乘客自动获得退款。",
+    "cta": "前往运营商页面"
+  },
+  "stats": {
+    "title": "实时运行在 Avalanche 区块链上",
+    "trips": "已预订行程",
+    "tickets": "已出票",
+    "refunds": "已自动退款",
+    "note": "来自 Avalanche 合约的实时数据（Fuji 测试网络）"
+  },
+  "dataFrom": {
+    "title": "数据来源",
+    "gtfs": "泰国 OTP GTFS（轻轨、公交、船和铁路时刻表）",
+    "openMeteo": "Open-Meteo（天气预报和 PM2.5）",
+    "osm": "OpenStreetMap（OSRM 和 Nominatim）",
+    "duffel": "Duffel（航班，测试模式）",
+    "more": "查看所有来源及计算方法"
+  }
+}

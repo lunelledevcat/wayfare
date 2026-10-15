@@ -1,0 +1,24 @@
+{
+  "walk": "步行",
+  "bts": "BTS 轻轨",
+  "mrt": "MRT",
+  "arl": "机场快线",
+  "red": "SRT 红线",
+  "train": "火车",
+  "bus": "公交",
+  "coach": "大巴",
+  "van": "面包车",
+  "boat": "船",
+  "flight": "航班",
+  "taxi": "出租车",
+  "grab": "Grab",
+  "win": "摩的",
+  "car": "自驾",
+  "kind": {
+    "walk": "步行",
+    "wait": "等候",
+    "ride": "乘车",
+    "transfer": "换乘",
+    "buffer": "预留"
+  }
+}

@@ -2,6 +2,10 @@ import path from "node:path";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { loadEnvConfig } from "@next/env";
+
+// one .env at the repo root serves contracts and web
+loadEnvConfig(path.resolve(__dirname, ".."));
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const withBundleAnalyzer = bundleAnalyzer({ enabled: process.env.ANALYZE === "true" });

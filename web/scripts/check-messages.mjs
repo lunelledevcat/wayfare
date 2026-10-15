@@ -20,8 +20,8 @@ for (const ns of namespaces) {
       continue;
     }
     const keys = new Set(flatten(JSON.parse(fs.readFileSync(file, "utf8"))));
-    for (const k of ref) if (!keys.has(k)) (console.error(`${loc}/${ns}: missing ${k}`), problems++);
-    for (const k of keys) if (!ref.has(k)) (console.error(`${loc}/${ns}: extra ${k}`), problems++);
+    for (const k of ref) if (!keys.has(k)) { console.error(`${loc}/${ns}: missing ${k}`); problems++; }
+    for (const k of keys) if (!ref.has(k)) { console.error(`${loc}/${ns}: extra ${k}`); problems++; }
   }
 }
 if (problems) {

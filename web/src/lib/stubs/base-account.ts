@@ -6,4 +6,5 @@
 export function createBaseAccountSDK(): never {
   throw new Error("Base Account wallet is not supported in Wayfare");
 }
-export default { createBaseAccountSDK };
+const stub = { createBaseAccountSDK };
+export default stub;

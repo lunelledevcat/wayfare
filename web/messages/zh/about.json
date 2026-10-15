@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "title": "数据来源与计算方法",
+    "description": "Wayfare 使用的所有数据来源、最近更新时间，以及价格、排名和天气规则的计算方式。"
+  },
+  "title": "数据来源与计算方法",
+  "intro": "Wayfare 只使用允许使用的开放数据和 API，从不抓取售票网站。每个结果都会注明数据来源，估算数据或备用数据都有清楚标注。",
+  "toc": "本页内容",
+  "nav": {
+    "sources": "全部数据来源",
+    "gtfs": "公共交通（GTFS）",
+    "flights": "城际交通",
+    "road": "道路与步行",
+    "weather": "天气",
+    "pricing": "价格如何计算",
+    "scoring": "如何排名",
+    "planner": "预留时间与 CO₂",
+    "chain": "区块链预订"
+  },
+  "status": {
+    "live": "实时数据",
+    "estimate": "估算",
+    "fallback": "备用数据",
+    "liveOrFallback": "实时（含备用）"
+  },
+  "table": {
+    "source": "来源",
+    "use": "用途",
+    "status": "类型",
+    "updated": "最近更新",
+    "link": "链接",
+    "open": "打开",
+    "onRequest": "每次搜索时",
+    "atBuild": "导入于 {date}"
+  },
+  "sources": {
+    "gtfs": { "name": "泰国交通运输政策与规划办公室（OTP）GTFS（Mobility Database mdb-1831）", "use": "轻轨、公交、船和铁路的车站、线路、时刻表与票价" },
+    "fares": { "name": "各线路公布的票价表", "use": "GTFS 无票价时按站数计算票价" },
+    "duffel": { "name": "Duffel API（测试模式）", "use": "配置令牌后提供国内航班" },
+    "flights": { "name": "国内航班时刻表（备用）", "use": "Duffel 不可用时的航班时间和票价区间" },
+    "rail": { "name": "泰国国家铁路时刻表与票价", "use": "长途城际列车" },
+    "bus": { "name": "客运站公布的大巴和面包车时刻表", "use": "城际大巴和面包车" },
+    "osrm": { "name": "OSRM（OpenStreetMap 道路网络）", "use": "出租车、Grab、摩的、自驾和步行的道路距离与时间" },
+    "roadFares": { "name": "出租车计价标准、摩的价格参考和 Grab 估算", "use": "道路交通费用" },
+    "meteo": { "name": "Open-Meteo 天气预报 API", "use": "未来最多 16 天的逐小时降雨概率、降雨量、气温和风力" },
+    "aq": { "name": "Open-Meteo 空气质量 API", "use": "逐小时 PM2.5" },
+    "climate": { "name": "泰国气象局 1991–2020 年气候平均值", "use": "尚无预报时使用的季节平均值" },
+    "nominatim": { "name": "Nominatim（OpenStreetMap）", "use": "一般地址搜索" },
+    "places": { "name": "精选地点（坐标来自 OpenStreetMap）", "use": "主要区域、机场和客运站" },
+    "holidays": { "name": "2026 年泰国公共假日", "use": "长假期间的机票价格调整" }
+  },
+  "gtfs": {
+    "title": "轻轨、公交、船和铁路（GTFS）",
+    "body": "我们在构建网站时导入泰国交通运输政策与规划办公室（OTP）发布的全国 GTFS 数据，并精简为路线规划所需的部分，因此搜索很快，打开网站时无需下载任何数据。市内路线采用 RAPTOR 式的逐轮换乘扫描在该时刻表上计算。",
+    "feedVersion": "数据版本",
+    "validity": "有效期",
+    "imported": "导入时间",
+    "agencies": "运营商",
+    "routes": "线路",
+    "trips": "班次",
+    "stops": "站点",
+    "faresTitle": "按站数计算的备用票价",
+    "faresBody": "仅在 GTFS 没有该段票价时使用：起步价 + 每站票价，不超过最高票价（最近核对 {date}）。",
+    "mode": "交通方式",
+    "base": "起步价",
+    "perStop": "每站",
+    "max": "最高"
+  },
+  "flights": {
+    "title": "城际交通：航班、火车、大巴和面包车",
+    "body": "配置 Duffel 测试模式令牌后，我们使用 Duffel 的航班报价。没有令牌或无结果时，使用标注为“估算价格”的备用时刻表。火车和大巴使用公开发布的时刻表；如有数据，曼谷出发的火车时间来自 GTFS。",
+    "formula": "机票价格 = 基础票价 × 日期系数 × 提前购买系数 × 时段系数",
+    "band": "显示的价格区间：估算值的 {low}% 至 {high}%",
+    "dayFactor": "日期系数",
+    "advanceFactor": "提前购买系数",
+    "timeFactor": "出发时段系数",
+    "factor": "系数",
+    "day": {
+      "mon": "星期一",
+      "tue": "星期二",
+      "wed": "星期三",
+      "thu": "星期四",
+      "fri": "星期五",
+      "sat": "星期六",
+      "sun": "星期日",
+      "holiday": "长假"
+    },
+    "advance": "提前 ≥ {days} 天购买",
+    "routesTitle": "备用时刻表中的航线",
+    "route": "航线",
+    "blockTime": "飞行时间",
+    "baseFare": "基础票价",
+    "departures": "每日航班数",
+    "otherTitle": "火车和大巴",
+    "trains": "{n} 趟长途列车（最近核对 {date}）",
+    "buses": "{n} 条大巴和面包车线路（最近核对 {date}）"
+  },
+  "road": {
+    "title": "道路与步行",
+    "body": "道路距离和时间来自基于 OpenStreetMap 道路的 OSRM，按坐标对（保留 3 位小数）缓存。若无法连接 OSRM，则使用直线距离 × {detour}，并标注为备用数据。",
+    "rush": "高峰时段 {from}–{to}：道路时间 × {factor}",
+    "speeds": "无 OSRM 时使用的平均速度",
+    "speed": "{mode}：{kmh} 公里/小时",
+    "highway": "高速公路"
+  },
+  "weather": {
+    "title": "天气与提醒规则",
+    "body": "我们按每段行程的地点和时间获取 Open-Meteo 逐小时预报（最多提前 16 天）。日期更远或服务不可用时，使用泰国气象局的季节平均值，并提示“暂无预报”。每条提醒都附有原因和替代方案。",
+    "condition": "天气",
+    "effect": "对建议的影响",
+    "rules": {
+      "rain": {
+        "when": "降雨概率 ≥ {prob}% 或降雨量 ≥ {mm} 毫米/小时",
+        "then": "摩的“不推荐”并大幅降低评分 · 户外步行超过 {walk} 分钟：请带伞 · 道路时间 +{pct}%"
+      },
+      "heavy": {
+        "when": "大雨 ≥ {mm} 毫米/小时或雷暴（天气代码 {codes}）",
+        "then": "摩的和超过 {walk} 分钟的步行从推荐中移除 · 乘船提醒 · 道路时间 +{pct}% · 机场预留时间增加 {extra} 分钟"
+      },
+      "wind": {
+        "when": "阵风 ≥ {gust} 公里/小时",
+        "then": "乘船“不推荐”"
+      },
+      "heat": {
+        "when": "体感温度 ≥ {feels}°C",
+        "then": "超过 {walk} 分钟的步行会收到提醒 · “最舒适”优先选择有空调的交通工具"
+      },
+      "pm": {
+        "when": "PM2.5 > {pm} µg/m³",
+        "then": "步行 {walk} 分钟或以上：请戴口罩"
+      }
+    }
+  },
+  "pricing": {
+    "title": "价格如何计算",
+    "body": "每段行程显示“约 ฿X（区间 ฿A–฿B）”，并汇总为全程总价再乘以乘客人数。轻轨、公交和船使用公布的票价表；道路交通使用以下公式。",
+    "taxiTitle": "曼谷计价出租车",
+    "taxiFlag": "起步价 {fare}（前 {km} 公里）",
+    "tier": "第 {from}–{to} 公里",
+    "tierLast": "超过 {from} 公里",
+    "perKm": "每公里",
+    "taxiExtra": "堵车等候每分钟 {wait} · 机场上车 +{airport} · 超过 {km} 公里的行程包含高速费 {toll}",
+    "winTitle": "摩的",
+    "win": "前 {km} 公里 {fare} · 第 {km}–5 公里每公里加 {to5} · 超过 5 公里每公里加 {over5} · 最远 {max} 公里",
+    "grabTitle": "Grab（按距离和时间估算，非官方价格）",
+    "grab": "{base} + 每公里 {perKm} + 每分钟 {perMin} + 预订费 {fee} · 高峰时段 × {peak}",
+    "carTitle": "自驾",
+    "car": "油费每公里 {perKm} + 每 100 公里过路费 {toll} + 停车费 {parking}",
+    "checked": "费率最近核对 {date}",
+    "holidaysTitle": "用于定价的假日（2026）"
+  },
+  "scoring": {
+    "title": "如何按你的需求排名",
+    "body": "我们生成所有可行路线，只保留在价格、总时间、换乘次数和步行上没有被其他行程全面超越的方案（帕累托最优），再按你的选择排序。因天气被标为“不推荐”的行程始终排在最后。更改选择后会在你的设备上立即重新排序。",
+    "fastest": { "title": "最快", "body": "门到门时间最短；时间相同时选更便宜的。" },
+    "cheapest": { "title": "最便宜", "body": "全程费用 × 乘客人数最低；费用相同时选更快的。" },
+    "value": { "title": "最划算", "body": "总价 + 时间 × 时间价值（默认每小时 {rate}，可在个人资料中调整）+ 天气风险 × {risk} + 换乘次数 × {transfer}（按每位乘客计）。" },
+    "comfort": { "title": "最舒适", "body": "舒适度评分 0–100：换乘、步行、站立、无空调、摩的和淋雨会扣分；卧铺列车会加分。" },
+    "filters": "其他筛选：避开摩的 · 步行不超过 X 分钟 · 携带大件行李（不含摩的和船，步行时间 × 1.3）· 预算不超过 ฿X · 乘客人数"
+  },
+  "planner": {
+    "title": "预留时间、准点度与 CO₂",
+    "body": "每个行程都拆分为步行 · 等候 · 乘车 · 换乘 · 预留时间，且任何衔接都不会短于下方的最短预留时间。在“需在…前到达”模式下，我们会倒推告诉你何时出门。",
+    "buffersTitle": "出发前最短预留时间",
+    "buffer": {
+      "flightDomestic": "国内航班",
+      "flightInternational": "国际航班",
+      "train": "火车",
+      "coach": "大巴",
+      "van": "面包车",
+      "boatIntercity": "城际船",
+      "metroTransfer": "轻轨换乘"
+    },
+    "minutes": "{min} 分钟",
+    "co2Title": "每位乘客每公里 CO₂",
+    "co2": "{kg} 千克",
+    "reliability": "时间准点度：轻轨“非常准点” · 高峰时段道路交通按距离“视路况 ± 分钟”"
+  },
+  "chain": {
+    "title": "在 Avalanche 上预订与退款",
+    "body": "可预订的行程段（航班、城际火车、大巴、面包车、船）在 Avalanche C-Chain 上通过一笔交易完成预订和支付。款项按段托管，扫描车票时付给运营商。若运营商取消，持票人立即获得全额退款。轻轨、出租车、摩的和步行段显示为“现场支付”，并计入总价。",
+    "demo": "本演示运行在 Fuji 测试网络上，使用测试币 tUSDC（1 tUSDC = {rate}）。所有可预订的运营商均为演示用的虚构名称。",
+    "refundTitle": "乘客取消时",
+    "operator": "运营商（虚构）",
+    "fee": "手续费",
+    "deadline": "最晚取消时间",
+    "hours": "提前 {h} 小时",
+    "noShow": "若乘客在出发后 2 小时内未登车，运营商将获得该段票款。",
+    "operatorCancel": "运营商取消班次：自动全额退款。"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "运营商专区"
+  },
+  "title": "交通运营商控制台",
+  "subtitle": "扫描乘客车票即时收款。取消班次后，所有乘客自动获得退款。",
+  "noDeployment": "此网络暂不支持预订。",
+  "connect": "连接运营商钱包以管理班次和乘客",
+  "loadError": "无法从区块链加载数据。请检查网络连接后重试。",
+  "notOperator": {
+    "title": "该钱包不是已注册的运营商",
+    "body": "钱包 {address} 不在运营商名单中，因此无法为乘客签到或取消班次。",
+    "demoList": "已注册的演示运营商",
+    "howTo": "请按 README 说明切换到演示运营商钱包，然后返回此页面。"
+  },
+  "active": "接受预订中",
+  "inactive": "已暂停预订",
+  "balance": "钱包余额",
+  "today": "今日收入",
+  "scanButton": "扫码签到",
+  "services": "班次和乘客",
+  "empty": "还没有预订",
+  "emptyBody": "有人预订你的班次后，会显示在这里。",
+  "departs": "{day} {time} 出发",
+  "passengers": "{n, plural, one {# 位乘客} other {# 位乘客}}",
+  "escrow": "托管至登车",
+  "paidOut": "已付给你",
+  "ticketList": "全部车票（{n}）",
+  "ticketNo": "车票 #{id}",
+  "checkIn": "签到",
+  "noShow": "申请未登车款项",
+  "noShowHint": "出发 2 小时后可申请未登车款项。",
+  "paidIn": "已付 {price}",
+  "cancelService": "取消此班次",
+  "cancel": {
+    "title": "取消此班次？",
+    "passengers": "受影响乘客",
+    "refund": "退款总额",
+    "body": "所有乘客都会立即自动获得全额退款，无需任何操作。",
+    "confirm": "取消并退款给 {n, plural, one {# 位乘客} other {# 位乘客}}",
+    "done": "已取消。{n, plural, one {# 位乘客} other {# 位乘客}}已自动退款，共 {refund}"
+  },
+  "scan": {
+    "title": "扫码签到",
+    "body": "将摄像头对准乘客应用中的二维码。我们会确认对方确实持有该车票。",
+    "cameraError": "无法打开摄像头。请允许摄像头访问，或在下方粘贴二维码文本 / 车票编号。",
+    "cameraOff": "关闭摄像头",
+    "cameraOn": "打开摄像头",
+    "manual": "或粘贴二维码文本 / 车票编号",
+    "manualPlaceholder": "例如 12",
+    "verify": "检查车票",
+    "checking": "正在检查车票…",
+    "signatureOk": "签名有效 · 持票人 {holder}",
+    "noSignature": "没有持票人（{holder}）的签名。签到前请在乘客的应用中核对车票。",
+    "ticketLine": "车票 #{id} · {label}",
+    "checkIn": "签到并收款 {price}",
+    "paid": "已付 {price}",
+    "next": "扫描下一位乘客",
+    "again": "重新扫描",
+    "problem": {
+      "parse": "无法读取此二维码，它不是 Wayfare 车票。",
+      "wrongChain": "该车票在其他网络上。",
+      "unknown": "找不到车票。",
+      "notYours": "该车票不属于你的班次。",
+      "notBooked": "该车票已使用、已取消或已退款。",
+      "badSignature": "签名与持票人不符。二维码可能是伪造的，或车票已转让给他人。"
+    }
+  }
+}

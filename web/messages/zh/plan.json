@@ -1,0 +1,122 @@
+{
+  "title": "{from} → {to}",
+  "summary": "{date} · {time} {mode, select, arrive {前到达} other {出发}} · {pax, plural, one {# 位乘客} other {# 位乘客}}",
+  "edit": "修改搜索",
+  "priorityLabel": "你最在意什么？",
+  "priority": {
+    "fastest": "最快",
+    "cheapest": "最便宜",
+    "value": "最划算",
+    "comfort": "最舒适"
+  },
+  "priorityHint": {
+    "fastest": "门到门时间最短",
+    "cheapest": "总费用最低",
+    "value": "价格 + 你的时间 + 天气风险",
+    "comfort": "换乘少、步行少、不淋雨"
+  },
+  "best": "最适合你",
+  "bestReason": {
+    "faster": "比{mode}快 {h, plural, =0 {} other {# 小时 }}{m} 分钟",
+    "slower": "比{mode}慢 {h, plural, =0 {} other {# 小时 }}{m} 分钟",
+    "pricier": "贵 {price}",
+    "cheaper": "便宜 {price}",
+    "samePrice": "价格相同",
+    "weatherOk": "不受天气影响",
+    "weatherRisk": "请查看天气提醒"
+  },
+  "leaveAt": "{time} 出发",
+  "arriveAt": "{time} 到达",
+  "nextDay": "+1 天",
+  "transfers": "{n, plural, =0 {直达} one {换乘 # 次} other {换乘 # 次}}",
+  "walk": "步行 {min} 分钟",
+  "details": "查看详情",
+  "compare": "比较",
+  "compareSelected": "比较 {n} 个行程",
+  "compareMax": "最多可比较 3 个行程",
+  "compareTitle": "并排比较",
+  "notRecommended": "不推荐",
+  "seeAlternative": "查看替代方案",
+  "trips": "{n, plural, one {# 种走法} other {# 种走法}}",
+  "noMatch": "没有符合筛选条件的行程。",
+  "resetFilters": "清除筛选",
+  "range": "{low}–{high}",
+  "approx": "约 {price}",
+  "payOnSite": "现场支付",
+  "onChain": "在线预订",
+  "reliability": {
+    "high": "非常准点",
+    "medium": "通常准时 ±{min} 分钟",
+    "low": "视路况 ±{min} 分钟"
+  },
+  "filters": {
+    "title": "筛选",
+    "open": "筛选",
+    "modes": "交通工具",
+    "budget": "预算（合计）",
+    "budgetAny": "不限预算",
+    "departWindow": "出发时间",
+    "window": {
+      "any": "不限时间",
+      "morning": "上午 05–12",
+      "afternoon": "下午 12–17",
+      "evening": "傍晚 17–21",
+      "night": "夜间 21–05"
+    },
+    "transfers": "换乘",
+    "transfersAny": "不限",
+    "transfersMax": "{n, plural, =0 {仅直达} other {最多 # 次}}",
+    "avoidWin": "避开摩的",
+    "maxWalk": "最多步行",
+    "maxWalkAny": "不限",
+    "bigLuggage": "我有大件行李",
+    "bigLuggageHint": "排除摩的和小船，步行时间按更慢计算",
+    "apply": "显示 {n} 个行程"
+  },
+  "weather": {
+    "title": "出行当天的天气",
+    "origin": "出发地",
+    "destination": "目的地",
+    "rain": "降雨 {prob}%",
+    "temp": "{min}–{max}°C",
+    "seasonal": "该日期暂无预报——显示季节平均值。",
+    "better": "{time} 出发可避开降雨（降雨概率 {prob}%，而非 {now}%）。",
+    "source": "预报：{source}"
+  },
+  "calendar": {
+    "title": "你所选日期前后的价格",
+    "reference": "每天最便宜的{mode}行程",
+    "cheaperOn": "{day}出发便宜 {price}。",
+    "bestDay": "你选的日期已经是本周最便宜的。",
+    "holiday": "假日",
+    "na": "–"
+  },
+  "map": "地图",
+  "list": "列表",
+  "mapUnavailable": "无法加载地图。",
+  "sources": "本次搜索的数据来源",
+  "compareTable": {
+    "depart": "出发",
+    "arrive": "到达",
+    "total": "门到门",
+    "walk": "步行",
+    "wait": "等候",
+    "ride": "乘车",
+    "transfer": "换乘",
+    "buffer": "预留",
+    "price": "总价",
+    "transfers": "换乘次数",
+    "weather": "天气风险",
+    "co2": "CO₂",
+    "refund": "退款政策",
+    "risk": {
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "refundNone": "现场支付——无在线退款",
+    "refundPartial": "运营商取消免费退款；你在出发前 {h} 小时以前取消收取 {fee}% 手续费"
+  },
+  "errorTitle": "无法规划此行程",
+  "newSearch": "重新搜索"
+}

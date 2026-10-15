@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Wayfare 应用"
+  },
+  "tabsLabel": "应用菜单",
+  "tabs": {
+    "plan": "规划",
+    "trips": "我的行程",
+    "tickets": "车票",
+    "profile": "个人资料"
+  },
+  "noDeployment": "此网络暂不支持预订，请稍后再试。",
+  "loadError": "无法从区块链加载数据。请检查网络连接后重试。",
+  "plan": {
+    "intro": "搜索一次，比较所有出行方式，然后一次付款预订所有行程段。",
+    "popular": "热门路线"
+  },
+  "trips": {
+    "connect": "连接钱包以查看已预订的行程",
+    "empty": "还没有预订的行程",
+    "emptyBody": "搜索路线并点击“预订全程”，你的行程会显示在这里。",
+    "planNow": "规划行程",
+    "upcoming": "即将出发",
+    "noUpcoming": "没有即将出发的行程",
+    "past": "过往行程",
+    "tripNo": "行程 #{id}",
+    "paid": "已付 ≈ {usdc} USDC · {pax, plural, one {# 位乘客} other {# 位乘客}}",
+    "departs": "{day} {time} 出发",
+    "tickets": "{n, plural, one {# 张车票} other {# 张车票}}",
+    "alertsTitle": "天气变化提醒",
+    "alert": "{name}{kind, select, transfer {换乘时} walk {步行时} other {乘车时}}降雨概率升至 {prob}%。建议提前 {min} 分钟出发。",
+    "alertDetail": "行程 #{id} · 预订时为 {was}% · 约 {time}"
+  },
+  "tickets": {
+    "connect": "连接钱包以查看你的车票",
+    "empty": "还没有车票",
+    "emptyBody": "你预订的每段行程都会作为车票保存在钱包中，并显示在这里。",
+    "ticketNo": "车票 #{id}",
+    "departs": "{day} {time} 出发",
+    "imageAlt": "车票 #{id}",
+    "showQr": "显示二维码",
+    "qrTitle": "车票 #{id} 的二维码",
+    "qrBody": "登车时请工作人员扫描。二维码由你的钱包确认，仅对持票人有效。",
+    "cancel": "取消",
+    "cancelTitle": "取消这张车票？",
+    "paidLabel": "票价",
+    "feeLabel": "取消手续费（{pct}%）",
+    "refundLabel": "退还金额",
+    "cancelDeadline": "可退款取消截止至 {day} {time}",
+    "cancelConfirm": "确认取消 · 退还 {refund}",
+    "cancelDone": "已取消，已退还 {refund}",
+    "noRefund": "已超过可退款取消期限。",
+    "transfer": "转给朋友",
+    "transferTitle": "把车票转给朋友",
+    "transferBody": "把车票 {label} 发送到朋友的钱包，对方将代替你成为持票人。",
+    "transferTo": "朋友的钱包地址",
+    "transferHint": "以 0x 开头，共 42 个字符。请仔细核对：此操作无法撤销。",
+    "transferInvalid": "钱包地址无效",
+    "transferSelf": "这是你自己的钱包",
+    "transferConfirm": "确认转让",
+    "transferDone": "车票已发送"
+  },
+  "profile": {
+    "settings": "设置",
+    "timeValue": "你的时间价值（用于“最划算”）",
+    "perHour": "每小时",
+    "timeValueHint": "节省一小时对你价值 {price}",
+    "defaultPriority": "默认优先项",
+    "connect": "连接钱包以查看余额并领取测试币",
+    "wallet": "我的钱包",
+    "address": "钱包地址",
+    "faucetWait": "{time} 后可再次领取",
+    "faucetNext": "下次可领取免费测试币的时间：{time}"
+  }
+}
