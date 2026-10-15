@@ -1,0 +1,37 @@
+{
+  "step": {
+    "walk": "เดินไป {to} ({min} นาที, ประมาณ {m} ม.)",
+    "transferWalk": "เดินไปต่อรถที่ {to} ({min} นาที)",
+    "wait": "รอ {mode} ที่ {place} ({min} นาที)",
+    "transferWait": "ต่อ {mode} ที่ {place} ({min} นาที)",
+    "buffer": "เผื่อเวลา {min} นาทีที่ {place}",
+    "bufferFlight": "เช็คอินและผ่านจุดตรวจที่ {place} — ไปถึงก่อนเครื่องออก {min} นาที",
+    "bufferStation": "ไปถึง {place} ก่อน {min} นาที เพื่อหาชานชาลาและขึ้นรถ",
+    "deplaneFlight": "ลงจากเครื่องและรับกระเป๋าที่ {place} ({min} นาที)",
+    "deplane": "ลงที่ {place} ({min} นาที)",
+    "taxi": "นั่งแท็กซี่มิเตอร์ไป {to} ({min} นาที, {km} กม.)",
+    "grab": "เรียก Grab ไป {to} ({min} นาที, {km} กม.)",
+    "win": "นั่งวินมอเตอร์ไซค์ไป {to} ({min} นาที, {km} กม.)",
+    "car": "ขับรถไป {to} ({min} นาที, {km} กม.)",
+    "ride": "ขึ้น {mode} {line} ไปทาง {headsign} {stops} สถานี ลงที่ {to} ({min} นาที, {price})",
+    "flight": "บิน {carrier} {flightNo} จาก {from} ไป {to} ({min} นาที)",
+    "train": "ขึ้น {name} ({cls}) จาก {from} ไป {to} ({min} นาที)",
+    "coach": "ขึ้น{mode} {name} ({cls}) จาก {from} ไป {to} ({min} นาที)"
+  },
+  "warn": {
+    "winRain": "วินถูกที่สุด ({price}) แต่ช่วง {time} มีโอกาสฝน {prob}% — ไม่แนะนำ",
+    "winHeavyRain": "ช่วง {time} คาดว่าฝนหนักหรือพายุฝนฟ้าคะนอง ({mm} มม./ชม.) — ไม่แนะนำวินมอเตอร์ไซค์",
+    "walkHeavyRain": "ต้องเดิน {min} นาทีกลางฝนหนักช่วง {time} (โอกาสฝน {prob}%, {mm} มม./ชม.) — ไม่แนะนำ",
+    "walkUmbrella": "ช่วง {time} มีโอกาสฝน {prob}% — พกร่มสำหรับช่วงเดิน {min} นาที",
+    "walkHeat": "อุณหภูมิที่รู้สึก {feels}°C — เดิน {min} นาทีจะร้อนมาก พกน้ำไปด้วย",
+    "walkPm25": "PM2.5 {pm25} µg/m³ — ใส่หน้ากากช่วงเดิน {min} นาที",
+    "boatWind": "ลมกระโชกถึง {gust} กม./ชม. ช่วง {time} — ไม่แนะนำเรือ",
+    "boatRain": "ฝนหนักช่วง {time} — เรืออาจล่าช้าหรือแน่น",
+    "roadSlow": "ช่วง {time} มีโอกาสฝน {prob}% — ถนนช้าลงราว {pct}% เราบวกเวลาเผื่อให้แล้ว",
+    "flightStorm": "พยากรณ์มีพายุฝนฟ้าคะนอง — เพิ่มเวลาเผื่อที่สนามบินอีก {extra} นาที"
+  },
+  "alt": {
+    "instead": "แนะนำ {mode} แทน ({sign}{delta}, ไม่เปียก)",
+    "insteadBoat": "แนะนำ {mode} แทน ({sign}{delta})"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "title": "Wayfare — every way to travel, compared in one place",
+    "description": "Compare trains, buses, boats, flights, taxis and motorbike taxis door to door with real timetables, today's prices and the weather. Book every leg in one payment."
+  },
+  "language": "Language",
+  "mainNav": "Main navigation",
+  "travelTypes": "Ways to travel",
+  "operators": "For operators",
+  "aboutData": "Data & methods",
+  "connectWallet": "Connect wallet",
+  "loading": "Loading…",
+  "retry": "Try again",
+  "close": "Close",
+  "back": "Back",
+  "minutes": "{min} min",
+  "duration": "{h, plural, =0 {} other {# h }}{m} min",
+  "hoursShort": "{h} h",
+  "perPerson": "per person",
+  "total": "Total",
+  "people": "{n, plural, one {# passenger} other {# passengers}}",
+  "dataFrom": "Data from",
+  "estimate": "Estimate",
+  "fallbackData": "Backup data",
+  "updated": "updated {date}",
+  "currency": "Display currency",
+  "menu": {
+    "city": "In the city",
+    "intercity": "Between cities",
+    "popular": "Popular routes",
+    "metro": "Skytrain & subway",
+    "bus": "City bus",
+    "boat": "Boats & ferries",
+    "taxiWin": "Taxi / motorbike taxi",
+    "flight": "Domestic flights",
+    "train": "Trains",
+    "coach": "Intercity coaches",
+    "van": "Vans"
+  },
+  "popular": {
+    "asokBkk": "Asok → Suvarnabhumi Airport",
+    "bkkCnx": "Bangkok → Chiang Mai",
+    "siamDmk": "Siam → Don Mueang Airport",
+    "bkkPattaya": "Bangkok → Pattaya"
+  },
+  "footer": {
+    "tagline": "Every way to travel, compared in one place — with the weather already checked.",
+    "product": "Product",
+    "plan": "Plan a trip",
+    "app": "My trips & tickets",
+    "data": "Data",
+    "demo": "Hackathon demo. Bookable operators are fictional and payments use test tokens on Avalanche Fuji."
+  },
+  "wallet": {
+    "connect": "Connect wallet",
+    "wrongNetwork": "Switch to Avalanche",
+    "account": "My wallet"
+  }
+}

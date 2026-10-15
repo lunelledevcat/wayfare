@@ -346,7 +346,7 @@ export function intercityLeg(ctx: LegContext, s: IntercityService): Leg {
       cancelFeeBps: policy.feeBps,
       label: ascii(`${s.from.name.en} -> ${s.to.name.en} · ${operator} ${s.serviceNo}`).slice(0, 90),
     },
-    line: { name: s.name, short: s.serviceNo, classLabel: s.classLabel, stops: s.stops, agency: operator },
+    line: { name: s.name, short: s.serviceNo.split("-")[0], classLabel: s.classLabel, stops: s.stops, agency: operator },
     reliability: s.mode === "train" ? { level: "medium", plusMinusMin: longTrip ? 40 : 15 } : { level: "medium", plusMinusMin: longTrip ? 45 : 20 },
     instruction: {
       key: s.mode === "train" ? "step.train" : "step.coach",

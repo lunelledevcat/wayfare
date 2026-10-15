@@ -1,0 +1,21 @@
+{
+  "formLabel": "Search trips",
+  "from": "From",
+  "to": "To",
+  "fromPlaceholder": "Station, place or address",
+  "toPlaceholder": "Where to?",
+  "swap": "Swap from and to",
+  "when": "Time",
+  "depart": "Leave at",
+  "arrive": "Arrive by",
+  "date": "Date",
+  "time": "Time",
+  "pax": "Passengers",
+  "submit": "Find the best way",
+  "searching": "Searching…",
+  "needFrom": "Choose where you start from the suggestions.",
+  "needTo": "Choose your destination from the suggestions.",
+  "same": "Start and destination are the same.",
+  "osm": "OpenStreetMap",
+  "gtfs": "GTFS station"
+}

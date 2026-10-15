@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Wayfare app"
+  },
+  "tabsLabel": "App menu",
+  "tabs": {
+    "plan": "Plan",
+    "trips": "My trips",
+    "tickets": "Tickets",
+    "profile": "Profile"
+  },
+  "noDeployment": "Booking is not available on this network yet. Please try again later.",
+  "loadError": "Couldn't load data from the blockchain. Check your connection and try again.",
+  "plan": {
+    "intro": "Search once, compare every way to travel, then book every leg with one payment.",
+    "popular": "Popular routes"
+  },
+  "trips": {
+    "connect": "Connect your wallet to see your booked trips",
+    "empty": "No booked trips yet",
+    "emptyBody": "Search a route and tap “Book whole trip”. Your trips will show up here.",
+    "planNow": "Plan a trip",
+    "upcoming": "Upcoming trips",
+    "noUpcoming": "No upcoming trips",
+    "past": "Past trips",
+    "tripNo": "Trip #{id}",
+    "paid": "Paid ≈ {usdc} USDC · {pax, plural, one {# passenger} other {# passengers}}",
+    "departs": "Departs {day} {time}",
+    "tickets": "{n, plural, one {# ticket} other {# tickets}}",
+    "alertsTitle": "Weather change alerts",
+    "alert": "Rain chance up to {prob}% {kind, select, transfer {during your transfer} walk {during your walk} other {on your ride}} at {name}. Consider leaving {min} min earlier.",
+    "alertDetail": "Trip #{id} · {was}% when you booked · around {time}"
+  },
+  "tickets": {
+    "connect": "Connect your wallet to see your tickets",
+    "empty": "No tickets yet",
+    "emptyBody": "Every leg you book is kept as a ticket in your wallet and shown here.",
+    "ticketNo": "Ticket #{id}",
+    "departs": "Departs {day} {time}",
+    "imageAlt": "Ticket #{id}",
+    "showQr": "Show QR",
+    "qrTitle": "QR for ticket #{id}",
+    "qrBody": "Let staff scan this when you board. The QR is confirmed by your wallet and only works for the ticket holder.",
+    "cancel": "Cancel",
+    "cancelTitle": "Cancel this ticket?",
+    "paidLabel": "Ticket price",
+    "feeLabel": "Cancellation fee ({pct}%)",
+    "refundLabel": "You get back",
+    "cancelDeadline": "Refundable cancellation until {day} {time}",
+    "cancelConfirm": "Confirm cancel · get {refund} back",
+    "cancelDone": "Cancelled. {refund} refunded",
+    "noRefund": "The refundable cancellation window has passed.",
+    "transfer": "Give to a friend",
+    "transferTitle": "Give ticket to a friend",
+    "transferBody": "Send ticket {label} to your friend's wallet. They become the ticket holder instead of you.",
+    "transferTo": "Friend's wallet address",
+    "transferHint": "Starts with 0x, 42 characters. Double-check it: this can't be undone.",
+    "transferInvalid": "That wallet address isn't valid",
+    "transferSelf": "That's your own wallet",
+    "transferConfirm": "Confirm transfer",
+    "transferDone": "Ticket sent"
+  },
+  "profile": {
+    "settings": "Settings",
+    "timeValue": "Value of your time (used by “Best value”)",
+    "perHour": "per hour",
+    "timeValueHint": "One hour saved is worth {price} to you",
+    "defaultPriority": "Default priority",
+    "connect": "Connect your wallet to see your balance and get test money",
+    "wallet": "My wallet",
+    "address": "Wallet address",
+    "faucetWait": "Available again in {time}",
+    "faucetNext": "Next free test money at {time}"
+  }
+}

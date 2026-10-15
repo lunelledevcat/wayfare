@@ -1,0 +1,38 @@
+{
+  "pending": "Confirming on the blockchain…",
+  "waitingWallet": "Please confirm in your wallet…",
+  "steps": {
+    "quote": "Getting today's price…",
+    "switch": "Switching to Avalanche…",
+    "faucet": "Sending you free test money…",
+    "approve": "Confirm payment in your wallet (1 of 2)…",
+    "book": "Confirm booking in your wallet (2 of 2)…",
+    "confirm": "Confirming on the blockchain…",
+    "sign": "Confirm in your wallet to create the ticket QR…",
+    "cancel": "Confirm the cancellation in your wallet…",
+    "transfer": "Confirm the ticket transfer in your wallet…",
+    "checkin": "Confirm the check-in in your wallet…",
+    "noshow": "Confirm the payment claim in your wallet…",
+    "cancelTrip": "Confirm the service cancellation in your wallet…"
+  },
+  "success": "Done!",
+  "viewExplorer": "View on Snowtrace",
+  "localChain": "Recorded on the local test chain",
+  "errorFix": "How to fix",
+  "tryAgain": "Try again",
+  "faucet": "Get free test money",
+  "faucetDone": "Test money added: 1,000",
+  "faucetHint": "Test money has no real value. You can get it once per hour.",
+  "balance": "Test balance",
+  "switch": "Switch to Avalanche",
+  "connectFirst": "Connect your wallet to book",
+  "gasHint": "Your wallet also needs a little test AVAX for network fees.",
+  "gasFaucet": "Get test AVAX (Fuji faucet)",
+  "status": {
+    "booked": "Valid",
+    "checkedIn": "Checked in",
+    "cancelledByOperator": "Cancelled by operator · refunded",
+    "cancelledByPassenger": "Cancelled · refunded",
+    "noShow": "No-show"
+  }
+}

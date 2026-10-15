@@ -1,0 +1,122 @@
+{
+  "title": "{from} → {to}",
+  "summary": "{date} · {mode, select, arrive {arrive by} other {leave at}} {time} · {pax, plural, one {# passenger} other {# passengers}}",
+  "edit": "Change search",
+  "priorityLabel": "What matters most?",
+  "priority": {
+    "fastest": "Fastest",
+    "cheapest": "Cheapest",
+    "value": "Best value",
+    "comfort": "Most comfortable"
+  },
+  "priorityHint": {
+    "fastest": "Least door-to-door time",
+    "cheapest": "Lowest total cost",
+    "value": "Price + your time + weather risk",
+    "comfort": "Fewer changes, less walking, stays dry"
+  },
+  "best": "Best for you",
+  "bestReason": {
+    "faster": "{h, plural, =0 {} other {# h }}{m} min faster than {mode}",
+    "slower": "{h, plural, =0 {} other {# h }}{m} min slower than {mode}",
+    "pricier": "{price} more",
+    "cheaper": "{price} cheaper",
+    "samePrice": "same price",
+    "weatherOk": "weather has no effect",
+    "weatherRisk": "check the weather notes"
+  },
+  "leaveAt": "Leave at {time}",
+  "arriveAt": "Arrive {time}",
+  "nextDay": "+1 day",
+  "transfers": "{n, plural, =0 {Direct} one {# change} other {# changes}}",
+  "walk": "Walk {min} min",
+  "details": "View details",
+  "compare": "Compare",
+  "compareSelected": "Compare {n} trips",
+  "compareMax": "You can compare up to 3 trips",
+  "compareTitle": "Side-by-side comparison",
+  "notRecommended": "Not recommended",
+  "seeAlternative": "See alternative",
+  "trips": "{n, plural, one {# way to go} other {# ways to go}}",
+  "noMatch": "No trip matches these filters.",
+  "resetFilters": "Clear filters",
+  "range": "{low}–{high}",
+  "approx": "about {price}",
+  "payOnSite": "pay on site",
+  "onChain": "book online",
+  "reliability": {
+    "high": "Very punctual",
+    "medium": "Usually on time ±{min} min",
+    "low": "Depends on traffic ±{min} min"
+  },
+  "filters": {
+    "title": "Filters",
+    "open": "Filters",
+    "modes": "Vehicles",
+    "budget": "Budget (total)",
+    "budgetAny": "Any budget",
+    "departWindow": "Departure time",
+    "window": {
+      "any": "Any time",
+      "morning": "Morning 05–12",
+      "afternoon": "Afternoon 12–17",
+      "evening": "Evening 17–21",
+      "night": "Night 21–05"
+    },
+    "transfers": "Changes",
+    "transfersAny": "Any",
+    "transfersMax": "{n, plural, =0 {Direct only} other {Up to #}}",
+    "avoidWin": "Avoid motorbike taxis",
+    "maxWalk": "Walk at most",
+    "maxWalkAny": "Any",
+    "bigLuggage": "I have big luggage",
+    "bigLuggageHint": "Removes motorbikes and small boats, counts walking as slower",
+    "apply": "Show {n} trips"
+  },
+  "weather": {
+    "title": "Weather on your travel day",
+    "origin": "Start",
+    "destination": "Destination",
+    "rain": "Rain {prob}%",
+    "temp": "{min}–{max}°C",
+    "seasonal": "No forecast yet for this date — showing seasonal averages.",
+    "better": "Leave at {time} to avoid the rain (rain chance {prob}% instead of {now}%).",
+    "source": "Forecast: {source}"
+  },
+  "calendar": {
+    "title": "Prices around your date",
+    "reference": "Cheapest {mode} trip per day",
+    "cheaperOn": "Going on {day} is {price} cheaper.",
+    "bestDay": "Your date is already the cheapest in this week.",
+    "holiday": "Holiday",
+    "na": "–"
+  },
+  "map": "Map",
+  "list": "List",
+  "mapUnavailable": "Map could not be loaded.",
+  "sources": "Data sources for this search",
+  "compareTable": {
+    "depart": "Leave",
+    "arrive": "Arrive",
+    "total": "Door to door",
+    "walk": "Walking",
+    "wait": "Waiting",
+    "ride": "Riding",
+    "transfer": "Changing",
+    "buffer": "Buffers",
+    "price": "Total price",
+    "transfers": "Changes",
+    "weather": "Weather risk",
+    "co2": "CO₂",
+    "refund": "Refund policy",
+    "risk": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "refundNone": "Pay on site — no online refund",
+    "refundPartial": "Free if the operator cancels; {fee}% fee if you cancel up to {h} h before"
+  },
+  "errorTitle": "We couldn't plan this trip",
+  "newSearch": "New search"
+}

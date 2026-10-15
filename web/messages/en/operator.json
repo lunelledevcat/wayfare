@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "title": "For operators"
+  },
+  "title": "Transport operator console",
+  "subtitle": "Scan passenger tickets and get paid instantly. Cancel a service and every passenger is refunded automatically.",
+  "noDeployment": "Booking is not available on this network yet.",
+  "connect": "Connect your operator wallet to manage services and passengers",
+  "loadError": "Couldn't load data from the blockchain. Check your connection and try again.",
+  "notOperator": {
+    "title": "This wallet isn't a registered operator",
+    "body": "Wallet {address} is not on the operator list, so it can't check passengers in or cancel services.",
+    "demoList": "Registered demo operators",
+    "howTo": "Switch to a demo operator wallet as described in the README, then come back to this page."
+  },
+  "active": "Taking bookings",
+  "inactive": "Bookings paused",
+  "balance": "Wallet balance",
+  "today": "Earned today",
+  "scanButton": "Scan QR to check in",
+  "services": "Services and passengers",
+  "empty": "No bookings yet",
+  "emptyBody": "When people book your services, they will show up here.",
+  "departs": "Departs {day} {time}",
+  "passengers": "{n, plural, one {# passenger} other {# passengers}}",
+  "escrow": "Held until boarding",
+  "paidOut": "Paid to you",
+  "ticketList": "All tickets ({n})",
+  "ticketNo": "Ticket #{id}",
+  "checkIn": "Check in",
+  "noShow": "Claim no-show",
+  "noShowHint": "No-show payment can be claimed 2 hours after departure.",
+  "paidIn": "Paid {price}",
+  "cancelService": "Cancel this service",
+  "cancel": {
+    "title": "Cancel this service?",
+    "passengers": "Passengers affected",
+    "refund": "Total refund",
+    "body": "Every passenger gets a full refund automatically, right away. They don't need to do anything.",
+    "confirm": "Cancel and refund {n, plural, one {# passenger} other {# passengers}}",
+    "done": "Cancelled. {n, plural, one {# passenger was} other {# passengers were}} refunded automatically, {refund} in total"
+  },
+  "scan": {
+    "title": "Scan QR to check in",
+    "body": "Point the camera at the QR in the passenger's app. We confirm they really hold the ticket.",
+    "cameraError": "Couldn't open the camera. Allow camera access, or paste the QR text / ticket number below.",
+    "cameraOff": "Turn camera off",
+    "cameraOn": "Turn camera on",
+    "manual": "Or paste QR text / ticket number",
+    "manualPlaceholder": "e.g. 12",
+    "verify": "Check ticket",
+    "checking": "Checking ticket…",
+    "signatureOk": "Signature valid · holder {holder}",
+    "noSignature": "No signature from the holder ({holder}). Check the ticket in the passenger's app before checking in.",
+    "ticketLine": "Ticket #{id} · {label}",
+    "checkIn": "Check in and get {price}",
+    "paid": "Paid {price}",
+    "next": "Scan next passenger",
+    "again": "Scan again",
+    "problem": {
+      "parse": "Can't read this QR. It isn't a Wayfare ticket.",
+      "wrongChain": "This ticket is on a different network.",
+      "unknown": "Ticket not found.",
+      "notYours": "This ticket isn't for your service.",
+      "notBooked": "This ticket was already used, cancelled or refunded.",
+      "badSignature": "The signature doesn't match the ticket holder. The QR may be fake or the ticket was given away."
+    }
+  }
+}

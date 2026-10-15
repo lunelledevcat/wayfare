@@ -1,0 +1,24 @@
+{
+  "walk": "Walk",
+  "bts": "BTS Skytrain",
+  "mrt": "MRT",
+  "arl": "Airport Rail Link",
+  "red": "SRT Red Line",
+  "train": "Train",
+  "bus": "Bus",
+  "coach": "Coach",
+  "van": "Van",
+  "boat": "Boat",
+  "flight": "Flight",
+  "taxi": "Taxi",
+  "grab": "Grab",
+  "win": "Motorbike taxi",
+  "car": "Private car",
+  "kind": {
+    "walk": "Walk",
+    "wait": "Wait",
+    "ride": "Ride",
+    "transfer": "Transfer",
+    "buffer": "Buffer"
+  }
+}

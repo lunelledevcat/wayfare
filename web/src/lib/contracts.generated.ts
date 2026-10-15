@@ -22,7 +22,7 @@ export const deployments = {
     "booking": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
     "quoteSigner": "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
     "deployBlock": 1,
-    "deployedAt": "2026-10-15T14:29:20.427Z",
+    "deployedAt": "2026-10-15T15:04:29.811Z",
     "operators": [
       {
         "address": "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",

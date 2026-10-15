@@ -1,0 +1,37 @@
+{
+  "step": {
+    "walk": "Walk to {to} ({min} min, about {m} m)",
+    "transferWalk": "Walk to the connection at {to} ({min} min)",
+    "wait": "Wait for the {mode} at {place} ({min} min)",
+    "transferWait": "Change to the {mode} at {place} ({min} min)",
+    "buffer": "Allow {min} min at {place}",
+    "bufferFlight": "Check in and pass security at {place} — be there {min} min before departure",
+    "bufferStation": "Arrive at {place} {min} min early to find your platform and board",
+    "deplaneFlight": "Leave the plane and collect bags at {place} ({min} min)",
+    "deplane": "Get off at {place} ({min} min)",
+    "taxi": "Take a metered taxi to {to} ({min} min, {km} km)",
+    "grab": "Book a Grab car to {to} ({min} min, {km} km)",
+    "win": "Ride a motorbike taxi (win) to {to} ({min} min, {km} km)",
+    "car": "Drive to {to} ({min} min, {km} km)",
+    "ride": "Take the {mode} {line} towards {headsign}, {stops} stops, get off at {to} ({min} min, {price})",
+    "flight": "Fly {carrier} {flightNo} from {from} to {to} ({min} min)",
+    "train": "Board {name} ({cls}) from {from} to {to} ({min} min)",
+    "coach": "Board the {mode} {name} ({cls}) from {from} to {to} ({min} min)"
+  },
+  "warn": {
+    "winRain": "Motorbike taxi is the cheapest ({price}) but there is a {prob}% chance of rain at {time} — not recommended.",
+    "winHeavyRain": "Heavy rain or thunderstorms expected at {time} ({mm} mm/h) — motorbike taxi is not recommended.",
+    "walkHeavyRain": "{min} min walk in heavy rain at {time} ({prob}% chance, {mm} mm/h) — not recommended.",
+    "walkUmbrella": "{prob}% chance of rain at {time} — bring an umbrella for the {min} min walk.",
+    "walkHeat": "Feels like {feels}°C — the {min} min walk will be hot. Carry water.",
+    "walkPm25": "PM2.5 is {pm25} µg/m³ — wear a mask for the {min} min walk.",
+    "boatWind": "Gusts up to {gust} km/h at {time} — boat not recommended.",
+    "boatRain": "Heavy rain at {time} — boats may be delayed or crowded.",
+    "roadSlow": "Rain expected at {time} ({prob}%) — roads about {pct}% slower; extra time already added.",
+    "flightStorm": "Thunderstorms forecast — we added {extra} min to the airport buffer."
+  },
+  "alt": {
+    "instead": "Take {mode} instead ({sign}{delta}, stays dry).",
+    "insteadBoat": "Take {mode} instead ({sign}{delta})."
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "title": "Wayfare — every way to travel, compared in one place"
+  },
+  "hero": {
+    "badge": "Real timetables · prices for your day · hourly weather",
+    "title": "What is the best way to get there?",
+    "titleAccent": "Let Wayfare work it out",
+    "subtitle": "Compare skytrain, bus, boat, taxi, motorbike taxi, train, coach and flights door to door. See when to leave, how long every step takes and what the whole trip costs, then book every leg in one payment.",
+    "trySearch": "Try"
+  },
+  "modes": {
+    "title": "Browse by way of travel",
+    "subtitle": "Tap to see a sample route using that mode",
+    "seeMore": "See more",
+    "hint": {
+      "metro": "BTS · MRT · Airport Rail Link · Red Line",
+      "bus": "BMTA and partner city buses",
+      "boat": "Chao Phraya express and canal boats",
+      "taxiWin": "Metered taxi · Grab · motorbike taxi",
+      "flight": "Domestic flights",
+      "train": "Long-distance trains",
+      "coach": "Intercity coaches",
+      "van": "Passenger vans"
+    }
+  },
+  "highlights": {
+    "title": "Why Wayfare",
+    "compare": {
+      "title": "Every option in one place",
+      "body": "No more juggling websites and doing the maths yourself. One search ranks every way to travel by what matters to you."
+    },
+    "realtime": {
+      "title": "Real times and prices for your day",
+      "body": "Walking, waiting, riding, transfers and buffers broken down, with prices for the day and time you travel."
+    },
+    "weather": {
+      "title": "Weather already checked",
+      "body": "If rain is expected on part of your trip, we warn you first and suggest a dry alternative."
+    }
+  },
+  "how": {
+    "title": "Four simple steps",
+    "search": {
+      "title": "Search",
+      "body": "Enter where from, where to, date, time and passengers."
+    },
+    "priority": {
+      "title": "Pick what matters",
+      "body": "Fastest, cheapest, best value or most comfortable. Results re-rank instantly."
+    },
+    "best": {
+      "title": "See the best plan",
+      "body": "Every step timed, total cost, the weather and exactly when to leave home."
+    },
+    "book": {
+      "title": "Book once, pay once",
+      "body": "Book every bookable leg in one payment, keep all tickets in the app and get refunded automatically if a service is cancelled."
+    }
+  },
+  "compare": {
+    "title": "Three plans for the same journey",
+    "subtitle": "Asok → Chiang Mai · {date} · leaving 08:00 · 1 passenger",
+    "sample": "Sample from a real search",
+    "recommended": "Recommended",
+    "label": {
+      "cheapest": "Cheapest",
+      "fastest": "Fastest",
+      "value": "Best value"
+    },
+    "doorToDoor": "Door to door {duration}",
+    "perPerson": "per person",
+    "mainMode": "Main leg by {mode}",
+    "edge": {
+      "cheapest": "{amount} cheaper than the fastest option",
+      "fastest": "{duration} faster than the cheapest option",
+      "value": "Balances price and time (time valued at {rate} per hour)"
+    },
+    "transfers": "{n, plural, =0 {No transfers} one {# transfer} other {# transfers}}",
+    "walk": "{min, plural, =0 {Almost no walking} other {# min walking in total}}",
+    "weatherOk": "Weather does not affect this trip",
+    "weatherRisk": "Some weather risk, check the warnings before you go",
+    "bookOnChain": "Book {amount} ahead in one payment",
+    "refundFull": "Full refund if cancelled",
+    "refundPartial": "Cancel up to {hours} h before departure for a {pct}% refund",
+    "refundNone": "Pay on the spot, no booking needed",
+    "cta": "View this plan"
+  },
+  "operator": {
+    "eyebrow": "For transport operators",
+    "title": "Get paid the moment you scan a ticket",
+    "body": "Passengers pay upfront into escrow. Scan the ticket at boarding and the fare goes straight to you. Cancel a service and every passenger is refunded automatically.",
+    "cta": "Go to operator page"
+  },
+  "stats": {
+    "title": "Live on the Avalanche blockchain",
+    "trips": "Trips booked",
+    "tickets": "Tickets issued",
+    "refunds": "Refunded automatically",
+    "note": "Live figures from the Avalanche contract (Fuji test network)"
+  },
+  "dataFrom": {
+    "title": "Data from",
+    "gtfs": "OTP Thailand GTFS (skytrain, bus, boat and rail timetables)",
+    "openMeteo": "Open-Meteo (weather forecast and PM2.5)",
+    "osm": "OpenStreetMap (OSRM and Nominatim)",
+    "duffel": "Duffel (flights, test mode)",
+    "more": "See every source and how we calculate"
+  }
+}

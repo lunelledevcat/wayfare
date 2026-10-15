@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Wayfare design tokens */
+:root {
+  --wf-primary: #1463ff;
+  --wf-primary-strong: #0b4fd6;
+  --wf-primary-soft: #eaf1ff;
+  --wf-good: #12a150;
+  --wf-good-soft: #e7f6ee;
+  --wf-warn: #b45309; /* text on light bg (AA); fill uses --wf-warn-fill */
+  --wf-warn-fill: #f59e0b;
+  --wf-warn-soft: #fef3c7;
+  --wf-bad: #c9353a;
+  --wf-bad-fill: #e5484d;
+  --wf-bad-soft: #fdeced;
+  --wf-bg: #f7f8fa;
+  --wf-card: #ffffff;
+  --wf-fg: #0f172a;
+  --wf-muted: #5b6577;
+  --wf-border: #e3e6ec;
+  --wf-ring: #1463ff55;
+
+  --wf-mode-metro: #16a34a;
+  --wf-mode-train: #b91c1c;
+  --wf-mode-bus: #ea580c;
+  --wf-mode-coach: #7c3aed;
+  --wf-mode-van: #0891b2;
+  --wf-mode-boat: #0284c7;
+  --wf-mode-flight: #1463ff;
+  --wf-mode-taxi: #ca8a04;
+  --wf-mode-win: #db2777;
+  --wf-mode-walk: #64748b;
+  --wf-mode-car: #475569;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light) {
+    --wf-primary: #5b8cff;
+    --wf-primary-strong: #8bb0ff;
+    --wf-primary-soft: #16233f;
+    --wf-good: #3ccf7f;
+    --wf-good-soft: #0f2a1c;
+    --wf-warn: #fbbf24;
+    --wf-warn-soft: #33270b;
+    --wf-bad: #ff7b7f;
+    --wf-bad-soft: #3a1416;
+    --wf-bg: #0b0f17;
+    --wf-card: #131a26;
+    --wf-fg: #e8edf6;
+    --wf-muted: #a0abbe;
+    --wf-border: #263042;
+    --wf-ring: #5b8cff66;
   }
 }
 
+@theme inline {
+  --color-primary: var(--wf-primary);
+  --color-primary-strong: var(--wf-primary-strong);
+  --color-primary-soft: var(--wf-primary-soft);
+  --color-good: var(--wf-good);
+  --color-good-soft: var(--wf-good-soft);
+  --color-warn: var(--wf-warn);
+  --color-warn-fill: var(--wf-warn-fill);
+  --color-warn-soft: var(--wf-warn-soft);
+  --color-bad: var(--wf-bad);
+  --color-bad-fill: var(--wf-bad-fill);
+  --color-bad-soft: var(--wf-bad-soft);
+  --color-bg: var(--wf-bg);
+  --color-card: var(--wf-card);
+  --color-fg: var(--wf-fg);
+  --color-muted: var(--wf-muted);
+  --color-border: var(--wf-border);
+  --color-ring: var(--wf-ring);
+  --font-sans: var(--font-thai), var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
+  --radius-2xl: 1rem;
+  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--wf-bg);
+  color: var(--wf-fg);
+  font-family: var(--font-sans);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 3px solid var(--wf-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -1,0 +1,122 @@
+{
+  "title": "{from} → {to}",
+  "summary": "{date} · {mode, select, arrive {ต้องถึงก่อน} other {ออก}} {time} · {pax} คน",
+  "edit": "แก้การค้นหา",
+  "priorityLabel": "คุณให้ความสำคัญกับอะไร?",
+  "priority": {
+    "fastest": "เร็วสุด",
+    "cheapest": "ถูกสุด",
+    "value": "คุ้มสุด",
+    "comfort": "สบายสุด"
+  },
+  "priorityHint": {
+    "fastest": "ใช้เวลา door-to-door น้อยที่สุด",
+    "cheapest": "ค่าใช้จ่ายรวมน้อยที่สุด",
+    "value": "ราคา + มูลค่าเวลา + ความเสี่ยงสภาพอากาศ",
+    "comfort": "ต่อรถน้อย เดินน้อย ไม่ตากฝน"
+  },
+  "best": "สูตรที่ดีที่สุดสำหรับคุณ",
+  "bestReason": {
+    "faster": "เร็วกว่า{mode} {h, plural, =0 {} other {# ชม. }}{m} นาที",
+    "slower": "ช้ากว่า{mode} {h, plural, =0 {} other {# ชม. }}{m} นาที",
+    "pricier": "แพงกว่า {price}",
+    "cheaper": "ถูกกว่า {price}",
+    "samePrice": "ราคาเท่ากัน",
+    "weatherOk": "ฝนไม่มีผล",
+    "weatherRisk": "ดูคำเตือนสภาพอากาศ"
+  },
+  "leaveAt": "ออก {time}",
+  "arriveAt": "ถึง {time}",
+  "nextDay": "+1 วัน",
+  "transfers": "{n, plural, =0 {ไม่ต้องต่อรถ} other {ต่อรถ # ครั้ง}}",
+  "walk": "เดิน {min} นาที",
+  "details": "ดูรายละเอียด",
+  "compare": "เปรียบเทียบ",
+  "compareSelected": "เปรียบเทียบ {n} ทริป",
+  "compareMax": "เปรียบเทียบได้สูงสุด 3 ทริป",
+  "compareTitle": "ตารางเปรียบเทียบ",
+  "notRecommended": "ไม่แนะนำ",
+  "seeAlternative": "ดูทางเลือก",
+  "trips": "{n} วิธีเดินทาง",
+  "noMatch": "ไม่มีทริปที่ตรงกับตัวกรอง",
+  "resetFilters": "ล้างตัวกรอง",
+  "range": "{low}–{high}",
+  "approx": "ประมาณ {price}",
+  "payOnSite": "จ่ายหน้างาน",
+  "onChain": "จองออนไลน์",
+  "reliability": {
+    "high": "ตรงเวลาสูง",
+    "medium": "ส่วนใหญ่ตรงเวลา ±{min} นาที",
+    "low": "ขึ้นกับรถติด ±{min} นาที"
+  },
+  "filters": {
+    "title": "ตัวกรอง",
+    "open": "ตัวกรอง",
+    "modes": "พาหนะ",
+    "budget": "งบไม่เกิน (รวม)",
+    "budgetAny": "ไม่จำกัดงบ",
+    "departWindow": "เวลาออก",
+    "window": {
+      "any": "ทุกเวลา",
+      "morning": "เช้า 05–12",
+      "afternoon": "บ่าย 12–17",
+      "evening": "เย็น 17–21",
+      "night": "กลางคืน 21–05"
+    },
+    "transfers": "ต่อรถ",
+    "transfersAny": "ไม่จำกัด",
+    "transfersMax": "{n, plural, =0 {ไม่ต่อรถ} other {ไม่เกิน # ครั้ง}}",
+    "avoidWin": "หลีกเลี่ยงวินมอเตอร์ไซค์",
+    "maxWalk": "เดินไม่เกิน",
+    "maxWalkAny": "ไม่จำกัด",
+    "bigLuggage": "มีกระเป๋าใหญ่",
+    "bigLuggageHint": "ตัดวินและเรือเล็กออก และคิดเวลาเดินนานขึ้น",
+    "apply": "แสดง {n} ทริป"
+  },
+  "weather": {
+    "title": "สภาพอากาศวันเดินทาง",
+    "origin": "ต้นทาง",
+    "destination": "ปลายทาง",
+    "rain": "ฝน {prob}%",
+    "temp": "{min}–{max}°C",
+    "seasonal": "ยังไม่มีพยากรณ์ของวันนี้ — แสดงค่าเฉลี่ยตามฤดูกาล",
+    "better": "ถ้าออก {time} จะเลี่ยงฝนได้ (โอกาสฝน {prob}% แทน {now}%)",
+    "source": "พยากรณ์: {source}"
+  },
+  "calendar": {
+    "title": "ราคาช่วงวันที่เลือก",
+    "reference": "ทริป{mode}ที่ถูกที่สุดของแต่ละวัน",
+    "cheaperOn": "ไป{day}ถูกกว่า {price}",
+    "bestDay": "วันที่เลือกถูกที่สุดในสัปดาห์นี้แล้ว",
+    "holiday": "วันหยุด",
+    "na": "–"
+  },
+  "map": "แผนที่",
+  "list": "รายการ",
+  "mapUnavailable": "โหลดแผนที่ไม่ได้",
+  "sources": "แหล่งข้อมูลของการค้นหานี้",
+  "compareTable": {
+    "depart": "ออก",
+    "arrive": "ถึง",
+    "total": "door-to-door",
+    "walk": "เดิน",
+    "wait": "รอ",
+    "ride": "นั่ง/โดยสาร",
+    "transfer": "ต่อรถ",
+    "buffer": "เผื่อเวลา",
+    "price": "ราคารวม",
+    "transfers": "ต่อรถ",
+    "weather": "ความเสี่ยงสภาพอากาศ",
+    "co2": "CO₂",
+    "refund": "นโยบายคืนเงิน",
+    "risk": {
+      "low": "ต่ำ",
+      "medium": "ปานกลาง",
+      "high": "สูง"
+    },
+    "refundNone": "จ่ายหน้างาน — ไม่มีคืนเงินออนไลน์",
+    "refundPartial": "คืนเต็มถ้าผู้ให้บริการยกเลิก; ยกเลิกเองก่อน {h} ชม. หัก {fee}%"
+  },
+  "errorTitle": "วางแผนทริปนี้ไม่ได้",
+  "newSearch": "ค้นหาใหม่"
+}

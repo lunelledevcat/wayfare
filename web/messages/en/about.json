@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "title": "Data sources and methods",
+    "description": "Every data source Wayfare uses, when it was last updated, and how prices, rankings and weather rules are calculated."
+  },
+  "title": "Data sources and methods",
+  "intro": "Wayfare only uses open data and APIs that allow it. We never scrape ticketing sites. Every result shows where it came from, and anything estimated or served from a fallback is clearly labelled.",
+  "toc": "On this page",
+  "nav": {
+    "sources": "All data sources",
+    "gtfs": "Public transport (GTFS)",
+    "flights": "Intercity",
+    "road": "Roads and walking",
+    "weather": "Weather",
+    "pricing": "How prices work",
+    "scoring": "How we rank",
+    "planner": "Buffers and CO₂",
+    "chain": "Booking on blockchain"
+  },
+  "status": {
+    "live": "Live data",
+    "estimate": "Estimate",
+    "fallback": "Fallback",
+    "liveOrFallback": "Live (with fallback)"
+  },
+  "table": {
+    "source": "Source",
+    "use": "Used for",
+    "status": "Type",
+    "updated": "Last updated",
+    "link": "Link",
+    "open": "Open",
+    "onRequest": "On every search",
+    "atBuild": "Imported {date}"
+  },
+  "sources": {
+    "gtfs": { "name": "OTP Thailand GTFS (Mobility Database mdb-1831)", "use": "Stations, routes, timetables and fares for skytrain, bus, boat and rail" },
+    "fares": { "name": "Published fare tables of each line", "use": "Station-count fares when GTFS has no price" },
+    "duffel": { "name": "Duffel API (test mode)", "use": "Domestic flights when a token is configured" },
+    "flights": { "name": "Domestic flight schedule (fallback)", "use": "Flight times and fare bands when Duffel is unavailable" },
+    "rail": { "name": "State Railway of Thailand timetable and fares", "use": "Long-distance intercity trains" },
+    "bus": { "name": "Coach and van timetables posted at bus terminals", "use": "Intercity coaches and vans" },
+    "osrm": { "name": "OSRM (OpenStreetMap road network)", "use": "Road distance and time for taxi, Grab, motorbike taxi, car and walking" },
+    "roadFares": { "name": "Taxi meter rates, motorbike taxi fare guide and Grab estimate", "use": "Road fares" },
+    "meteo": { "name": "Open-Meteo Forecast API", "use": "Hourly rain chance, rainfall, temperature and wind, up to 16 days ahead" },
+    "aq": { "name": "Open-Meteo Air Quality API", "use": "Hourly PM2.5" },
+    "climate": { "name": "Thai Meteorological Department climate normals 1991–2020", "use": "Seasonal averages when no forecast exists yet" },
+    "nominatim": { "name": "Nominatim (OpenStreetMap)", "use": "General address search" },
+    "places": { "name": "Curated places (coordinates from OpenStreetMap)", "use": "Key districts, airports and bus terminals" },
+    "holidays": { "name": "Thai public holidays 2026", "use": "Flight price adjustment over long weekends" }
+  },
+  "gtfs": {
+    "title": "Skytrain, bus, boat and rail (GTFS)",
+    "body": "We import the national GTFS feed published by the Office of Transport and Traffic Policy and Planning (OTP) when the site is built and shrink it to what routing needs, so searches are fast and nothing is downloaded when you open the site. City routes are found with a RAPTOR-style, round-by-round transfer scan over this timetable.",
+    "feedVersion": "Feed version",
+    "validity": "Valid",
+    "imported": "Imported",
+    "agencies": "Operators",
+    "routes": "Routes",
+    "trips": "Scheduled trips",
+    "stops": "Stops and stations",
+    "faresTitle": "Fallback fares by number of stations",
+    "faresBody": "Used only when GTFS has no fare for a ride: base fare + fare per station, capped at the maximum (last checked {date}).",
+    "mode": "Mode",
+    "base": "Base",
+    "perStop": "Per station",
+    "max": "Maximum"
+  },
+  "flights": {
+    "title": "Intercity: flights, trains, coaches and vans",
+    "body": "With a Duffel test-mode token we use flight offers from Duffel. Without one, or when it returns nothing, we use a fallback schedule labelled “estimated price”. Trains and coaches use publicly posted timetables; train departure times from Bangkok come from GTFS when available.",
+    "formula": "Flight price = base fare × day factor × advance-purchase factor × time-of-day factor",
+    "band": "Price range shown: {low}% to {high}% of the estimate",
+    "dayFactor": "Day factor",
+    "advanceFactor": "Advance-purchase factor",
+    "timeFactor": "Departure time factor",
+    "factor": "Factor",
+    "day": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday",
+      "holiday": "Long holiday"
+    },
+    "advance": "Bought ≥ {days} days ahead",
+    "routesTitle": "Routes in the fallback schedule",
+    "route": "Route",
+    "blockTime": "Flight time",
+    "baseFare": "Base fare",
+    "departures": "Flights per day",
+    "otherTitle": "Trains and coaches",
+    "trains": "{n} long-distance trains (last checked {date})",
+    "buses": "{n} coach and van services (last checked {date})"
+  },
+  "road": {
+    "title": "Roads and walking",
+    "body": "Road distance and time come from OSRM on OpenStreetMap roads, cached per coordinate pair rounded to 3 decimals. If OSRM is unreachable we use straight-line distance × {detour} and label it as fallback data.",
+    "rush": "Rush hour {from}–{to}: road time × {factor}",
+    "speeds": "Average speeds used without OSRM",
+    "speed": "{mode}: {kmh} km/h",
+    "highway": "Highway"
+  },
+  "weather": {
+    "title": "Weather and warning rules",
+    "body": "We fetch the hourly Open-Meteo forecast at the place and time of each leg (up to 16 days ahead). For dates further out, or if the service is down, we use seasonal averages from the Thai Meteorological Department and say “no forecast yet”. Every warning comes with a reason and an alternative.",
+    "condition": "Weather",
+    "effect": "Effect on advice",
+    "rules": {
+      "rain": {
+        "when": "Rain chance ≥ {prob}% or rain ≥ {mm} mm/h",
+        "then": "Motorbike taxi “not recommended” and heavily penalised · outdoor walks over {walk} min: bring an umbrella · road time +{pct}%"
+      },
+      "heavy": {
+        "when": "Heavy rain ≥ {mm} mm/h or thunderstorm (weather codes {codes})",
+        "then": "Motorbike taxi and walks over {walk} min removed from recommendations · boat warning · road time +{pct}% · {extra} min extra airport buffer"
+      },
+      "wind": {
+        "when": "Wind gusts ≥ {gust} km/h",
+        "then": "Boat “not recommended”"
+      },
+      "heat": {
+        "when": "Feels-like temperature ≥ {feels}°C",
+        "then": "Walks over {walk} min get a warning · “Most comfortable” favours air-conditioned rides"
+      },
+      "pm": {
+        "when": "PM2.5 > {pm} µg/m³",
+        "then": "Walks of {walk} min or more: wear a mask"
+      }
+    }
+  },
+  "pricing": {
+    "title": "How prices work",
+    "body": "Every leg shows “about ฿X (range ฿A–฿B)” and adds up to a whole-trip total multiplied by the number of passengers. Skytrain, bus and boat use the published fare tables; road legs use the formulas below.",
+    "taxiTitle": "Bangkok metered taxi",
+    "taxiFlag": "Flag fall {fare} for the first {km} km",
+    "tier": "km {from}–{to}",
+    "tierLast": "Over {from} km",
+    "perKm": "Per km",
+    "taxiExtra": "Traffic waiting {wait} per minute · airport pickup +{airport} · trips over {km} km include expressway tolls {toll}",
+    "winTitle": "Motorbike taxi",
+    "win": "First {km} km {fare} · km {km}–5 add {to5} per km · over 5 km add {over5} per km · up to {max} km",
+    "grabTitle": "Grab (estimated from distance and time, not an official price)",
+    "grab": "{base} + {perKm}/km + {perMin}/min + booking fee {fee} · rush hour × {peak}",
+    "carTitle": "Private car",
+    "car": "Fuel {perKm}/km + tolls {toll} per 100 km + parking {parking}",
+    "checked": "Rates last checked {date}",
+    "holidaysTitle": "Holidays used for pricing (2026)"
+  },
+  "scoring": {
+    "title": "How we rank by what matters to you",
+    "body": "We generate every feasible route, then keep only trips that no other trip beats on every count (Pareto) across price, total time, transfers and walking. They are then sorted by your choice. Trips marked “not recommended” because of the weather always come last. Changing your choice re-ranks instantly on your device.",
+    "fastest": { "title": "Fastest", "body": "Shortest door-to-door time; ties go to the cheaper trip." },
+    "cheapest": { "title": "Cheapest", "body": "Lowest whole-trip cost × passengers; ties go to the faster trip." },
+    "value": { "title": "Best value", "body": "Total price + time × value of time (default {rate}/h, adjustable in your profile) + weather risk × {risk} + transfers × {transfer} (per passenger)." },
+    "comfort": { "title": "Most comfortable", "body": "Comfort score 0–100: points off for transfers, walking, standing, no air-con, motorbike taxis and getting rained on; points added for sleeper trains." },
+    "filters": "Extra filters: avoid motorbike taxi · walk at most X min · big luggage (no motorbike taxi or boat, walking time × 1.3) · budget up to ฿X · passengers"
+  },
+  "planner": {
+    "title": "Buffers, reliability and CO₂",
+    "body": "Every trip is split into walking · waiting · riding · transfers · buffers, and no trip connects faster than the minimum buffers below. In “arrive by” mode we work backwards to tell you when to leave home.",
+    "buffersTitle": "Minimum buffer before departure",
+    "buffer": {
+      "flightDomestic": "Domestic flight",
+      "flightInternational": "International flight",
+      "train": "Train",
+      "coach": "Coach",
+      "van": "Van",
+      "boatIntercity": "Intercity boat",
+      "metroTransfer": "Skytrain transfer"
+    },
+    "minutes": "{min} min",
+    "co2Title": "CO₂ per passenger-kilometre",
+    "co2": "{kg} kg",
+    "reliability": "Time reliability: skytrain “highly punctual” · road travel in rush hour “depends on traffic ± minutes” by distance"
+  },
+  "chain": {
+    "title": "Booking and refunds on Avalanche",
+    "body": "Bookable legs (flight, intercity train, coach, van, boat) are booked and paid in one transaction on Avalanche C-Chain. Money is held in escrow per leg and released to the operator when the ticket is scanned. If the operator cancels, the ticket holder is refunded in full immediately. Skytrain, taxi, motorbike taxi and walking legs are shown as “pay on the spot” and included in the total.",
+    "demo": "This demo runs on the Fuji test network with test money tUSDC (1 tUSDC = {rate}). Every bookable operator is a fictional name used for demonstration only.",
+    "refundTitle": "When a passenger cancels",
+    "operator": "Operator (fictional)",
+    "fee": "Fee",
+    "deadline": "Cancel up to",
+    "hours": "{h} h before",
+    "noShow": "If the passenger does not board within 2 hours of departure, the operator receives that leg's fare.",
+    "operatorCancel": "Operator cancels the service: full refund, automatically."
+  }
+}
