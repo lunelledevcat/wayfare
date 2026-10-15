@@ -1,0 +1,38 @@
+{
+  "pending": "ブロックチェーンで確認中…",
+  "waitingWallet": "ウォレットで確認してください…",
+  "steps": {
+    "quote": "本日の料金を取得中…",
+    "switch": "Avalanche に切り替え中…",
+    "faucet": "無料のテスト用のお金を送っています…",
+    "approve": "ウォレットで支払いを確認してください（1/2）…",
+    "book": "ウォレットで予約を確認してください（2/2）…",
+    "confirm": "ブロックチェーンで確認中…",
+    "sign": "チケットの QR を作成するため、ウォレットで確認してください…",
+    "cancel": "ウォレットでキャンセルを確認してください…",
+    "transfer": "ウォレットでチケットの譲渡を確認してください…",
+    "checkin": "ウォレットでチェックインを確認してください…",
+    "noshow": "ウォレットで代金の請求を確認してください…",
+    "cancelTrip": "ウォレットで運休を確認してください…"
+  },
+  "success": "完了！",
+  "viewExplorer": "Snowtrace で見る",
+  "localChain": "ローカルのテストチェーンに記録しました",
+  "errorFix": "解決方法",
+  "tryAgain": "もう一度試す",
+  "faucet": "無料のテスト用のお金を受け取る",
+  "faucetDone": "テスト用のお金を追加しました：1,000",
+  "faucetHint": "テスト用のお金に実際の価値はありません。1 時間に 1 回受け取れます。",
+  "balance": "テスト残高",
+  "switch": "Avalanche に切り替え",
+  "connectFirst": "予約するにはウォレットを接続してください",
+  "gasHint": "ネットワーク手数料として、ウォレットに少額のテスト用 AVAX も必要です。",
+  "gasFaucet": "テスト用 AVAX を受け取る（Fuji フォーセット）",
+  "status": {
+    "booked": "有効",
+    "checkedIn": "チェックイン済み",
+    "cancelledByOperator": "事業者により運休 · 返金済み",
+    "cancelledByPassenger": "キャンセル済み · 返金済み",
+    "noShow": "未乗車"
+  }
+}

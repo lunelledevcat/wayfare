@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Wayfare アプリ"
+  },
+  "tabsLabel": "アプリメニュー",
+  "tabs": {
+    "plan": "プラン",
+    "trips": "マイ旅程",
+    "tickets": "チケット",
+    "profile": "プロフィール"
+  },
+  "noDeployment": "このネットワークではまだ予約できません。しばらくしてからお試しください。",
+  "loadError": "ブロックチェーンからデータを読み込めませんでした。接続を確認して、もう一度お試しください。",
+  "plan": {
+    "intro": "一度の検索ですべての移動手段を比較し、すべての区間を 1 回の支払いで予約できます。",
+    "popular": "人気のルート"
+  },
+  "trips": {
+    "connect": "ウォレットを接続すると、予約した旅程が表示されます",
+    "empty": "予約した旅程はまだありません",
+    "emptyBody": "ルートを検索して「旅程をまとめて予約」をタップすると、ここに表示されます。",
+    "planNow": "旅程を計画する",
+    "upcoming": "今後の旅程",
+    "noUpcoming": "今後の旅程はありません",
+    "past": "過去の旅程",
+    "tripNo": "旅程 #{id}",
+    "paid": "支払済み ≈ {usdc} USDC · {pax, plural, one {# 名} other {# 名}}",
+    "departs": "{day} {time} 出発",
+    "tickets": "{n, plural, one {チケット # 枚} other {チケット # 枚}}",
+    "alertsTitle": "天気の変化のお知らせ",
+    "alert": "{name}での{kind, select, transfer {乗換中} walk {徒歩中} other {乗車中}}の降水確率が {prob}% に上がりました。{min} 分早めの出発をご検討ください。",
+    "alertDetail": "旅程 #{id} · 予約時は {was}% · {time} ごろ"
+  },
+  "tickets": {
+    "connect": "ウォレットを接続すると、チケットが表示されます",
+    "empty": "チケットはまだありません",
+    "emptyBody": "予約した区間はすべてチケットとしてウォレットに保管され、ここに表示されます。",
+    "ticketNo": "チケット #{id}",
+    "departs": "{day} {time} 出発",
+    "imageAlt": "チケット #{id}",
+    "showQr": "QR を表示",
+    "qrTitle": "チケット #{id} の QR",
+    "qrBody": "乗車時にスタッフにスキャンしてもらってください。QR はあなたのウォレットで確認され、チケット所有者だけが使えます。",
+    "cancel": "キャンセル",
+    "cancelTitle": "このチケットをキャンセルしますか？",
+    "paidLabel": "チケット料金",
+    "feeLabel": "キャンセル手数料（{pct}%）",
+    "refundLabel": "返金額",
+    "cancelDeadline": "返金ありのキャンセルは {day} {time} まで",
+    "cancelConfirm": "キャンセルを確定 · {refund} を返金",
+    "cancelDone": "キャンセルしました。{refund} を返金しました",
+    "noRefund": "返金ありのキャンセル期限を過ぎています。",
+    "transfer": "友だちに譲る",
+    "transferTitle": "チケットを友だちに譲る",
+    "transferBody": "チケット {label} を友だちのウォレットに送ります。あなたに代わって友だちがチケット所有者になります。",
+    "transferTo": "友だちのウォレットアドレス",
+    "transferHint": "0x で始まる 42 文字です。取り消しできないので、よく確認してください。",
+    "transferInvalid": "ウォレットアドレスが正しくありません",
+    "transferSelf": "それはあなた自身のウォレットです",
+    "transferConfirm": "譲渡を確定",
+    "transferDone": "チケットを送りました"
+  },
+  "profile": {
+    "settings": "設定",
+    "timeValue": "あなたの時間の価値（「コスパ最良」で使用）",
+    "perHour": "1 時間あたり",
+    "timeValueHint": "1 時間の節約はあなたにとって {price} の価値",
+    "defaultPriority": "既定の優先項目",
+    "connect": "ウォレットを接続すると、残高の確認とテスト用のお金の受け取りができます",
+    "wallet": "マイウォレット",
+    "address": "ウォレットアドレス",
+    "faucetWait": "{time} 後に再び受け取れます",
+    "faucetNext": "次に無料のテスト用のお金を受け取れる時刻：{time}"
+  }
+}

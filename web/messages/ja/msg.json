@@ -1,0 +1,37 @@
+{
+  "step": {
+    "walk": "{to} まで歩く（{min} 分、約 {m} m）",
+    "transferWalk": "{to} の乗換口まで歩く（{min} 分）",
+    "wait": "{place} で{mode}を待つ（{min} 分）",
+    "transferWait": "{place} で{mode}に乗り換える（{min} 分）",
+    "buffer": "{place} で {min} 分の余裕をみる",
+    "bufferFlight": "{place} でチェックインと保安検査 — 出発の {min} 分前までに到着",
+    "bufferStation": "ホームを探して乗車するため、{place} に {min} 分前に到着",
+    "deplaneFlight": "{place} で降機し、荷物を受け取る（{min} 分）",
+    "deplane": "{place} で降りる（{min} 分）",
+    "taxi": "メータータクシーで {to} へ（{min} 分、{km} km）",
+    "grab": "Grab の車を呼んで {to} へ（{min} 分、{km} km）",
+    "win": "バイクタクシー（ウィン）で {to} へ（{min} 分、{km} km）",
+    "car": "車で {to} へ（{min} 分、{km} km）",
+    "ride": "{mode} {line}（{headsign} 方面）に乗り、{stops} 駅目の {to} で降りる（{min} 分、{price}）",
+    "flight": "{carrier} {flightNo} 便で {from} から {to} へ（{min} 分）",
+    "train": "{name}（{cls}）に乗車、{from} から {to} へ（{min} 分）",
+    "coach": "{mode} {name}（{cls}）に乗車、{from} から {to} へ（{min} 分）"
+  },
+  "warn": {
+    "winRain": "バイクタクシーがいちばん安い（{price}）ですが、{time} の降水確率は {prob}% です — おすすめしません。",
+    "winHeavyRain": "{time} に大雨または雷雨の予報（{mm} mm/h） — バイクタクシーはおすすめしません。",
+    "walkHeavyRain": "{time} に大雨の中を {min} 分歩きます（確率 {prob}%、{mm} mm/h） — おすすめしません。",
+    "walkUmbrella": "{time} の降水確率は {prob}% — {min} 分の徒歩には傘をお持ちください。",
+    "walkHeat": "体感温度 {feels}°C — {min} 分の徒歩は暑くなります。水をお持ちください。",
+    "walkPm25": "PM2.5 が {pm25} µg/m³ — {min} 分の徒歩ではマスクを着用してください。",
+    "boatWind": "{time} に最大瞬間風速 時速 {gust} km — 船はおすすめしません。",
+    "boatRain": "{time} に大雨 — 船が遅れたり混雑したりする可能性があります。",
+    "roadSlow": "{time} に雨の予報（{prob}%） — 道路は約 {pct}% 遅くなります。追加の時間は計算済みです。",
+    "flightStorm": "雷雨の予報 — 空港の余裕時間に {extra} 分を追加しました。"
+  },
+  "alt": {
+    "instead": "代わりに{mode}を利用（{sign}{delta}、濡れません）。",
+    "insteadBoat": "代わりに{mode}を利用（{sign}{delta}）。"
+  }
+}

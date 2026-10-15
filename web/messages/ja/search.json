@@ -1,0 +1,21 @@
+{
+  "formLabel": "旅程を検索",
+  "from": "出発地",
+  "to": "目的地",
+  "fromPlaceholder": "駅、場所、住所",
+  "toPlaceholder": "どこへ行きますか？",
+  "swap": "出発地と目的地を入れ替え",
+  "when": "時刻",
+  "depart": "出発時刻",
+  "arrive": "到着時刻",
+  "date": "日付",
+  "time": "時刻",
+  "pax": "人数",
+  "submit": "いちばんいい行き方を探す",
+  "searching": "検索中…",
+  "needFrom": "候補から出発地を選んでください。",
+  "needTo": "候補から目的地を選んでください。",
+  "same": "出発地と目的地が同じです。",
+  "osm": "OpenStreetMap",
+  "gtfs": "GTFS の駅"
+}

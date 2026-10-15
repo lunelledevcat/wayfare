@@ -1,0 +1,122 @@
+{
+  "title": "{from} → {to}",
+  "summary": "{date} · {time} {mode, select, arrive {までに到着} other {出発}} · {pax, plural, one {# 名} other {# 名}}",
+  "edit": "検索条件を変更",
+  "priorityLabel": "いちばん重視するのは？",
+  "priority": {
+    "fastest": "いちばん早い",
+    "cheapest": "いちばん安い",
+    "value": "コスパ最良",
+    "comfort": "いちばん快適"
+  },
+  "priorityHint": {
+    "fastest": "ドア・ツー・ドアの時間が最短",
+    "cheapest": "総費用が最安",
+    "value": "料金 + あなたの時間 + 天気リスク",
+    "comfort": "乗換が少なく、歩きが少なく、濡れない"
+  },
+  "best": "あなたに最適",
+  "bestReason": {
+    "faster": "{mode}より {h, plural, =0 {} other {# 時間 }}{m} 分早い",
+    "slower": "{mode}より {h, plural, =0 {} other {# 時間 }}{m} 分遅い",
+    "pricier": "{price} 高い",
+    "cheaper": "{price} 安い",
+    "samePrice": "同じ料金",
+    "weatherOk": "天気の影響なし",
+    "weatherRisk": "天気の注意事項を確認"
+  },
+  "leaveAt": "{time} 出発",
+  "arriveAt": "{time} 到着",
+  "nextDay": "+1 日",
+  "transfers": "{n, plural, =0 {直通} one {乗換 # 回} other {乗換 # 回}}",
+  "walk": "徒歩 {min} 分",
+  "details": "詳細を見る",
+  "compare": "比較",
+  "compareSelected": "{n} 件の旅程を比較",
+  "compareMax": "比較できるのは 3 件までです",
+  "compareTitle": "並べて比較",
+  "notRecommended": "おすすめしません",
+  "seeAlternative": "代わりの手段を見る",
+  "trips": "{n, plural, one {# 通りの行き方} other {# 通りの行き方}}",
+  "noMatch": "条件に合う旅程はありません。",
+  "resetFilters": "絞り込みをクリア",
+  "range": "{low}–{high}",
+  "approx": "約 {price}",
+  "payOnSite": "現地払い",
+  "onChain": "オンライン予約",
+  "reliability": {
+    "high": "定時性が高い",
+    "medium": "ほぼ定刻 ±{min} 分",
+    "low": "渋滞次第 ±{min} 分"
+  },
+  "filters": {
+    "title": "絞り込み",
+    "open": "絞り込み",
+    "modes": "乗り物",
+    "budget": "予算（合計）",
+    "budgetAny": "予算指定なし",
+    "departWindow": "出発時刻",
+    "window": {
+      "any": "指定なし",
+      "morning": "朝 05–12",
+      "afternoon": "昼 12–17",
+      "evening": "夕方 17–21",
+      "night": "夜 21–05"
+    },
+    "transfers": "乗換",
+    "transfersAny": "指定なし",
+    "transfersMax": "{n, plural, =0 {直通のみ} other {# 回まで}}",
+    "avoidWin": "バイクタクシーを避ける",
+    "maxWalk": "徒歩の上限",
+    "maxWalkAny": "指定なし",
+    "bigLuggage": "大きな荷物がある",
+    "bigLuggageHint": "バイクと小型船を除外し、徒歩を遅めに計算します",
+    "apply": "{n} 件の旅程を表示"
+  },
+  "weather": {
+    "title": "移動日の天気",
+    "origin": "出発地",
+    "destination": "目的地",
+    "rain": "雨 {prob}%",
+    "temp": "{min}–{max}°C",
+    "seasonal": "この日付の予報はまだありません — 季節平均を表示しています。",
+    "better": "{time} に出発すれば雨を避けられます（降水確率 {now}% → {prob}%）。",
+    "source": "予報：{source}"
+  },
+  "calendar": {
+    "title": "選んだ日付前後の料金",
+    "reference": "1 日ごとの最安の{mode}旅程",
+    "cheaperOn": "{day}に行くと {price} 安くなります。",
+    "bestDay": "選んだ日付がすでにこの週で最安です。",
+    "holiday": "祝日",
+    "na": "–"
+  },
+  "map": "地図",
+  "list": "リスト",
+  "mapUnavailable": "地図を読み込めませんでした。",
+  "sources": "この検索のデータソース",
+  "compareTable": {
+    "depart": "出発",
+    "arrive": "到着",
+    "total": "ドア・ツー・ドア",
+    "walk": "徒歩",
+    "wait": "待ち",
+    "ride": "乗車",
+    "transfer": "乗換",
+    "buffer": "余裕時間",
+    "price": "合計料金",
+    "transfers": "乗換回数",
+    "weather": "天気リスク",
+    "co2": "CO₂",
+    "refund": "返金ポリシー",
+    "risk": {
+      "low": "低",
+      "medium": "中",
+      "high": "高"
+    },
+    "refundNone": "現地払い — オンライン返金なし",
+    "refundPartial": "事業者都合の運休は無料。出発 {h} 時間前までの自己都合キャンセルは手数料 {fee}%"
+  },
+  "errorTitle": "この旅程を計画できませんでした",
+  "newSearch": "新しく検索"
+}

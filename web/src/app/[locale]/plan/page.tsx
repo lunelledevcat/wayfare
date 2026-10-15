@@ -13,6 +13,9 @@ import { PRIORITIES, type Mode, type PlanResult, type Priority } from "@/lib/pla
 import { resolvePlace } from "@/lib/providers/places";
 import { bkkTime } from "@/lib/time";
 
+// results depend on the query string — never prerender
+export const dynamic = "force-dynamic";
+
 type SP = Record<string, string | string[] | undefined>;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
 
