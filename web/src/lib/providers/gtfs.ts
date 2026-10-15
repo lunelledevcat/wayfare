@@ -69,6 +69,8 @@ export interface GtfsNetwork {
   grid: GridIndex<GtfsStop>;
   isActive(service: string, date: string, weekday: number): boolean;
   fare(trip: GtfsTrip, fromPos: number, toPos: number): { amount: number; low: number; high: number; fromTable: boolean } | null;
+  /** Zone fare between two stops of one agency (e.g. a BTS ride spanning two lines is charged once). */
+  zoneFare(agency: string, routeId: string, fromStop: number, toStop: number): number | null;
 }
 
 const DATA_DIR = path.join(process.cwd(), "data", "gtfs");
@@ -149,7 +151,13 @@ function buildNetwork(): GtfsNetwork {
     return null;
   };
 
-  return { meta, stops, routes, trips, agencies, stopTrips, transfers, grid, isActive, fare };
+  const zoneFare: GtfsNetwork["zoneFare"] = (agency, routeId, fromStop, toStop) => {
+    const o = stops[fromStop].zone;
+    const d = stops[toStop].zone;
+    return fares.zone[`${agency}|${routeId}|${o}|${d}`] ?? fares.zone[`${agency}||${o}|${d}`] ?? null;
+  };
+
+  return { meta, stops, routes, trips, agencies, stopTrips, transfers, grid, isActive, fare, zoneFare };
 }
 
 export function gtfsSource(net: GtfsNetwork | null): Source {

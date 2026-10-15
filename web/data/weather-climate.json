@@ -1,0 +1,11 @@
+{
+  "note": "Seasonal averages used when no forecast exists for the selected date (beyond Open-Meteo's 16-day horizon) or when Open-Meteo is unreachable. Monthly rainy-day share and mean daily maximum temperature, derived from Thai Meteorological Department 1991–2020 climate normals (rounded).",
+  "source": "Thai Meteorological Department climate normals 1991–2020",
+  "sourceUrl": "https://www.tmd.go.th/en/climate/climateNormal",
+  "regions": {
+    "north":   { "rainShare": [0.03, 0.03, 0.07, 0.17, 0.5, 0.6, 0.67, 0.73, 0.63, 0.4, 0.13, 0.03], "tmax": [29, 32, 35, 36, 34, 32, 31, 31, 31, 31, 30, 28], "pm25": [45, 60, 85, 60, 25, 15, 12, 12, 12, 18, 30, 40] },
+    "central": { "rainShare": [0.07, 0.1, 0.13, 0.2, 0.5, 0.57, 0.6, 0.67, 0.7, 0.57, 0.2, 0.03], "tmax": [32, 33, 34, 35, 34, 33, 33, 33, 32, 32, 31, 31], "pm25": [55, 50, 38, 28, 18, 15, 14, 14, 15, 20, 35, 50] },
+    "south":   { "rainShare": [0.2, 0.13, 0.2, 0.33, 0.6, 0.6, 0.6, 0.63, 0.67, 0.7, 0.6, 0.4], "tmax": [32, 33, 34, 34, 33, 32, 32, 32, 32, 31, 31, 31], "pm25": [15, 15, 18, 18, 14, 14, 15, 15, 16, 15, 12, 13] }
+  },
+  "hourlyRainShape": [0.6, 0.55, 0.5, 0.5, 0.45, 0.45, 0.45, 0.45, 0.5, 0.55, 0.6, 0.7, 0.85, 1.0, 1.2, 1.45, 1.6, 1.6, 1.5, 1.3, 1.1, 0.9, 0.75, 0.65]
+}

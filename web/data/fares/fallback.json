@@ -1,0 +1,15 @@
+{
+  "note": "Used only when the GTFS feed has no fare for a ride. Station-count fare formulas from each operator's published fare table.",
+  "checkedAt": "2026-10-15",
+  "modes": {
+    "bts":   { "base": 17, "perStop": 3.5, "max": 47, "label": "BTS fare table (17–47 THB, extensions excluded)", "sourceUrl": "https://www.bts.co.th/eng/info/fare.html" },
+    "mrt":   { "base": 17, "perStop": 2.5, "max": 45, "label": "MRT Blue/Purple fare table (17–45 THB)", "sourceUrl": "https://metro.bemplc.co.th/MRT-Fare?lang=en" },
+    "arl":   { "base": 15, "perStop": 5, "max": 45, "label": "Airport Rail Link fares (15–45 THB)", "sourceUrl": "https://www.srtet.co.th/index.php/en/" },
+    "red":   { "base": 12, "perStop": 2.5, "max": 42, "label": "SRT Red Line fares (12–42 THB)", "sourceUrl": "https://www.srtet.co.th/index.php/en/" },
+    "bus":   { "base": 8, "perStop": 0.4, "max": 25, "label": "BMTA bus fares (8–25 THB)", "sourceUrl": "https://www.bmta.co.th/" },
+    "boat":  { "base": 10, "perStop": 1, "max": 37, "label": "Chao Phraya / canal boat fares (10–37 THB)", "sourceUrl": "https://www.chaophrayaexpressboat.com/" },
+    "van":   { "base": 20, "perStop": 2, "max": 120, "label": "Public van fares (estimate)", "sourceUrl": "https://www.dlt.go.th/" },
+    "coach": { "base": 30, "perStop": 20, "max": 900, "label": "Intercity coach (estimate)", "sourceUrl": "https://www.transport.co.th/" },
+    "train": { "base": 6, "perStop": 2, "max": 300, "label": "SRT ordinary/commuter fares (estimate)", "sourceUrl": "https://www.railway.co.th/" }
+  }
+}
