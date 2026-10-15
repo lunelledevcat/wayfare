@@ -1,0 +1,28 @@
+{
+  "source": "Thai public holidays 2026 (Cabinet announcement / Bank of Thailand holiday calendar)",
+  "sourceUrl": "https://www.bot.or.th/en/financial-institutions-holiday.html",
+  "checkedAt": "2026-10-15",
+  "holidays": [
+    { "date": "2026-01-01", "th": "วันขึ้นปีใหม่", "en": "New Year's Day" },
+    { "date": "2026-01-02", "th": "วันหยุดพิเศษ", "en": "Special holiday" },
+    { "date": "2026-03-03", "th": "วันมาฆบูชา", "en": "Makha Bucha Day" },
+    { "date": "2026-04-06", "th": "วันจักรี", "en": "Chakri Memorial Day" },
+    { "date": "2026-04-13", "th": "วันสงกรานต์", "en": "Songkran" },
+    { "date": "2026-04-14", "th": "วันสงกรานต์", "en": "Songkran" },
+    { "date": "2026-04-15", "th": "วันสงกรานต์", "en": "Songkran" },
+    { "date": "2026-05-01", "th": "วันแรงงานแห่งชาติ", "en": "National Labour Day" },
+    { "date": "2026-05-04", "th": "วันฉัตรมงคล", "en": "Coronation Day" },
+    { "date": "2026-06-01", "th": "ชดเชยวันวิสาขบูชา", "en": "Visakha Bucha Day (substitute)" },
+    { "date": "2026-06-03", "th": "วันเฉลิมพระชนมพรรษาสมเด็จพระราชินี", "en": "Queen Suthida's Birthday" },
+    { "date": "2026-07-28", "th": "วันเฉลิมพระชนมพรรษา ร.10", "en": "King's Birthday" },
+    { "date": "2026-07-29", "th": "วันอาสาฬหบูชา", "en": "Asalha Bucha Day" },
+    { "date": "2026-07-30", "th": "วันเข้าพรรษา", "en": "Buddhist Lent Day" },
+    { "date": "2026-08-12", "th": "วันแม่แห่งชาติ", "en": "Mother's Day" },
+    { "date": "2026-10-13", "th": "วันนวมินทรมหาราช", "en": "King Bhumibol Memorial Day" },
+    { "date": "2026-10-23", "th": "วันปิยมหาราช", "en": "Chulalongkorn Day" },
+    { "date": "2026-12-07", "th": "ชดเชยวันพ่อแห่งชาติ", "en": "Father's Day (substitute)" },
+    { "date": "2026-12-10", "th": "วันรัฐธรรมนูญ", "en": "Constitution Day" },
+    { "date": "2026-12-31", "th": "วันสิ้นปี", "en": "New Year's Eve" },
+    { "date": "2027-01-01", "th": "วันขึ้นปีใหม่", "en": "New Year's Day" }
+  ]
+}

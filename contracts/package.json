@@ -4,7 +4,7 @@
   "scripts": {
     "compile": "hardhat compile",
     "test": "hardhat test",
-    "node": "cross-env HARDHAT_INTERVAL_MINING=1 hardhat node",
+    "node": "hardhat node --port 8546",
     "deploy:local": "hardhat run scripts/deploy.ts --network localhost && hardhat run scripts/seed.ts --network localhost",
     "deploy:fuji": "hardhat run scripts/deploy.ts --network fuji",
     "seed:fuji": "hardhat run scripts/seed.ts --network fuji",

@@ -1,0 +1,49 @@
+{
+  "note": "Fallback domestic flight schedule used when Duffel test mode is unavailable. Carrier names are fictional demo operators. Block times and fare bands are modelled on typical published domestic schedules (2025–2026); prices are estimates.",
+  "checkedAt": "2026-10-15",
+  "carriers": {
+    "SK": { "name": "SkyThai Air", "operator": "SkyThai Air", "checkedBagKg": 15 }
+  },
+  "airports": {
+    "BKK": { "name": { "th": "ท่าอากาศยานสุวรรณภูมิ", "en": "Suvarnabhumi Airport", "zh": "素万那普机场", "ja": "スワンナプーム空港" }, "lat": 13.69, "lon": 100.7501, "city": "bangkok" },
+    "DMK": { "name": { "th": "ท่าอากาศยานดอนเมือง", "en": "Don Mueang Airport", "zh": "廊曼机场", "ja": "ドンムアン空港" }, "lat": 13.9126, "lon": 100.6068, "city": "bangkok" },
+    "CNX": { "name": { "th": "ท่าอากาศยานเชียงใหม่", "en": "Chiang Mai Airport", "zh": "清迈机场", "ja": "チェンマイ空港" }, "lat": 18.7668, "lon": 98.9626, "city": "chiangmai" },
+    "CEI": { "name": { "th": "ท่าอากาศยานแม่ฟ้าหลวง เชียงราย", "en": "Mae Fah Luang–Chiang Rai Airport", "zh": "清莱机场", "ja": "チェンライ空港" }, "lat": 19.9523, "lon": 99.8828, "city": "chiangrai" },
+    "HKT": { "name": { "th": "ท่าอากาศยานภูเก็ต", "en": "Phuket Airport", "zh": "普吉机场", "ja": "プーケット空港" }, "lat": 8.1132, "lon": 98.3169, "city": "phuket" },
+    "KBV": { "name": { "th": "ท่าอากาศยานกระบี่", "en": "Krabi Airport", "zh": "甲米机场", "ja": "クラビ空港" }, "lat": 8.0992, "lon": 98.9862, "city": "krabi" },
+    "HDY": { "name": { "th": "ท่าอากาศยานหาดใหญ่", "en": "Hat Yai Airport", "zh": "合艾机场", "ja": "ハートヤイ空港" }, "lat": 6.9332, "lon": 100.393, "city": "hatyai" },
+    "KKC": { "name": { "th": "ท่าอากาศยานขอนแก่น", "en": "Khon Kaen Airport", "zh": "孔敬机场", "ja": "コーンケン空港" }, "lat": 16.4666, "lon": 102.7837, "city": "khonkaen" },
+    "UTH": { "name": { "th": "ท่าอากาศยานอุดรธานี", "en": "Udon Thani Airport", "zh": "乌隆他尼机场", "ja": "ウドーンターニー空港" }, "lat": 17.3864, "lon": 102.7883, "city": "udonthani" },
+    "UBP": { "name": { "th": "ท่าอากาศยานอุบลราชธานี", "en": "Ubon Ratchathani Airport", "zh": "乌汶机场", "ja": "ウボンラーチャターニー空港" }, "lat": 15.2513, "lon": 104.8703, "city": "ubon" },
+    "UTP": { "name": { "th": "ท่าอากาศยานอู่ตะเภา", "en": "U-Tapao Airport", "zh": "乌塔堡机场", "ja": "ウタパオ空港" }, "lat": 12.6799, "lon": 101.005, "city": "pattaya" }
+  },
+  "routes": [
+    { "from": "DMK", "to": "CNX", "flightNo": 100, "minutes": 70, "base": 1290, "departures": ["06:10", "08:35", "11:20", "14:05", "17:40", "20:15"], "returnDepartures": ["07:45", "10:25", "13:10", "16:00", "19:30", "21:55"] },
+    { "from": "BKK", "to": "CNX", "flightNo": 120, "minutes": 75, "base": 1690, "departures": ["07:20", "12:30", "18:10"], "returnDepartures": ["09:15", "14:30", "20:05"] },
+    { "from": "DMK", "to": "CEI", "flightNo": 140, "minutes": 80, "base": 1390, "departures": ["07:05", "13:15", "18:30"], "returnDepartures": ["09:00", "15:10", "20:25"] },
+    { "from": "DMK", "to": "HKT", "flightNo": 200, "minutes": 85, "base": 1490, "departures": ["06:30", "09:10", "12:40", "16:20", "19:50"], "returnDepartures": ["08:40", "11:30", "15:00", "18:45", "22:10"] },
+    { "from": "BKK", "to": "HKT", "flightNo": 220, "minutes": 85, "base": 1890, "departures": ["08:00", "13:30", "19:00"], "returnDepartures": ["10:20", "15:50", "21:20"] },
+    { "from": "DMK", "to": "KBV", "flightNo": 240, "minutes": 80, "base": 1390, "departures": ["07:40", "15:20"], "returnDepartures": ["09:50", "17:30"] },
+    { "from": "DMK", "to": "HDY", "flightNo": 260, "minutes": 90, "base": 1390, "departures": ["06:45", "11:05", "17:15", "20:40"], "returnDepartures": ["09:00", "13:25", "19:35", "22:50"] },
+    { "from": "DMK", "to": "KKC", "flightNo": 300, "minutes": 60, "base": 990, "departures": ["07:15", "12:00", "18:20"], "returnDepartures": ["08:55", "13:45", "20:00"] },
+    { "from": "DMK", "to": "UTH", "flightNo": 320, "minutes": 65, "base": 1090, "departures": ["06:55", "11:40", "17:50"], "returnDepartures": ["08:40", "13:30", "19:40"] },
+    { "from": "DMK", "to": "UBP", "flightNo": 340, "minutes": 65, "base": 1190, "departures": ["07:30", "16:45"], "returnDepartures": ["09:20", "18:35"] },
+    { "from": "UTP", "to": "CNX", "flightNo": 400, "minutes": 95, "base": 1590, "departures": ["10:10"], "returnDepartures": ["12:40"] }
+  ],
+  "fareBand": { "lowPct": 0.85, "highPct": 1.6 },
+  "timeFactor": [
+    { "from": "05:00", "to": "07:59", "factor": 0.9 },
+    { "from": "08:00", "to": "11:59", "factor": 1.1 },
+    { "from": "12:00", "to": "15:59", "factor": 0.95 },
+    { "from": "16:00", "to": "20:59", "factor": 1.15 },
+    { "from": "21:00", "to": "23:59", "factor": 0.85 }
+  ],
+  "dayFactor": { "mon": 0.95, "tue": 0.9, "wed": 0.9, "thu": 1.0, "fri": 1.2, "sat": 1.15, "sun": 1.25, "holiday": 1.35 },
+  "advanceFactor": [
+    { "minDays": 0, "factor": 1.45 },
+    { "minDays": 3, "factor": 1.25 },
+    { "minDays": 7, "factor": 1.1 },
+    { "minDays": 14, "factor": 1.0 },
+    { "minDays": 30, "factor": 0.9 }
+  ]
+}

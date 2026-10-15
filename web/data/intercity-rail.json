@@ -1,0 +1,33 @@
+{
+  "note": "State Railway of Thailand long-distance trains. Departure times at Bangkok (Krung Thep Aphiwat) are taken from the OTP GTFS feed when present (the feed only carries the Bangkok segment of these trains); journey times and fares follow the timetable and fare table published by SRT and are estimates. Booking is demonstrated through the fictional operator 'Lanna Rail Express'.",
+  "source": "State Railway of Thailand timetable & fares",
+  "sourceUrl": "https://www.railway.co.th/Home/Index",
+  "checkedAt": "2026-10-15",
+  "operator": "Lanna Rail Express",
+  "bangkokStation": "SRT Bangkok (Krung Thep Aphiwat)",
+  "trains": [
+    { "no": "7",   "kind": "special_express", "dir": "out", "city": "chiangmai", "station": "SRT Chiang Mai", "depart": "07:30", "minutes": 650, "fare": 641,  "fareHigh": 641,  "class": { "th": "ชั้น 2 นั่งปรับอากาศ", "en": "2nd class AC seat" }, "comfort": 3 },
+    { "no": "9",   "kind": "special_express", "dir": "out", "city": "chiangmai", "station": "SRT Chiang Mai", "depart": "18:40", "minutes": 755, "fare": 881,  "fareHigh": 1041, "class": { "th": "ชั้น 2 นอนปรับอากาศ", "en": "2nd class AC sleeper" }, "comfort": 4 },
+    { "no": "13",  "kind": "special_express", "dir": "out", "city": "chiangmai", "station": "SRT Chiang Mai", "depart": "20:05", "minutes": 750, "fare": 881,  "fareHigh": 1041, "class": { "th": "ชั้น 2 นอนปรับอากาศ", "en": "2nd class AC sleeper" }, "comfort": 4 },
+    { "no": "51",  "kind": "express",         "dir": "out", "city": "chiangmai", "station": "SRT Chiang Mai", "depart": "22:30", "minutes": 820, "fare": 531,  "fareHigh": 791,  "class": { "th": "ชั้น 2 นอนพัดลม", "en": "2nd class fan sleeper" }, "comfort": 3 },
+    { "no": "109", "kind": "rapid",           "dir": "out", "city": "chiangmai", "station": "SRT Chiang Mai", "depart": "14:15", "minutes": 830, "fare": 271,  "fareHigh": 391,  "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 },
+    { "no": "8",   "kind": "special_express", "dir": "in",  "city": "chiangmai", "station": "SRT Chiang Mai", "arrive": "18:55", "minutes": 635, "fare": 641,  "fareHigh": 641,  "class": { "th": "ชั้น 2 นั่งปรับอากาศ", "en": "2nd class AC seat" }, "comfort": 3 },
+    { "no": "10",  "kind": "special_express", "dir": "in",  "city": "chiangmai", "station": "SRT Chiang Mai", "arrive": "06:50", "minutes": 770, "fare": 881,  "fareHigh": 1041, "class": { "th": "ชั้น 2 นอนปรับอากาศ", "en": "2nd class AC sleeper" }, "comfort": 4 },
+    { "no": "14",  "kind": "special_express", "dir": "in",  "city": "chiangmai", "station": "SRT Chiang Mai", "arrive": "06:10", "minutes": 790, "fare": 881,  "fareHigh": 1041, "class": { "th": "ชั้น 2 นอนปรับอากาศ", "en": "2nd class AC sleeper" }, "comfort": 4 },
+    { "no": "52",  "kind": "express",         "dir": "in",  "city": "chiangmai", "station": "SRT Chiang Mai", "arrive": "05:10", "minutes": 820, "fare": 531,  "fareHigh": 791,  "class": { "th": "ชั้น 2 นอนพัดลม", "en": "2nd class fan sleeper" }, "comfort": 3 },
+    { "no": "102", "kind": "rapid",           "dir": "in",  "city": "chiangmai", "station": "SRT Chiang Mai", "arrive": "20:20", "minutes": 830, "fare": 271,  "fareHigh": 391,  "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 },
+
+    { "no": "31",  "kind": "special_express", "dir": "out", "city": "hatyai", "station": "SRT Hat Yai Junction", "depart": "14:50", "minutes": 975, "fare": 945, "fareHigh": 1145, "class": { "th": "ชั้น 2 นอนปรับอากาศ", "en": "2nd class AC sleeper" }, "comfort": 4 },
+    { "no": "171", "kind": "rapid",           "dir": "out", "city": "hatyai", "station": "SRT Hat Yai Junction", "depart": "13:10", "minutes": 1080, "fare": 330, "fareHigh": 495, "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 },
+
+    { "no": "21",  "kind": "special_express", "dir": "out", "city": "ubon", "station": "SRT Ubon Ratchathani", "depart": "06:10", "minutes": 520, "fare": 721, "fareHigh": 721, "class": { "th": "ชั้น 2 นั่งปรับอากาศ", "en": "2nd class AC seat" }, "comfort": 3 },
+    { "no": "139", "kind": "rapid",           "dir": "out", "city": "ubon", "station": "SRT Ubon Ratchathani", "depart": "19:30", "minutes": 610, "fare": 245, "fareHigh": 551, "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 },
+
+    { "no": "25",  "kind": "special_express", "dir": "out", "city": "nongkhai", "station": "SRT Nong Khai", "depart": "20:25", "minutes": 590, "fare": 758, "fareHigh": 1158, "class": { "th": "ชั้น 2 นอนปรับอากาศ", "en": "2nd class AC sleeper" }, "comfort": 4 },
+
+    { "no": "261", "kind": "ordinary",        "dir": "out", "city": "huahin", "station": "SRT Hua Hin", "depart": "09:20", "minutes": 260, "fare": 44, "fareHigh": 94, "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 },
+    { "no": "262", "kind": "ordinary",        "dir": "in",  "city": "huahin", "station": "SRT Hua Hin", "arrive": "20:20", "minutes": 270, "fare": 44, "fareHigh": 94, "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 },
+
+    { "no": "283", "kind": "ordinary",        "dir": "out", "city": "pattaya", "station": "SRT Pattaya", "fromStation": "SRT Bangkok", "depart": "06:55", "minutes": 225, "fare": 31, "fareHigh": 31, "class": { "th": "ชั้น 3 นั่งพัดลม", "en": "3rd class fan seat" }, "comfort": 1 }
+  ]
+}
