@@ -4,6 +4,7 @@ import { Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { TimeWheelPicker } from "./TimeWheelPicker";
 import { Popover, PopoverAnchor, PopoverContent } from "./ui/popover";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -51,11 +52,9 @@ function mask(raw: string): string {
   return d.length > 2 ? `${d.slice(0, 2)}:${d.slice(2)}` : d;
 }
 
-const GRID = Array.from({ length: 48 }, (_, i) => fromMin(i * 30));
-
 /**
  * 24-hour time input: type freely (0930 → 09:30), ↑/↓ change by 5 minutes,
- * and a popover with shortcuts and a 30-minute grid.
+ * and a popover with shortcuts and an iOS-style scroll wheel (hours / 5-minute steps).
  */
 export function TimeField({ value, onChange, label }: { value: string; onChange: (v: string) => void; label: string }) {
   const t = useTranslations("search");
@@ -64,14 +63,8 @@ export function TimeField({ value, onChange, label }: { value: string; onChange:
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
   const input = useRef<HTMLInputElement>(null);
-  const grid = useRef<HTMLDivElement>(null);
 
   useEffect(() => setText(value), [value]);
-  useEffect(() => {
-    if (!open) return;
-    const t = setTimeout(() => grid.current?.querySelector<HTMLElement>("[data-near='true']")?.scrollIntoView({ block: "center" }), 30);
-    return () => clearTimeout(t);
-  }, [open]);
 
   const commit = (raw: string) => {
     const v = parseTime(raw);
@@ -92,7 +85,12 @@ export function TimeField({ value, onChange, label }: { value: string; onChange:
     input.current?.focus();
   };
   const base = parseTime(value) ?? nowBkk();
-  const near = fromMin(Math.round(toMin(base) / 30) * 30);
+  /** apply a value but keep the popover open so the wheel can glide to it */
+  const apply = (v: string) => {
+    setError(false);
+    setText(v);
+    onChange(v);
+  };
 
   return (
     <div>
@@ -156,30 +154,18 @@ export function TimeField({ value, onChange, label }: { value: string; onChange:
               { k: "plus30", v: fromMin(toMin(nowBkk()) + 30) },
               { k: "plus60", v: fromMin(toMin(nowBkk()) + 60) },
             ].map((s) => (
-              <button key={s.k} type="button" onClick={() => choose(s.v)} className="press flex min-h-11 flex-col items-center justify-center rounded-xl bg-primary-soft px-2 py-1 text-primary hover:bg-primary/20">
+              <button key={s.k} type="button" onClick={() => apply(s.v)} className="press flex min-h-11 flex-col items-center justify-center rounded-xl bg-primary-soft px-2 py-1 text-primary hover:bg-primary/20">
                 <span className="text-sm font-semibold">{t(`timePicker.${s.k}`)}</span>
                 <span className="text-[11px] tabular opacity-80">{s.v}</span>
               </button>
             ))}
           </div>
-          <div ref={grid} role="listbox" aria-label={t("chooseTime")} className="thin-scroll mt-3 grid max-h-56 grid-cols-4 gap-1.5 overflow-y-auto pr-1">
-            {GRID.map((v) => (
-              <button
-                key={v}
-                type="button"
-                role="option"
-                aria-selected={v === value}
-                data-near={v === near}
-                onClick={() => choose(v)}
-                className={cn(
-                  "press min-h-11 rounded-lg text-sm font-medium tabular",
-                  v === value ? "bg-primary text-on-primary shadow-soft" : "bg-subtle text-fg hover:bg-primary-soft hover:text-primary",
-                )}
-              >
-                {v}
-              </button>
-            ))}
+          <div className="mt-3">
+            <TimeWheelPicker value={parseTime(value) ?? base} onChange={apply} hoursLabel={t("timePicker.hours")} minutesLabel={t("timePicker.minutes")} />
           </div>
+          <button type="button" onClick={() => choose(parseTime(value) ?? base)} className="press mt-3 min-h-11 w-full rounded-xl bg-primary text-sm font-semibold text-on-primary shadow-soft hover:bg-primary-strong">
+            {t("timePicker.done")}
+          </button>
         </PopoverContent>
       </Popover>
       <p id={`${id}-hint`} role={error ? "alert" : undefined} className={cn("mt-1 text-xs", error ? "font-medium text-bad" : "sr-only")}>

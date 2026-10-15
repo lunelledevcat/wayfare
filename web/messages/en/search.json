@@ -27,7 +27,10 @@
     "plus30": "+30 min",
     "plus60": "+1 h",
     "invalid": "That time isn't valid. Type 24-hour time, e.g. 0930 or 18:45.",
-    "hint": "Type a 24-hour time such as 0930. Use the up/down arrows to change by 5 minutes."
+    "hint": "Type a 24-hour time such as 0930. Use the up/down arrows to change by 5 minutes.",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "done": "Done"
   },
   "datePicker": {
     "today": "Today",
