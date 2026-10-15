@@ -1,0 +1,15 @@
+{
+  "name": "wayfare",
+  "private": true,
+  "workspaces": ["contracts", "web"],
+  "scripts": {
+    "test": "npm run test -w contracts && npm run test -w web",
+    "node": "npm run node -w contracts",
+    "deploy:local": "npm run deploy:local -w contracts",
+    "deploy:fuji": "npm run deploy:fuji -w contracts",
+    "import:gtfs": "npm run import:gtfs -w web",
+    "dev": "npm run dev -w web",
+    "build": "npm run build -w web",
+    "lint": "npm run lint -w web"
+  }
+}
