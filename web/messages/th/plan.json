@@ -71,7 +71,21 @@
     "maxWalkAny": "ไม่จำกัด",
     "bigLuggage": "มีกระเป๋าใหญ่",
     "bigLuggageHint": "ตัดวินและเรือเล็กออก และคิดเวลาเดินนานขึ้น",
-    "apply": "แสดง {n} ทริป"
+    "apply": "แสดง {n} ทริป",
+    "windowName": {
+      "morning": "เช้า",
+      "afternoon": "บ่าย",
+      "evening": "เย็น",
+      "night": "กลางคืน"
+    },
+    "windowRange": {
+      "morning": "05:00–12:00",
+      "afternoon": "12:00–17:00",
+      "evening": "17:00–21:00",
+      "night": "21:00–05:00"
+    },
+    "transfersShort": "{n, plural, =0 {ไม่ต่อ} other {≤ #}}",
+    "minShort": "≤ {n} นาที"
   },
   "weather": {
     "title": "สภาพอากาศวันเดินทาง",
@@ -121,5 +135,6 @@
     "refundPartial": "คืนเต็มถ้าผู้ให้บริการยกเลิก; ยกเลิกเองก่อน {h} ชม. หัก {fee}%"
   },
   "errorTitle": "วางแผนทริปนี้ไม่ได้",
-  "newSearch": "ค้นหาใหม่"
+  "newSearch": "ค้นหาใหม่",
+  "compareDismiss": "ปิดข้อความ"
 }

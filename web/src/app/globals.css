@@ -1,57 +1,103 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* theme follows the OS setting (light / dark) */
+@custom-variant dark (@media (prefers-color-scheme: dark));
 
 /* Wayfare design tokens */
 :root {
+  color-scheme: light;
   --wf-primary: #1463ff;
   --wf-primary-strong: #0b4fd6;
   --wf-primary-soft: #eaf1ff;
-  --wf-good: #12a150;
+  --wf-on-primary: #ffffff;
+  --wf-good: #0f8a44; /* text on light bg (AA) */
+  --wf-good-fill: #12a150;
   --wf-good-soft: #e7f6ee;
-  --wf-warn: #b45309; /* text on light bg (AA); fill uses --wf-warn-fill */
+  --wf-warn: #a24c06;
   --wf-warn-fill: #f59e0b;
   --wf-warn-soft: #fef3c7;
-  --wf-bad: #c9353a;
+  --wf-bad: #c42f35;
   --wf-bad-fill: #e5484d;
   --wf-bad-soft: #fdeced;
-  --wf-bg: #f7f8fa;
+  --wf-bg: #f5f7fb;
   --wf-card: #ffffff;
-  --wf-fg: #0f172a;
-  --wf-muted: #5b6577;
-  --wf-border: #e3e6ec;
-  --wf-ring: #1463ff55;
+  --wf-elevated: #ffffff;
+  --wf-fg: #0d1526;
+  --wf-muted: #566176;
+  --wf-subtle: #eef1f6;
+  --wf-border: #e1e6ee;
+  --wf-ring: #1463ff66;
+  --wf-shadow: 0 1px 2px rgb(13 21 38 / 0.04), 0 6px 20px -6px rgb(13 21 38 / 0.1);
+  --wf-shadow-lg: 0 2px 4px rgb(13 21 38 / 0.04), 0 18px 40px -12px rgb(13 21 38 / 0.22);
 
-  --wf-mode-metro: #16a34a;
-  --wf-mode-train: #b91c1c;
-  --wf-mode-bus: #ea580c;
-  --wf-mode-coach: #7c3aed;
-  --wf-mode-van: #0891b2;
-  --wf-mode-boat: #0284c7;
+  /* vehicle colours (always paired with an icon) */
+  --wf-mode-metro: #15924a;
+  --wf-mode-train: #c0262d;
+  --wf-mode-bus: #dd5a0b;
+  --wf-mode-coach: #7240e0;
+  --wf-mode-van: #0a87a6;
+  --wf-mode-boat: #0277bd;
   --wf-mode-flight: #1463ff;
-  --wf-mode-taxi: #ca8a04;
-  --wf-mode-win: #db2777;
-  --wf-mode-walk: #64748b;
-  --wf-mode-car: #475569;
+  --wf-mode-taxi: #b7790a;
+  --wf-mode-win: #d2306e;
+  --wf-mode-walk: #5b6577;
+  --wf-mode-car: #48556a;
+
+  /* weather colours */
+  --wf-wx-sun: #e88a00;
+  --wf-wx-cloud: #6b7a90;
+  --wf-wx-rain: #1d8fd6;
+  --wf-wx-storm: #6e56a8;
+  --wf-wx-wind: #2a9d8f;
+  --wf-wx-heat: #e2502b;
+  --wf-wx-pm: #8a6d3b;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not(.light) {
-    --wf-primary: #5b8cff;
-    --wf-primary-strong: #8bb0ff;
-    --wf-primary-soft: #16233f;
-    --wf-good: #3ccf7f;
-    --wf-good-soft: #0f2a1c;
-    --wf-warn: #fbbf24;
-    --wf-warn-soft: #33270b;
-    --wf-bad: #ff7b7f;
-    --wf-bad-soft: #3a1416;
-    --wf-bg: #0b0f17;
-    --wf-card: #131a26;
-    --wf-fg: #e8edf6;
-    --wf-muted: #a0abbe;
-    --wf-border: #263042;
-    --wf-ring: #5b8cff66;
+  :root {
+    color-scheme: dark;
+    --wf-primary: #6b98ff;
+    --wf-primary-strong: #9dbcff;
+    --wf-primary-soft: #18244a;
+    --wf-on-primary: #08122b;
+    --wf-good: #4fd88d;
+    --wf-good-fill: #2fbf6f;
+    --wf-good-soft: #0f2b1d;
+    --wf-warn: #fbbf4a;
+    --wf-warn-soft: #34270b;
+    --wf-bad: #ff8b8f;
+    --wf-bad-fill: #f0565b;
+    --wf-bad-soft: #3b1518;
+    --wf-bg: #0a0e17;
+    --wf-card: #121927;
+    --wf-elevated: #182131;
+    --wf-fg: #eaf0fa;
+    --wf-muted: #9eaac0;
+    --wf-subtle: #1a2333;
+    --wf-border: rgb(255 255 255 / 0.09);
+    --wf-ring: #6b98ff80;
+    --wf-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -8px rgb(0 0 0 / 0.5);
+    --wf-shadow-lg: 0 2px 4px rgb(0 0 0 / 0.3), 0 20px 44px -12px rgb(0 0 0 / 0.65);
+
+    --wf-mode-metro: #3fcf7a;
+    --wf-mode-train: #ff6b70;
+    --wf-mode-bus: #ff9a4d;
+    --wf-mode-coach: #a98bff;
+    --wf-mode-van: #3cc6e6;
+    --wf-mode-boat: #4db4f5;
+    --wf-mode-flight: #6b98ff;
+    --wf-mode-taxi: #f2c14e;
+    --wf-mode-win: #ff7aa8;
+    --wf-mode-walk: #a6b0c2;
+    --wf-mode-car: #a3b0c6;
+
+    --wf-wx-sun: #ffb340;
+    --wf-wx-cloud: #a9b6c9;
+    --wf-wx-rain: #5cbcff;
+    --wf-wx-storm: #b39ce6;
+    --wf-wx-wind: #5fd1c2;
+    --wf-wx-heat: #ff7a5c;
+    --wf-wx-pm: #d4b483;
   }
 }
 
@@ -59,7 +105,9 @@
   --color-primary: var(--wf-primary);
   --color-primary-strong: var(--wf-primary-strong);
   --color-primary-soft: var(--wf-primary-soft);
+  --color-on-primary: var(--wf-on-primary);
   --color-good: var(--wf-good);
+  --color-good-fill: var(--wf-good-fill);
   --color-good-soft: var(--wf-good-soft);
   --color-warn: var(--wf-warn);
   --color-warn-fill: var(--wf-warn-fill);
@@ -69,13 +117,60 @@
   --color-bad-soft: var(--wf-bad-soft);
   --color-bg: var(--wf-bg);
   --color-card: var(--wf-card);
+  --color-elevated: var(--wf-elevated);
   --color-fg: var(--wf-fg);
   --color-muted: var(--wf-muted);
+  --color-subtle: var(--wf-subtle);
   --color-border: var(--wf-border);
   --color-ring: var(--wf-ring);
   --font-sans: var(--font-thai), var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
   --radius-2xl: 1rem;
-  --shadow-soft: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 16px rgb(15 23 42 / 0.06);
+  --radius-3xl: 1.25rem;
+  --shadow-soft: var(--wf-shadow);
+  --shadow-lift: var(--wf-shadow-lg);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-shimmer: wf-shimmer 1.4s linear infinite;
+  --animate-pop-in: wf-pop-in 220ms var(--ease-soft) both;
+  --animate-pop-out: wf-pop-out 150ms ease-in both;
+  --animate-sheet-in: wf-sheet-in 300ms var(--ease-soft) both;
+  --animate-sheet-out: wf-sheet-out 200ms ease-in both;
+  --animate-fade-in: wf-fade-in 200ms ease-out both;
+  --animate-fade-out: wf-fade-out 150ms ease-in both;
+  --animate-drop: wf-drop 1.2s ease-in-out infinite;
+}
+
+@keyframes wf-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+@keyframes wf-pop-in {
+  from { opacity: 0; transform: scale(0.96) translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes wf-pop-out {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: scale(0.97); }
+}
+@keyframes wf-sheet-in {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+@keyframes wf-sheet-out {
+  from { transform: none; }
+  to { transform: translateY(100%); }
+}
+@keyframes wf-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes wf-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes wf-drop {
+  0%, 100% { transform: translateY(-0.6px); opacity: 0.75; }
+  50% { transform: translateY(1.4px); opacity: 1; }
 }
 
 html {
@@ -86,15 +181,51 @@ body {
   background: var(--wf-bg);
   color: var(--wf-fg);
   font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .tabular {
   font-variant-numeric: tabular-nums;
 }
 
+/* clear focus indicator on every interactive element */
 :focus-visible {
   outline: 3px solid var(--wf-ring);
   outline-offset: 2px;
+}
+
+/* tactile press feedback for buttons and links styled as buttons */
+.press {
+  transition: transform 120ms var(--ease-soft), background-color 150ms, color 150ms, box-shadow 150ms, border-color 150ms;
+}
+.press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* shimmer skeleton */
+.shimmer {
+  background: linear-gradient(90deg, var(--wf-subtle) 25%, color-mix(in srgb, var(--wf-subtle) 40%, var(--wf-card)) 50%, var(--wf-subtle) 75%);
+  background-size: 200% 100%;
+}
+
+/* vehicle icon tile: soft gradient of the vehicle colour */
+.mode-tile {
+  color: var(--mode);
+  background: linear-gradient(140deg, color-mix(in srgb, var(--mode) 22%, transparent), color-mix(in srgb, var(--mode) 9%, transparent));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--mode) 22%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  /* line colours from GTFS can be dark; lift them for contrast on dark surfaces */
+  .mode-tile {
+    color: color-mix(in srgb, var(--mode) 72%, white);
+  }
+}
+
+/* scrollbars inside popovers */
+.thin-scroll {
+  scrollbar-width: thin;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -102,6 +233,50 @@ body {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+/* react-day-picker themed to Wayfare */
+.wf-calendar {
+  --rdp-accent-color: var(--wf-primary);
+  --rdp-accent-background-color: var(--wf-primary-soft);
+  --rdp-day-height: 44px;
+  --rdp-day-width: 44px;
+  --rdp-day_button-height: 42px;
+  --rdp-day_button-width: 42px;
+  --rdp-day_button-border-radius: 12px;
+  --rdp-selected-border: 0;
+  --rdp-today-color: var(--wf-primary);
+  --rdp-nav_button-height: 44px;
+  --rdp-nav_button-width: 44px;
+  --rdp-disabled-opacity: 0.35;
+  color: var(--wf-fg);
+}
+.wf-calendar .rdp-day_button {
+  font-variant-numeric: tabular-nums;
+  transition: background-color 150ms, transform 120ms;
+}
+.wf-calendar .rdp-day_button:hover:not(:disabled) {
+  background: var(--wf-subtle);
+}
+.wf-calendar .rdp-day_button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+.wf-calendar .rdp-selected .rdp-day_button {
+  background: var(--wf-primary);
+  color: var(--wf-on-primary);
+  font-weight: 700;
+}
+.wf-calendar .rdp-chevron {
+  fill: var(--wf-primary);
+}
+.wf-calendar .rdp-caption_label {
+  font-weight: 700;
+}
+.wf-calendar .rdp-weekday {
+  color: var(--wf-muted);
+  font-size: 0.75rem;
 }

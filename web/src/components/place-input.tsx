@@ -110,7 +110,7 @@ export function PlaceInput({ label, value, onChange, placeholder, autoFocus }: {
         {loading && <LoaderCircle className="absolute right-3 top-1/2 size-4 -translate-y-1/2 animate-spin text-muted" aria-hidden />}
       </div>
       {open && items.length > 0 && (
-        <ul id={listId} role="listbox" className="absolute z-50 mt-1 max-h-80 w-full overflow-auto rounded-xl border border-border bg-card p-1 shadow-xl">
+        <ul id={listId} role="listbox" className="thin-scroll absolute z-50 mt-1.5 max-h-80 w-full animate-pop-in overflow-auto rounded-2xl border border-border bg-elevated p-1 shadow-lift">
           {items.map((s, i) => {
             const Icon = KIND_ICON[s.kind] ?? MapPin;
             return (

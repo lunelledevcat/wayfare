@@ -1,7 +1,7 @@
 "use client";
 
 import { useConnectModal } from "@rainbow-me/rainbowkit";
-import { CircleCheck, Coins, Ticket } from "lucide-react";
+import { Coins, Ticket } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { decodeEventLog, formatUnits, type Hex } from "viem";
@@ -16,6 +16,7 @@ import { saveSnapshot } from "@/lib/trip-store";
 import { cn } from "@/lib/utils";
 import { AvalancheBadge } from "./avalanche-badge";
 import { ModeIcon } from "./mode-icon";
+import { SuccessCheck } from "./success-check";
 import { Button } from "./ui/button";
 import { Card } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
@@ -133,7 +134,8 @@ export function BookingBox({ trip, query }: { trip: Trip; query: PlanQuery }) {
           .map((l) => ({ legId: l.id, mode: l.mode, kind: l.kind, at: l.depart, until: l.arrive, lat: l.from.lat, lon: l.from.lon, name: pick(l.from.name, "en"), outdoor: l.outdoor || l.kind === "transfer", precipProb: l.weather?.precipProb ?? null })),
       });
       setBooked({ tripId, tickets });
-      import("canvas-confetti").then((m) => m.default({ particleCount: 90, spread: 70, origin: { y: 0.7 } })).catch(() => {});
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+        import("canvas-confetti").then((m) => m.default({ particleCount: 60, spread: 60, startVelocity: 32, scalar: 0.85, ticks: 140, origin: { y: 0.75 } })).catch(() => {});
       return { hash };
     });
 
@@ -197,9 +199,10 @@ export function BookingBox({ trip, query }: { trip: Trip; query: PlanQuery }) {
           <p className="text-sm font-medium text-muted">{t("noBookable")}</p>
         ) : booked ? (
           <div className="space-y-2">
-            <p className="flex items-center gap-2 font-semibold text-good">
-              <CircleCheck className="size-5" aria-hidden /> {t("booked", { n: booked.tickets })}
-            </p>
+            <div className="flex items-center gap-3" role="status">
+              <SuccessCheck className="size-12 shrink-0" />
+              <p className="font-bold text-good">{t("booked", { n: booked.tickets })}</p>
+            </div>
             <AvalancheBadge tone="plain" />
             <TxStatus state={book.state} />
             <Button asChild className="w-full">

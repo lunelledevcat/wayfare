@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+import * as m from "motion/react-m";
+import { EASE, SPRING } from "../ui/motion";
 import { PlanTab } from "./plan-tab";
 import { ProfileTab } from "./profile-tab";
 import { TicketsTab } from "./tickets-tab";
@@ -57,12 +59,19 @@ export function AppShell() {
                 aria-selected={active}
                 aria-controls={`panel-${id}`}
                 onClick={() => select(id)}
-                className={cn("flex min-h-16 flex-col items-center justify-center gap-1 text-xs font-semibold transition-colors", active ? "text-primary" : "text-muted hover:text-fg")}
+                className={cn(
+                  "press relative flex min-h-16 flex-col items-center justify-center gap-1 text-xs font-semibold outline-none transition-colors focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-ring",
+                  active ? "text-primary" : "text-muted hover:text-fg",
+                )}
               >
-                <span className={cn("flex h-8 w-14 items-center justify-center rounded-full", active && "bg-primary-soft")}>
-                  <Icon className="size-5" aria-hidden />
+                <span className="relative flex h-8 w-14 items-center justify-center rounded-full">
+                  {active && <m.span layoutId="tab-pill" className="absolute inset-0 rounded-full bg-primary-soft" transition={SPRING} aria-hidden />}
+                  <m.span className="relative" animate={active ? { scale: [1, 1.18, 1], y: [0, -2, 0] } : { scale: 1, y: 0 }} transition={{ duration: 0.32, ease: EASE }}>
+                    <Icon className="size-5" aria-hidden />
+                  </m.span>
                 </span>
                 {t(`tabs.${id}`)}
+                {active && <m.span layoutId="tab-dot" className="absolute bottom-1.5 size-1.5 rounded-full bg-primary" transition={SPRING} aria-hidden />}
               </button>
             );
           })}

@@ -37,7 +37,7 @@ export function MegaMenu() {
         <ChevronDown className={`size-4 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden />
       </button>
       {open && (
-        <div className="absolute left-0 top-12 z-50 grid w-[680px] grid-cols-3 gap-6 rounded-2xl border border-border bg-card p-6 shadow-xl">
+        <div className="absolute left-0 top-12 z-50 grid w-[680px] origin-top-left animate-pop-in grid-cols-3 gap-6 rounded-[20px] border border-border bg-elevated p-6 shadow-lift">
           {MENU.map((g) => (
             <div key={g.group}>
               <p className="mb-3 text-xs font-bold uppercase tracking-wide text-muted">{t(`menu.${g.group}`)}</p>

@@ -1,3 +1,4 @@
+import type * as React from "react";
 import type { Mode } from "@/lib/planner/types";
 import { cn } from "@/lib/utils";
 import { BoatIcon, CarIcon, CoachIcon, FlightIcon, MetroIcon, MotorbikeIcon, TaxiIcon, TrainIcon, VanIcon, WalkIcon, type Icon } from "./icons";
@@ -43,13 +44,13 @@ export function ModeIcon({ mode, className, label, color }: { mode: Mode; classN
   const Icon = ICONS[mode];
   return (
     <span
-      className={cn("inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-white", className)}
-      style={{ background: color ?? MODE_COLOR[mode] }}
+      className={cn("mode-tile inline-flex size-8 shrink-0 items-center justify-center rounded-xl", className)}
+      style={{ "--mode": color ?? MODE_COLOR[mode] } as React.CSSProperties}
       role={label ? "img" : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}
     >
-      <Icon className="size-[66%]" />
+      <Icon className="size-[64%]" />
     </span>
   );
 }

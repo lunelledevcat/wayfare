@@ -17,5 +17,21 @@
   "needTo": "请从建议中选择目的地。",
   "same": "出发地和目的地相同。",
   "osm": "OpenStreetMap",
-  "gtfs": "GTFS 车站"
+  "gtfs": "GTFS 车站",
+  "arriveTime": "最晚到达",
+  "paxDec": "减少乘客",
+  "paxInc": "增加乘客",
+  "chooseTime": "选择时间",
+  "timePicker": {
+    "now": "现在",
+    "plus30": "+30 分钟",
+    "plus60": "+1 小时",
+    "invalid": "时间无效，请输入 24 小时制，例如 0930 或 18:45。",
+    "hint": "输入 24 小时制时间，如 0930；用上下方向键每次调整 5 分钟。"
+  },
+  "datePicker": {
+    "today": "今天",
+    "tomorrow": "明天",
+    "friday": "本周五"
+  }
 }

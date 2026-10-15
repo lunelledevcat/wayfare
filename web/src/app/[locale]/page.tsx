@@ -203,7 +203,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <li key={key}>
                 <Card className="h-full p-5">
                   <div className="flex items-center gap-3">
-                    <span className="tabular flex size-10 items-center justify-center rounded-full bg-primary text-lg font-extrabold text-white" aria-hidden>
+                    <span className="tabular flex size-10 items-center justify-center rounded-full bg-primary text-lg font-extrabold text-on-primary" aria-hidden>
                       {i + 1}
                     </span>
                     <Icon className="size-6 text-primary" aria-hidden />

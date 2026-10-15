@@ -10,13 +10,18 @@ import { applyFilters, bestByPriority, DEFAULT_PREFS, rankTrips, reasonFor } fro
 import { PRIORITIES, type Mode, type PlanResult, type Preferences, type Priority, type Trip } from "@/lib/planner/types";
 import { bkkSecOfDay } from "@/lib/time";
 import { cn } from "@/lib/utils";
+import * as m from "motion/react-m";
+import { ChoiceChip, ModeChip, SwitchRow } from "./chips";
+import { CountUp } from "./count-up";
 import { ModeIcon } from "./mode-icon";
 import { usePrefs } from "./prefs";
 import { buildPlanUrl } from "./search-box";
-import { PriorityIcon } from "./icons";
+import { MoonIcon, PriorityIcon, SunIcon, SunriseIcon, SunsetIcon, type Icon } from "./icons";
 import { TripCard } from "./trip-card";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
+import { EASE, SPRING } from "./ui/motion";
+import { Segmented } from "./ui/segmented";
 import { Card, Skeleton } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
 import { WeatherSummary } from "./weather";
@@ -25,10 +30,14 @@ import { CompareTable } from "./compare-table";
 const PriceChart = dynamic(() => import("./price-chart"), { ssr: false, loading: () => <Skeleton className="h-56" /> });
 const RouteMap = dynamic(() => import("./route-map"), { ssr: false, loading: () => <Skeleton className="h-full min-h-72" /> });
 
-type Window = "any" | "morning" | "afternoon" | "evening" | "night";
-const WINDOWS: Window[] = ["any", "morning", "afternoon", "evening", "night"];
-const inWindow = (epoch: number, w: Window) => {
-  if (w === "any") return true;
+type DayWindow = "morning" | "afternoon" | "evening" | "night";
+const WINDOWS: { key: DayWindow; Icon: Icon }[] = [
+  { key: "morning", Icon: SunriseIcon },
+  { key: "afternoon", Icon: SunIcon },
+  { key: "evening", Icon: SunsetIcon },
+  { key: "night", Icon: MoonIcon },
+];
+const inWindow = (epoch: number, w: DayWindow) => {
   const h = bkkSecOfDay(epoch) / 3600;
   if (w === "morning") return h >= 5 && h < 12;
   if (w === "afternoon") return h >= 12 && h < 17;
@@ -37,7 +46,8 @@ const inWindow = (epoch: number, w: Window) => {
 };
 
 interface ExtraFilters {
-  window: Window;
+  /** empty = any time */
+  windows: DayWindow[];
   maxTransfers: number | null;
 }
 
@@ -48,7 +58,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
   const { price, dur, locale } = useFmt();
   const q = result.query;
   const [prefs, setPrefs] = useState<Preferences>({ ...DEFAULT_PREFS, priority: initialPriority ?? "value", pax: q.pax, modes: initialModes ?? null });
-  const [extra, setExtra] = useState<ExtraFilters>({ window: "any", maxTransfers: null });
+  const [extra, setExtra] = useState<ExtraFilters>({ windows: [], maxTransfers: null });
   const [compare, setCompare] = useState<string[]>([]);
   const [compareOpen, setCompareOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -72,7 +82,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
   );
 
   const ranked = useMemo(
-    () => rankTrips(result.trips, prefs).filter((tr) => inWindow(tr.depart, extra.window) && (extra.maxTransfers === null || tr.transfers <= extra.maxTransfers)),
+    () => rankTrips(result.trips, prefs).filter((tr) => (extra.windows.length === 0 || extra.windows.some((w) => inWindow(tr.depart, w))) && (extra.maxTransfers === null || tr.transfers <= extra.maxTransfers)),
     [result.trips, prefs, extra],
   );
   const best = useMemo(() => bestByPriority(ranked, prefs), [ranked, prefs]);
@@ -100,37 +110,45 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
   };
   const resetFilters = () => {
     setPrefs((p) => ({ ...p, avoidWin: false, maxWalkMin: null, bigLuggage: false, budget: null, modes: null }));
-    setExtra({ window: "any", maxTransfers: null });
+    setExtra({ windows: [], maxTransfers: null });
   };
 
-  const travelFrom = Math.min(...result.trips.map((tr) => tr.depart), Date.now());
+  // derived only from the plan result (no Date.now()) so server and client render the same
+  const requested = result.weather.origin.hours[0]?.time ?? 0;
+  const startWindow = result.trips.length ? Math.min(...result.trips.map((tr) => tr.depart)) : requested;
+  const travelFrom = startWindow;
   const travelTo = Math.max(...result.trips.map((tr) => tr.arrive), travelFrom);
-  const startWindow = result.trips.length ? Math.min(...result.trips.map((tr) => tr.depart)) : Date.now();
 
+  const toggleWindow = (w: DayWindow) => setExtra((x) => ({ ...x, windows: x.windows.includes(w) ? x.windows.filter((y) => y !== w) : [...x.windows, w] }));
   const filters = (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <fieldset>
-        <legend className="mb-2 text-sm font-bold">{t("filters.modes")}</legend>
+        <legend className="mb-2.5 text-sm font-bold">{t("filters.modes")}</legend>
         <div className="flex flex-wrap gap-2">
-          {allModes.map((m) => {
-            const on = prefs.modes?.includes(m) ?? false;
+          {allModes.map((mode) => {
+            const on = prefs.modes?.includes(mode) ?? false;
             return (
-              <button
-                key={m}
-                type="button"
-                aria-pressed={on}
-                onClick={() => setPrefs((p) => ({ ...p, modes: on ? (p.modes ?? []).filter((x) => x !== m) : [...(p.modes ?? []), m] }))}
-                className={cn("inline-flex min-h-10 items-center gap-2 rounded-xl border px-2.5 text-sm font-medium", on ? "border-primary bg-primary-soft text-primary" : "border-border bg-card")}
-              >
-                <ModeIcon mode={m} className="size-6 rounded-md" />
-                {tm(m)}
-              </button>
+              <ModeChip
+                key={mode}
+                mode={mode}
+                label={tm(mode)}
+                on={on}
+                onToggle={() => setPrefs((p) => ({ ...p, modes: on ? (p.modes ?? []).filter((x) => x !== mode) : [...(p.modes ?? []), mode] }))}
+              />
             );
           })}
         </div>
       </fieldset>
+      <fieldset>
+        <legend className="mb-2.5 text-sm font-bold">{t("filters.departWindow")}</legend>
+        <div className="grid grid-cols-2 gap-2">
+          {WINDOWS.map(({ key, Icon }) => (
+            <ChoiceChip key={key} on={extra.windows.includes(key)} onClick={() => toggleWindow(key)} icon={<Icon className="size-6 shrink-0" />} label={t(`filters.windowName.${key}`)} sub={t(`filters.windowRange.${key}`)} />
+          ))}
+        </div>
+      </fieldset>
       <label className="block">
-        <span className="mb-2 block text-sm font-bold">{t("filters.budget")}</span>
+        <span className="mb-2.5 block text-sm font-bold">{t("filters.budget")}</span>
         <input
           type="number"
           inputMode="numeric"
@@ -139,60 +157,33 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
           placeholder={t("filters.budgetAny")}
           value={prefs.budget ?? ""}
           onChange={(e) => setPrefs((p) => ({ ...p, budget: e.target.value ? Number(e.target.value) : null }))}
-          className="h-12 w-full rounded-xl border border-border bg-card px-3"
+          className="h-12 w-full rounded-xl border border-border bg-card px-3 tabular hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-ring"
         />
       </label>
-      <label className="block">
-        <span className="mb-2 block text-sm font-bold">{t("filters.departWindow")}</span>
-        <select value={extra.window} onChange={(e) => setExtra((x) => ({ ...x, window: e.target.value as Window }))} className="h-12 w-full rounded-xl border border-border bg-card px-3">
-          {WINDOWS.map((w) => (
-            <option key={w} value={w}>
-              {t(`filters.window.${w}`)}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="block">
-        <span className="mb-2 block text-sm font-bold">{t("filters.transfers")}</span>
-        <select
-          value={extra.maxTransfers ?? ""}
-          onChange={(e) => setExtra((x) => ({ ...x, maxTransfers: e.target.value === "" ? null : Number(e.target.value) }))}
-          className="h-12 w-full rounded-xl border border-border bg-card px-3"
-        >
-          <option value="">{t("filters.transfersAny")}</option>
-          {[0, 1, 2, 3].map((n) => (
-            <option key={n} value={n}>
-              {t("filters.transfersMax", { n })}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="block">
-        <span className="mb-2 block text-sm font-bold">{t("filters.maxWalk")}</span>
-        <select
-          value={prefs.maxWalkMin ?? ""}
-          onChange={(e) => setPrefs((p) => ({ ...p, maxWalkMin: e.target.value === "" ? null : Number(e.target.value) }))}
-          className="h-12 w-full rounded-xl border border-border bg-card px-3"
-        >
-          <option value="">{t("filters.maxWalkAny")}</option>
-          {[5, 10, 15, 20].map((n) => (
-            <option key={n} value={n}>
-              {t("walk", { min: n })}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-border px-3">
-        <input type="checkbox" checked={prefs.avoidWin} onChange={(e) => setPrefs((p) => ({ ...p, avoidWin: e.target.checked }))} className="size-5 accent-[var(--wf-primary)]" />
-        <span className="text-sm font-medium">{t("filters.avoidWin")}</span>
-      </label>
-      <label className="flex min-h-12 cursor-pointer items-start gap-3 rounded-xl border border-border px-3 py-3">
-        <input type="checkbox" checked={prefs.bigLuggage} onChange={(e) => setPrefs((p) => ({ ...p, bigLuggage: e.target.checked }))} className="mt-0.5 size-5 accent-[var(--wf-primary)]" />
-        <span>
-          <span className="block text-sm font-medium">{t("filters.bigLuggage")}</span>
-          <span className="block text-xs text-muted">{t("filters.bigLuggageHint")}</span>
-        </span>
-      </label>
+      <div>
+        <p className="mb-2.5 text-sm font-bold">{t("filters.transfers")}</p>
+        <Segmented
+          ariaLabel={t("filters.transfers")}
+          size="sm"
+          value={extra.maxTransfers === null ? "any" : String(extra.maxTransfers)}
+          onChange={(v) => setExtra((x) => ({ ...x, maxTransfers: v === "any" ? null : Number(v) }))}
+          options={[{ value: "any", label: t("filters.transfersAny") }, ...[0, 1, 2].map((n) => ({ value: String(n), label: t("filters.transfersShort", { n }) }))]}
+        />
+      </div>
+      <div>
+        <p className="mb-2.5 text-sm font-bold">{t("filters.maxWalk")}</p>
+        <Segmented
+          ariaLabel={t("filters.maxWalk")}
+          size="sm"
+          value={prefs.maxWalkMin === null ? "any" : String(prefs.maxWalkMin)}
+          onChange={(v) => setPrefs((p) => ({ ...p, maxWalkMin: v === "any" ? null : Number(v) }))}
+          options={[{ value: "any", label: t("filters.maxWalkAny") }, ...[5, 10, 15].map((n) => ({ value: String(n), label: t("filters.minShort", { n }) }))]}
+        />
+      </div>
+      <div className="space-y-2">
+        <SwitchRow on={prefs.avoidWin} onChange={(v) => setPrefs((p) => ({ ...p, avoidWin: v }))} label={t("filters.avoidWin")} />
+        <SwitchRow on={prefs.bigLuggage} onChange={(v) => setPrefs((p) => ({ ...p, bigLuggage: v }))} label={t("filters.bigLuggage")} hint={t("filters.bigLuggageHint")} />
+      </div>
       <Button variant="ghost" className="w-full" onClick={resetFilters}>
         {t("resetFilters")}
       </Button>
@@ -206,31 +197,20 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
         <h2 id="prio" className="sr-only">
           {t("priorityLabel")}
         </h2>
-        <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-card p-2 shadow-soft md:grid-cols-4" role="radiogroup" aria-label={t("priorityLabel")}>
-          {PRIORITIES.map((p) => (
-            <button
-              key={p}
-              type="button"
-              role="radio"
-              aria-checked={prefs.priority === p}
-              onClick={() => setPriority(p)}
-              className={cn(
-                "flex min-h-16 flex-col items-center justify-center rounded-xl px-2 py-2 text-center transition-colors",
-                prefs.priority === p ? "bg-primary text-white shadow-soft" : "hover:bg-bg",
-              )}
-            >
-              <span className="inline-flex items-center gap-1.5 text-lg font-bold">
-                <PriorityIcon priority={p} className="size-5" /> {t(`priority.${p}`)}
-              </span>
-              <span className={cn("text-xs", prefs.priority === p ? "text-white/85" : "text-muted")}>{t(`priorityHint.${p}`)}</span>
-            </button>
-          ))}
-        </div>
+        <Segmented
+          ariaLabel={t("priorityLabel")}
+          value={prefs.priority}
+          onChange={setPriority}
+          size="lg"
+          columns="grid-cols-2 md:grid-cols-4"
+          className="bg-card p-1.5 shadow-soft"
+          options={PRIORITIES.map((p) => ({ value: p, label: t(`priority.${p}`), icon: <PriorityIcon priority={p} className="size-5" />, hint: t(`priorityHint.${p}`) }))}
+        />
       </section>
 
       {/* best for you */}
       {top && (
-        <Card className="border-primary/40 bg-primary-soft/40 p-4 md:p-5">
+        <Card className="border-primary/30 bg-gradient-to-br from-primary-soft to-card p-4 md:p-5">
           <p className="flex items-center gap-2 text-sm font-bold text-primary">
             <Sparkles className="size-4" aria-hidden /> {t("best")} · <PriorityIcon priority={prefs.priority} className="size-4" /> {t(`priority.${prefs.priority}`)}
           </p>
@@ -243,7 +223,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
                 ))}
             </div>
             <p className="text-lg font-bold">
-              {pick(MODE_LABEL[top.mainMode], locale)} · {dur(top.minutes)} · <span className="tabular">{price(top.cost.amount * q.pax)}</span>
+              {pick(MODE_LABEL[top.mainMode], locale)} · {dur(top.minutes)} · <CountUp className="tabular" value={top.cost.amount * q.pax} format={price} />
             </p>
           </div>
           {reason && (
@@ -323,7 +303,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
             {compareMsg && (
               <p role="status" className="flex items-center justify-between rounded-xl bg-warn-soft px-3 py-2 text-sm text-warn">
                 {t("compareMax")}
-                <button type="button" onClick={() => setCompareMsg(false)} aria-label="×" className="p-1">
+                <button type="button" onClick={() => setCompareMsg(false)} aria-label={t("compareDismiss")} className="press flex size-11 items-center justify-center rounded-lg">
                   <X className="size-4" />
                 </button>
               </p>
@@ -336,9 +316,9 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
                 </Button>
               </Card>
             )}
-            {ranked.map((tr) => (
+            {ranked.map((tr, i) => (
+              <m.div key={tr.id} layout="position" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: EASE, delay: Math.min(i, 10) * 0.04, layout: SPRING }}>
               <TripCard
-                key={tr.id}
                 trip={tr}
                 tags={tagsFor(tr.id)}
                 pax={q.pax}
@@ -348,6 +328,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
                 onAlternative={goAlternative}
                 highlight={highlight === tr.id}
               />
+              </m.div>
             ))}
           </div>
         </div>

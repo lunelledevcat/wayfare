@@ -44,7 +44,7 @@ export default async function TripPage({ params, searchParams }: { params: Promi
         ) : (
           <Card className="p-8 text-center">
             <p className="font-semibold">{t("notFound")}</p>
-            <Link href={back} className="mt-4 inline-flex h-12 items-center rounded-xl bg-primary px-5 font-semibold text-white">
+            <Link href={back} className="mt-4 inline-flex h-12 items-center rounded-xl bg-primary px-5 font-semibold text-on-primary">
               {t("back")}
             </Link>
           </Card>

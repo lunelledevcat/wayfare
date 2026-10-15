@@ -1,4 +1,4 @@
-import type { ReactNode, SVGProps } from "react";
+import type { CSSProperties, ReactNode, SVGProps } from "react";
 
 export interface IconProps extends Omit<SVGProps<SVGSVGElement>, "children"> {
   size?: number | string;
@@ -8,9 +8,20 @@ export interface IconProps extends Omit<SVGProps<SVGSVGElement>, "children"> {
 
 export type Icon = ((props: IconProps) => ReactNode) & { displayName?: string };
 
-/** Wayfare icon set: 24×24 grid, 1.75 stroke, currentColor, rounded joins. */
-export function createIcon(name: string, body: ReactNode): Icon {
-  const C = ({ size = 24, label, className, ...rest }: IconProps) => (
+/** Duotone fill layer: same colour as the stroke at 20% opacity. */
+export function Tone(props: SVGProps<SVGPathElement>) {
+  return <path fill="currentColor" fillOpacity={0.2} stroke="none" {...props} />;
+}
+export function ToneCircle(props: SVGProps<SVGCircleElement>) {
+  return <circle fill="currentColor" fillOpacity={0.2} stroke="none" {...props} />;
+}
+
+/**
+ * Wayfare icon set: 24×24 grid, 1.75 stroke in currentColor, rounded joins, plus a 20%
+ * tone fill of the same colour. `color` gives an icon its own default colour (weather).
+ */
+export function createIcon(name: string, body: ReactNode, color?: string): Icon {
+  const C = ({ size = 24, label, className, style, ...rest }: IconProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -22,6 +33,7 @@ export function createIcon(name: string, body: ReactNode): Icon {
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
+      style={color ? ({ color, ...style } as CSSProperties) : style}
       role={label ? "img" : undefined}
       aria-label={label}
       aria-hidden={label ? undefined : true}

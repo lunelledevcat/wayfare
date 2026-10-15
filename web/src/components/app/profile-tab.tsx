@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Coins, ExternalLink, Wallet } from "lucide-react";
 import { PriorityIcon } from "../icons";
+import { Segmented } from "../ui/segmented";
 import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useAccount, usePublicClient, useWriteContract } from "wagmi";
@@ -43,20 +44,15 @@ export function ProfileTab() {
             <LocaleSwitcher />
           </Suspense>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <Label htmlFor="currency">{tc("currency")}</Label>
-          <select
-            id="currency"
+        <div className="space-y-1.5">
+          <span className="text-sm font-medium text-muted">{tc("currency")}</span>
+          <Segmented
+            ariaLabel={tc("currency")}
+            size="sm"
             value={prefs.currency}
-            onChange={(e) => setPrefs({ currency: e.target.value as DisplayCurrency })}
-            className="h-12 rounded-xl border border-border bg-card px-3 text-base font-medium text-fg"
-          >
-            {DISPLAY_CURRENCIES.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
+            onChange={(c) => setPrefs({ currency: c as DisplayCurrency })}
+            options={DISPLAY_CURRENCIES.map((c) => ({ value: c, label: c }))}
+          />
         </div>
         <div className="space-y-1.5">
           <Label htmlFor="time-value">{t("timeValue")}</Label>

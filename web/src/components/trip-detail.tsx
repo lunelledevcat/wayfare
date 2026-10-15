@@ -8,9 +8,11 @@ import { pick } from "@/lib/format";
 import type { PlanQuery, TimeBreakdown, Trip } from "@/lib/planner/types";
 import { bkkTime } from "@/lib/time";
 import { cn } from "@/lib/utils";
+import * as m from "motion/react-m";
 import { BookingBox } from "./booking-box";
 import { ModeIcon } from "./mode-icon";
 import { WarningLine } from "./trip-card";
+import { EASE, SPRING } from "./ui/motion";
 import { Badge, Card, Skeleton } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
 import { VoiceButton } from "./voice-button";
@@ -102,20 +104,44 @@ export function TripDetail({ trip, query, backHref, fromName, toName }: { trip: 
           </h2>
           <ol className="relative space-y-0">
             {trip.legs.map((l, i) => (
-              <li key={l.id} className="grid grid-cols-[64px_40px_1fr] gap-x-2">
+              <m.li
+                key={l.id}
+                className="grid grid-cols-[64px_40px_1fr] gap-x-2"
+                initial={{ opacity: 0, x: -6 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.3, ease: EASE, delay: Math.min(i, 8) * 0.05 }}
+              >
                 <div className="pt-1 text-right text-sm font-bold tabular">
                   {time(l.depart)}
                   <div className="text-xs font-normal text-muted">{time(l.arrive)}</div>
                 </div>
                 <div className="flex flex-col items-center">
-                  {l.kind === "ride" || l.mode === "walk" ? (
-                    <ModeIcon mode={l.mode} color={l.line?.color} className="size-9" label={tm(l.mode)} />
-                  ) : (
-                    <span className="flex size-9 items-center justify-center rounded-lg border border-border bg-bg text-muted">
-                      <Clock className="size-5" aria-hidden />
-                    </span>
+                  <m.span
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ ...SPRING, delay: Math.min(i, 8) * 0.05 + 0.05 }}
+                    className="relative z-10"
+                  >
+                    {l.kind === "ride" || l.mode === "walk" ? (
+                      <ModeIcon mode={l.mode} color={l.line?.color} className="size-10" label={tm(l.mode)} />
+                    ) : (
+                      <span className="flex size-10 items-center justify-center rounded-xl border border-border bg-subtle text-muted">
+                        <Clock className="size-5" aria-hidden />
+                      </span>
+                    )}
+                  </m.span>
+                  {i < trip.legs.length - 1 && (
+                    <m.span
+                      className="-my-0.5 w-0.5 flex-1 origin-top rounded-full bg-gradient-to-b from-primary/50 to-border"
+                      initial={{ scaleY: 0 }}
+                      whileInView={{ scaleY: 1 }}
+                      viewport={{ once: true, margin: "-40px" }}
+                      transition={{ duration: 0.35, ease: EASE, delay: Math.min(i, 8) * 0.05 + 0.12 }}
+                      aria-hidden
+                    />
                   )}
-                  {i < trip.legs.length - 1 && <span className="w-0.5 flex-1 bg-border" aria-hidden />}
                 </div>
                 <div className="pb-5">
                   <div className="flex flex-wrap items-center gap-1.5">
@@ -142,7 +168,7 @@ export function TripDetail({ trip, query, backHref, fromName, toName }: { trip: 
                     )}
                   </div>
                 </div>
-              </li>
+              </m.li>
             ))}
           </ol>
         </section>

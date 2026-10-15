@@ -71,7 +71,21 @@
     "maxWalkAny": "指定なし",
     "bigLuggage": "大きな荷物がある",
     "bigLuggageHint": "バイクと小型船を除外し、徒歩を遅めに計算します",
-    "apply": "{n} 件の旅程を表示"
+    "apply": "{n} 件の旅程を表示",
+    "windowName": {
+      "morning": "朝",
+      "afternoon": "昼",
+      "evening": "夕方",
+      "night": "夜"
+    },
+    "windowRange": {
+      "morning": "05:00–12:00",
+      "afternoon": "12:00–17:00",
+      "evening": "17:00–21:00",
+      "night": "21:00–05:00"
+    },
+    "transfersShort": "{n, plural, =0 {乗換なし} other {≤ #}}",
+    "minShort": "≤ {n}分"
   },
   "weather": {
     "title": "移動日の天気",
@@ -121,5 +135,6 @@
     "refundPartial": "事業者都合の運休は無料。出発 {h} 時間前までの自己都合キャンセルは手数料 {fee}%"
   },
   "errorTitle": "この旅程を計画できませんでした",
-  "newSearch": "新しく検索"
+  "newSearch": "新しく検索",
+  "compareDismiss": "閉じる"
 }

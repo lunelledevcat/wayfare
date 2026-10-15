@@ -136,7 +136,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
         <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">{t("title")}</h1>
         <p className="mt-3 max-w-3xl text-muted md:text-lg">{t("intro")}</p>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[14rem_1fr]">
+        <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[14rem_1fr]">
           <nav aria-label={t("toc")} className="lg:sticky lg:top-24 lg:self-start">
             <p className="mb-2 text-xs font-bold uppercase tracking-wide text-muted">{t("toc")}</p>
             <ul className="flex flex-wrap gap-2 lg:flex-col lg:gap-0">
@@ -228,7 +228,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
               <p>{t("flights.body")}</p>
               <p className="rounded-xl bg-primary-soft p-4 font-semibold text-primary">{t("flights.formula")}</p>
               <p className="text-sm text-muted">{t("flights.band", { low: pct(flights.fareBand.lowPct), high: pct(flights.fareBand.highPct) })}</p>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3 [&>*]:min-w-0">
                 <div>
                   <h3 className="mb-2 font-bold">{t("flights.dayFactor")}</h3>
                   <Table
@@ -319,7 +319,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
             {/* Pricing */}
             <Section id="pricing" title={t("pricing.title")}>
               <p>{t("pricing.body")}</p>
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 [&>*]:min-w-0">
                 <div className="space-y-2">
                   <h3 className="font-bold">{t("pricing.taxiTitle")}</h3>
                   <p className="text-sm">{t("pricing.taxiFlag", { fare: baht(roadFares.taxi.flagFall), km: roadFares.taxi.flagFallKm })}</p>
@@ -369,7 +369,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
                 </div>
               </div>
               <h3 className="pt-2 font-bold">{t("pricing.holidaysTitle")}</h3>
-              <ul className="grid gap-1 text-sm sm:grid-cols-2">
+              <ul className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">
                 {holidays.holidays.map((h) => (
                   <li key={h.date} className="flex gap-3">
                     <span className="tabular w-28 shrink-0 text-muted">{date(`${h.date}T12:00:00+07:00`)}</span>
@@ -382,7 +382,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
             {/* Scoring */}
             <Section id="scoring" title={t("scoring.title")}>
               <p>{t("scoring.body")}</p>
-              <ul className="grid gap-3 md:grid-cols-2">
+              <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 {(["fastest", "cheapest", "value", "comfort"] as const).map((k) => (
                   <li key={k} className="rounded-xl border border-border p-4">
                     <h3 className="font-bold text-primary">{t(`scoring.${k}.title`)}</h3>
@@ -400,7 +400,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
             {/* Planner: buffers, reliability, CO2 */}
             <Section id="planner" title={t("planner.title")}>
               <p>{t("planner.body")}</p>
-              <div className="grid gap-6 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 [&>*]:min-w-0">
                 <div>
                   <h3 className="mb-2 font-bold">{t("planner.buffersTitle")}</h3>
                   <Table

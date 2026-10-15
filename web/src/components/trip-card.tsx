@@ -7,6 +7,7 @@ import { bkkDate } from "@/lib/time";
 import type { Priority, Trip, Warning } from "@/lib/planner/types";
 import { cn } from "@/lib/utils";
 import { PriorityIcon } from "./icons";
+import { CountUp } from "./count-up";
 import { ModeIcon } from "./mode-icon";
 import { Badge } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
@@ -68,7 +69,7 @@ export function TripCard({
   return (
     <article
       id={`trip-${trip.id}`}
-      className={cn("rounded-2xl border bg-card p-4 shadow-soft transition-shadow md:p-5", highlight ? "border-primary ring-4 ring-ring" : "border-border", trip.notRecommended && "opacity-90")}
+      className={cn("rounded-[18px] border bg-card p-4 shadow-soft transition-[transform,box-shadow,border-color] duration-200 ease-[var(--ease-soft)] hover:-translate-y-0.5 hover:shadow-lift md:p-5", highlight ? "border-primary ring-4 ring-ring" : "border-border hover:border-primary/25", trip.notRecommended && "opacity-90")}
       aria-label={`${time(trip.depart)}–${time(trip.arrive)}, ${price(trip.cost.amount * pax)}`}
     >
       <div className="flex flex-wrap items-center gap-1.5">
@@ -82,7 +83,7 @@ export function TripCard({
             <Ban aria-hidden /> {t("notRecommended")}
           </Badge>
         )}
-        <label className="ml-auto inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-lg px-2 text-sm text-muted hover:bg-bg">
+        <label className="press ml-auto inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg px-2 text-sm text-muted hover:bg-subtle">
           <input type="checkbox" checked={compareOn} onChange={(e) => onCompare(e.target.checked)} className="size-4 accent-[var(--wf-primary)]" />
           {t("compare")}
         </label>
@@ -120,13 +121,13 @@ export function TripCard({
         </div>
         <div className="flex items-end justify-between gap-3 md:flex-col md:items-end">
           <div className="text-left md:text-right">
-            <p className="text-3xl font-extrabold tabular text-fg">{price(trip.cost.amount * pax)}</p>
+            <CountUp className="block text-3xl font-extrabold tracking-tight tabular text-fg" value={trip.cost.amount * pax} format={price} />
             <p className="text-xs text-muted tabular">
               {trip.cost.estimate ? t("range", { low: price(trip.cost.low * pax), high: price(trip.cost.high * pax) }) : null}
               {trip.cost.onChain > 0 ? ` · ${t("onChain")} ${price(trip.cost.onChain * pax)}` : ` · ${t("payOnSite")}`}
             </p>
           </div>
-          <Link href={href} className="inline-flex h-12 items-center gap-1 rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-soft hover:bg-primary-strong">
+          <Link href={href} className="press inline-flex h-12 items-center gap-1 rounded-xl bg-primary px-4 text-sm font-semibold text-on-primary shadow-soft hover:bg-primary-strong hover:shadow-lift">
             {t("details")} <ChevronRight className="size-4" aria-hidden />
           </Link>
         </div>

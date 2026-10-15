@@ -71,7 +71,21 @@
     "maxWalkAny": "不限",
     "bigLuggage": "我有大件行李",
     "bigLuggageHint": "排除摩的和小船，步行时间按更慢计算",
-    "apply": "显示 {n} 个行程"
+    "apply": "显示 {n} 个行程",
+    "windowName": {
+      "morning": "上午",
+      "afternoon": "下午",
+      "evening": "傍晚",
+      "night": "夜间"
+    },
+    "windowRange": {
+      "morning": "05:00–12:00",
+      "afternoon": "12:00–17:00",
+      "evening": "17:00–21:00",
+      "night": "21:00–05:00"
+    },
+    "transfersShort": "{n, plural, =0 {直达} other {≤ #}}",
+    "minShort": "≤ {n} 分钟"
   },
   "weather": {
     "title": "出行当天的天气",
@@ -121,5 +135,6 @@
     "refundPartial": "运营商取消免费退款；你在出发前 {h} 小时以前取消收取 {fee}% 手续费"
   },
   "errorTitle": "无法规划此行程",
-  "newSearch": "重新搜索"
+  "newSearch": "重新搜索",
+  "compareDismiss": "关闭"
 }

@@ -1,12 +1,18 @@
 "use client";
 
-import { ArrowLeftRight, Search, Users } from "lucide-react";
+import { ArrowLeftRight, Minus, Plus, Search } from "lucide-react";
+import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { todayBkk } from "@/lib/time";
 import { cn } from "@/lib/utils";
+import { DateField } from "./date-field";
 import { PlaceInput, type PlaceValue } from "./place-input";
+import { nowBkk, TimeField } from "./time-field";
 import { Button } from "./ui/button";
+import { SPRING } from "./ui/motion";
+import { Segmented } from "./ui/segmented";
 
 export interface SearchInit {
   from?: PlaceValue | null;
@@ -17,12 +23,10 @@ export interface SearchInit {
   pax?: number;
 }
 
-const bkkNow = () => new Date(Date.now() + 7 * 3600_000);
-const defaultDate = () => bkkNow().toISOString().slice(0, 10);
+/** Default departure: 30 minutes from now, rounded to 15. */
 const defaultTime = () => {
-  const d = bkkNow();
-  const m = d.getUTCHours() * 60 + d.getUTCMinutes() + 30;
-  const r = Math.ceil(m / 15) * 15;
+  const [h, mm] = nowBkk().split(":").map(Number);
+  const r = Math.ceil((h * 60 + mm + 30) / 15) * 15;
   return `${String(Math.floor(r / 60) % 24).padStart(2, "0")}:${String(r % 60).padStart(2, "0")}`;
 };
 
@@ -31,6 +35,26 @@ export function buildPlanUrl(v: { from: string; to: string; date: string; time: 
   if (v.priority) p.set("priority", v.priority);
   if (v.modes) p.set("modes", v.modes);
   return `/plan?${p}`;
+}
+
+function PaxStepper({ value, onChange, label }: { value: number; onChange: (n: number) => void; label: string }) {
+  const t = useTranslations("search");
+  return (
+    <div>
+      <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted">{label}</span>
+      <div className="flex h-14 items-center justify-between rounded-xl border border-border bg-card px-1.5" role="group" aria-label={label}>
+        <button type="button" onClick={() => onChange(Math.max(1, value - 1))} disabled={value <= 1} aria-label={t("paxDec")} className="press flex size-11 items-center justify-center rounded-lg text-primary hover:bg-primary-soft disabled:text-muted disabled:opacity-40">
+          <Minus className="size-5" aria-hidden />
+        </button>
+        <output aria-live="polite" className="min-w-8 text-center text-xl font-bold tabular">
+          {value}
+        </output>
+        <button type="button" onClick={() => onChange(Math.min(9, value + 1))} disabled={value >= 9} aria-label={t("paxInc")} className="press flex size-11 items-center justify-center rounded-lg text-primary hover:bg-primary-soft disabled:text-muted disabled:opacity-40">
+          <Plus className="size-5" aria-hidden />
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export function SearchBox({ init, compact = false, priority }: { init?: SearchInit; compact?: boolean; priority?: string }) {
@@ -43,7 +67,14 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
   const [mode, setMode] = useState<"depart" | "arrive">(init?.mode ?? "depart");
   const [pax, setPax] = useState(init?.pax ?? 1);
   const [error, setError] = useState<string | null>(null);
+  const [turns, setTurns] = useState(0);
   const [pending, start] = useTransition();
+
+  // static pages are prerendered: fill "today" and "soon" on the client
+  useEffect(() => {
+    setDate((d) => d || todayBkk());
+    setTime((x) => x || defaultTime());
+  }, []);
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,72 +82,61 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
     if (!to) return setError(t("needTo"));
     if (from.token === to.token) return setError(t("same"));
     setError(null);
-    start(() => router.push(buildPlanUrl({ from: from.token, to: to.token, date: date || defaultDate(), time: time || defaultTime(), mode, pax, priority })));
+    start(() => router.push(buildPlanUrl({ from: from.token, to: to.token, date: date || todayBkk(), time: time || defaultTime(), mode, pax, priority })));
   };
 
   return (
-    <form onSubmit={submit} className={cn("rounded-2xl border border-border bg-card p-4 shadow-soft", compact ? "md:p-4" : "md:p-5")} aria-label={t("formLabel")}>
+    <form
+      onSubmit={submit}
+      aria-label={t("formLabel")}
+      className={cn("rounded-[20px] border border-border bg-elevated shadow-lift", compact ? "p-4" : "p-4 md:p-6")}
+    >
       <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-end">
         <PlaceInput label={t("from")} placeholder={t("fromPlaceholder")} value={from} onChange={setFrom} />
-        <button
+        <m.button
           type="button"
           onClick={() => {
             setFrom(to);
             setTo(from);
+            setTurns((n) => n + 1);
           }}
-          className="mx-auto flex size-11 items-center justify-center rounded-full border border-border bg-card text-primary hover:bg-primary-soft md:mb-1.5"
+          animate={{ rotate: turns * 180 }}
+          transition={SPRING}
+          whileTap={{ scale: 0.92 }}
+          className="mx-auto flex size-12 items-center justify-center rounded-full border border-border bg-card text-primary shadow-soft hover:bg-primary-soft focus-visible:ring-4 focus-visible:ring-ring md:mb-1"
           aria-label={t("swap")}
         >
           <ArrowLeftRight className="size-5 rotate-90 md:rotate-0" aria-hidden />
-        </button>
+        </m.button>
         <PlaceInput label={t("to")} placeholder={t("toPlaceholder")} value={to} onChange={setTo} />
       </div>
-      <div className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-[auto_1fr_1fr_auto_auto] md:items-end">
-        <fieldset className="col-span-2 md:col-span-1">
-          <legend className="mb-1 text-xs font-semibold uppercase tracking-wide text-muted">{t("when")}</legend>
-          <div className="inline-flex h-12 rounded-xl border border-border bg-bg p-1" role="radiogroup">
-            {(["depart", "arrive"] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                role="radio"
-                aria-checked={mode === m}
-                onClick={() => setMode(m)}
-                className={cn("rounded-lg px-3 text-sm font-semibold", mode === m ? "bg-card text-primary shadow-soft" : "text-muted")}
-              >
-                {t(m)}
-              </button>
-            ))}
-          </div>
-        </fieldset>
-        <label className="block">
-          <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">{t("date")}</span>
-          <input type="date" value={date} placeholder={defaultDate()} onChange={(e) => setDate(e.target.value)} className="h-12 w-full rounded-xl border border-border bg-card px-3 text-base" suppressHydrationWarning />
-        </label>
-        <label className="block">
-          <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">{t("time")}</span>
-          <input type="time" value={time} step={300} onChange={(e) => setTime(e.target.value)} className="h-12 w-full rounded-xl border border-border bg-card px-3 text-base" />
-        </label>
-        <label className="block">
-          <span className="mb-1 block text-xs font-semibold uppercase tracking-wide text-muted">{t("pax")}</span>
-          <span className="relative block">
-            <Users className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted" aria-hidden />
-            <select value={pax} onChange={(e) => setPax(Number(e.target.value))} className="h-12 w-full appearance-none rounded-xl border border-border bg-card pl-9 pr-4 text-base md:w-24">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => (
-                <option key={n} value={n}>
-                  {n}
-                </option>
-              ))}
-            </select>
-          </span>
-        </label>
-        <Button type="submit" size="lg" disabled={pending} className="col-span-2 md:col-span-1 md:h-12">
-          <Search aria-hidden />
-          {pending ? t("searching") : t("submit")}
-        </Button>
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(220px,auto)_1fr_1fr_auto]">
+        <div className="sm:col-span-2 lg:col-span-1">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-muted">{t("when")}</span>
+          <Segmented
+            ariaLabel={t("when")}
+            value={mode}
+            onChange={setMode}
+            size="lg"
+            className="h-14 [&_button]:min-h-0"
+            options={[
+              { value: "depart", label: t("depart") },
+              { value: "arrive", label: t("arrive") },
+            ]}
+          />
+        </div>
+        {date ? <DateField label={t("date")} value={date} onChange={setDate} /> : <div className="h-[78px]" aria-hidden />}
+        <TimeField label={mode === "arrive" ? t("arriveTime") : t("time")} value={time} onChange={setTime} />
+        <PaxStepper label={t("pax")} value={pax} onChange={setPax} />
       </div>
+
+      <Button type="submit" size="lg" disabled={pending} className="mt-4 w-full text-lg">
+        <Search aria-hidden />
+        {pending ? t("searching") : t("submit")}
+      </Button>
       {error && (
-        <p role="alert" className="mt-3 text-sm font-medium text-bad">
+        <p role="alert" className="mt-3 rounded-xl bg-bad-soft px-3 py-2 text-sm font-medium text-bad">
           {error}
         </p>
       )}

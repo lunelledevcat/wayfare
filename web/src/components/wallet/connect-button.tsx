@@ -14,7 +14,7 @@ export function WalletButton() {
         if (!ready) return <span className="inline-block h-10 w-32" aria-hidden />;
         if (!account)
           return (
-            <button type="button" onClick={openConnectModal} className="inline-flex h-10 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-white shadow-soft hover:bg-primary-strong">
+            <button type="button" onClick={openConnectModal} className="press inline-flex h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-on-primary shadow-soft hover:bg-primary-strong">
               <Wallet className="size-4" aria-hidden /> {t("connect")}
             </button>
           );

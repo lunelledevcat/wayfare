@@ -17,5 +17,21 @@
   "needTo": "Choose your destination from the suggestions.",
   "same": "Start and destination are the same.",
   "osm": "OpenStreetMap",
-  "gtfs": "GTFS station"
+  "gtfs": "GTFS station",
+  "arriveTime": "Arrive by",
+  "paxDec": "Fewer passengers",
+  "paxInc": "More passengers",
+  "chooseTime": "Choose a time",
+  "timePicker": {
+    "now": "Now",
+    "plus30": "+30 min",
+    "plus60": "+1 h",
+    "invalid": "That time isn't valid. Type 24-hour time, e.g. 0930 or 18:45.",
+    "hint": "Type a 24-hour time such as 0930. Use the up/down arrows to change by 5 minutes."
+  },
+  "datePicker": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "friday": "This Friday"
+  }
 }

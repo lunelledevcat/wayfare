@@ -5,6 +5,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
 import { PrefsProvider } from "@/components/prefs";
+import { MotionProvider } from "@/components/ui/motion";
 import { loadMessages } from "@/i18n/request";
 import { routing, type Locale } from "@/i18n/routing";
 
@@ -48,7 +49,9 @@ export default async function LocaleLayout({ children, params }: { children: Rea
     <html lang={locale} className={`${thai.variable} ${cjk}`}>
       <body className="min-h-dvh antialiased">
         <NextIntlClientProvider locale={locale} messages={messages} timeZone="Asia/Bangkok">
-          <PrefsProvider>{children}</PrefsProvider>
+          <PrefsProvider>
+            <MotionProvider>{children}</MotionProvider>
+          </PrefsProvider>
         </NextIntlClientProvider>
       </body>
     </html>

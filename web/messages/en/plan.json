@@ -71,7 +71,21 @@
     "maxWalkAny": "Any",
     "bigLuggage": "I have big luggage",
     "bigLuggageHint": "Removes motorbikes and small boats, counts walking as slower",
-    "apply": "Show {n} trips"
+    "apply": "Show {n} trips",
+    "windowName": {
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening",
+      "night": "Night"
+    },
+    "windowRange": {
+      "morning": "05:00–12:00",
+      "afternoon": "12:00–17:00",
+      "evening": "17:00–21:00",
+      "night": "21:00–05:00"
+    },
+    "transfersShort": "{n, plural, =0 {Direct} other {≤ #}}",
+    "minShort": "≤ {n} min"
   },
   "weather": {
     "title": "Weather on your travel day",
@@ -121,5 +135,6 @@
     "refundPartial": "Free if the operator cancels; {fee}% fee if you cancel up to {h} h before"
   },
   "errorTitle": "We couldn't plan this trip",
-  "newSearch": "New search"
+  "newSearch": "New search",
+  "compareDismiss": "Dismiss"
 }
