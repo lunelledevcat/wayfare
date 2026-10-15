@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "functions": {
+    "src/app/api/plan/route.ts": { "maxDuration": 30 },
+    "src/app/api/quote/route.ts": { "maxDuration": 30 },
+    "src/app/api/voice/route.ts": { "maxDuration": 30 },
+    "src/app/[locale]/plan/page.tsx": { "maxDuration": 30 },
+    "src/app/[locale]/trip/[id]/page.tsx": { "maxDuration": 30 }
+  }
+}

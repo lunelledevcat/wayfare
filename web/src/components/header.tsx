@@ -2,6 +2,7 @@ import { Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Suspense, type ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
+import { AuthMenu } from "./auth-menu";
 import { LocaleSwitcher } from "./locale-switcher";
 import { Logo } from "./logo";
 import { MegaMenu } from "./mega-menu";
@@ -28,6 +29,7 @@ export function Header({ wallet }: { wallet?: ReactNode }) {
           <Suspense fallback={<div className="h-10 w-24" />}>
             <LocaleSwitcher className="hidden sm:inline-flex" />
           </Suspense>
+          <AuthMenu />
           {wallet ?? (
             <Link
               href="/app"

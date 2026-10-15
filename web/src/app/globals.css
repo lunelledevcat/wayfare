@@ -123,7 +123,8 @@
   --color-subtle: var(--wf-subtle);
   --color-border: var(--wf-border);
   --color-ring: var(--wf-ring);
-  --font-sans: var(--font-thai), var(--font-cjk), ui-sans-serif, system-ui, sans-serif;
+  /* Thai/Latin from IBM Plex Sans Thai; Chinese and Japanese use the system's CJK fonts */
+  --font-sans: var(--font-thai), ui-sans-serif, system-ui, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
   --radius-2xl: 1rem;
   --radius-3xl: 1.25rem;
   --shadow-soft: var(--wf-shadow);

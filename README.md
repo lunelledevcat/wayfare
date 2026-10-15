@@ -114,6 +114,12 @@ Wallet for local testing (Hardhat public test keys — **never use on a real net
 
 Tests: `npm test` (contracts + web), `npm run lint`, `npm run check:i18n -w web`, `npm run build`.
 
+## Google login + Cloudflare D1
+
+- **Login:** next-auth 4 (Auth.js, App Router) with the Google provider at `/api/auth/[...nextauth]`; `/[locale]/login` has the "Login with Google" button, the navbar shows the account menu. `middleware.ts` guards `/[locale]/app/**` (trips, tickets, profile) and sends guests to `/login?callbackUrl=…`. The guard only turns on when `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` and `NEXTAUTH_SECRET` are set, so a fresh clone still runs as a guest.
+- **Users in Cloudflare D1:** on every successful login the `signIn` event upserts the user into the `users` table (`id, email, name, image, google_id, created_at, last_login_at`) through the D1 **REST API** (`web/src/lib/cloudflare-d1.ts`, because the app runs on Vercel, not Workers). A D1 outage is logged and never blocks sign-in. Create the table once with `npm run d1:migrate` (or `web/cloudflare/schema.sql`).
+- **Google Cloud Console:** OAuth client (Web application) with redirect URIs `http://localhost:3000/api/auth/callback/google` and `https://<your-domain>/api/auth/callback/google`.
+
 ## Deploy to Fuji + Vercel
 
 ```bash
@@ -121,9 +127,21 @@ Tests: `npm test` (contracts + web), `npm run lint`, `npm run check:i18n -w web`
 npm run deploy:fuji -w contracts      # deploy, register operators, verify, write addresses
 npm run seed:fuji -w contracts        # sample trips for live stats
 git add web/src/lib/contracts.generated.ts contracts/deployments && git commit -m "chore: Fuji deployment"
-# Vercel: root directory = web, env vars = QUOTE_SIGNER_PRIVATE_KEY, NEXT_PUBLIC_CHAIN=fuji,
-# optional DUFFEL_TEST_TOKEN, OSRM_URL, NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID
+# Vercel: Root Directory = web (npm workspaces install from the repo root automatically; web/vercel.json sets function timeouts)
 ```
+
+Environment variables to set in Vercel → Settings → Environment Variables (Production):
+
+| Variable | Needed for |
+|---|---|
+| `NEXT_PUBLIC_CHAIN` = `fuji` | chain selection (needs the committed Fuji deployment, otherwise booking is disabled) |
+| `QUOTE_SIGNER_PRIVATE_KEY` | signing booking quotes (server only) |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Google login |
+| `NEXTAUTH_SECRET` | `openssl rand -base64 32` |
+| `NEXTAUTH_URL` | `https://<your-domain>` |
+| `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `CLOUDFLARE_API_TOKEN` | storing users in D1 (token needs *Account → D1 → Edit*) |
+| `ELEVENLABS_API_KEY` *(optional)* | voice briefings |
+| `DUFFEL_TEST_TOKEN`, `OSRM_URL`, `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` *(optional)* | live flights, own routing server, mobile wallets |
 
 ## Screenshots
 

@@ -65,5 +65,16 @@
   "avalanche": {
     "built": "Built on Avalanche C-Chain",
     "contract": "Snowtrace で予約コントラクトを見る"
+  },
+  "auth": {
+    "title": "ログイン",
+    "subtitle": "Google アカウントでログインして、旅程とチケットを確認しましょう。",
+    "google": "Google でログイン",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "account": "{name} のアカウント",
+    "error": "ログインできませんでした。もう一度お試しください。",
+    "notConfigured": "このサーバーでは Google ログインがまだ設定されていません。",
+    "privacy": "保存するのは Google のメール、名前、プロフィール画像のみです。"
   }
 }

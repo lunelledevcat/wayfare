@@ -65,5 +65,16 @@
   "avalanche": {
     "built": "Built on Avalanche C-Chain",
     "contract": "在 Snowtrace 查看预订合约"
+  },
+  "auth": {
+    "title": "登录",
+    "subtitle": "使用 Google 账号登录，查看您的行程和车票。",
+    "google": "使用 Google 登录",
+    "login": "登录",
+    "logout": "退出登录",
+    "account": "{name} 的账号",
+    "error": "登录失败，请重试。",
+    "notConfigured": "此服务器尚未配置 Google 登录。",
+    "privacy": "我们仅保存您的 Google 邮箱、姓名和头像。"
   }
 }

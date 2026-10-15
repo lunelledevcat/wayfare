@@ -1,17 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans_Thai, Noto_Sans_JP, Noto_Sans_SC } from "next/font/google";
+import { IBM_Plex_Sans_Thai } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { ReactNode } from "react";
+import { AuthProvider } from "@/components/auth-provider";
 import { PrefsProvider } from "@/components/prefs";
 import { MotionProvider } from "@/components/ui/motion";
 import { loadMessages } from "@/i18n/request";
 import { routing, type Locale } from "@/i18n/routing";
 
 const thai = IBM_Plex_Sans_Thai({ subsets: ["thai", "latin"], weight: ["400", "500", "600", "700"], variable: "--font-thai", display: "swap" });
-const sc = Noto_Sans_SC({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-cjk", display: "swap", preload: false });
-const jp = Noto_Sans_JP({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-cjk", display: "swap", preload: false });
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -44,14 +43,15 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   setRequestLocale(locale);
   // only the namespaces every page needs on the client; pages add their own
   const messages = await loadMessages(locale as Locale, ["common", "mode", "errors"]);
-  const cjk = locale === "zh" ? sc.variable : locale === "ja" ? jp.variable : "";
   return (
-    <html lang={locale} className={`${thai.variable} ${cjk}`}>
+    <html lang={locale} className={thai.variable}>
       <body className="min-h-dvh antialiased">
         <NextIntlClientProvider locale={locale} messages={messages} timeZone="Asia/Bangkok">
-          <PrefsProvider>
-            <MotionProvider>{children}</MotionProvider>
-          </PrefsProvider>
+          <AuthProvider>
+            <PrefsProvider>
+              <MotionProvider>{children}</MotionProvider>
+            </PrefsProvider>
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>
