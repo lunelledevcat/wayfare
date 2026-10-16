@@ -73,6 +73,7 @@ export const co2PerKm: Record<string, number> = {
   grab: 0.15,
   win: 0.07,
   car: 0.17,
+  rental: 0.17,
 };
 
 /** Demo operators registered on chain (fictional names). */

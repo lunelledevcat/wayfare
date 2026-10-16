@@ -1,3 +1,5 @@
+import type { CarOptions } from "../car";
+
 /** Shared types for the Wayfare trip planner (server + client). */
 
 export type LocalizedText = { th: string; en: string; zh?: string; ja?: string };
@@ -21,7 +23,8 @@ export type Mode =
   | "taxi"
   | "grab"
   | "win"
-  | "car";
+  | "car"
+  | "rental";
 
 /** Time categories every minute of a trip is assigned to. */
 export type TimeKind = "walk" | "wait" | "ride" | "transfer" | "buffer";
@@ -170,6 +173,8 @@ export interface Trip {
 }
 
 export interface PlanQuery {
+  /** own-car and rental-car options (see lib/car.ts) */
+  car: CarOptions;
   from: string;
   to: string;
   /** YYYY-MM-DD in Asia/Bangkok */

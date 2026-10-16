@@ -3,6 +3,7 @@
  * door-to-door candidates, apply weather rules, pair alternatives, Pareto-filter
  * and attach the 7-day price calendar.
  */
+import { normalizeCar, type CarOptions } from "../car";
 import { buffers } from "../config";
 import { haversineKm } from "../geo";
 import { isHolidayPeriod } from "../holidays";
@@ -15,10 +16,11 @@ import { OsrmRoadProvider } from "../providers/road";
 import { GtfsTransitProvider } from "../providers/transit";
 import type { FlightOffer, FlightProvider, IntercityService, RoadProvider, TransitProvider, WeatherProvider } from "../providers/types";
 import { OpenMeteoWeatherProvider, weatherAt } from "../providers/weather";
+import { RENTAL_PICKUP_MIN } from "../rental";
 import { addDays, bkkHHMM, bkkTime, HOUR, MIN, todayBkk } from "../time";
 import { routeCity, stopsNear, WALK_M_PER_MIN, type AccessPoint } from "./city-router";
 import { MODE_LABEL } from "./labels";
-import { flightLeg, intercityLeg, roadLeg, roadLegArriving, stopRef, transitLegs, waitLeg, walkLeg, weatherFor, type LegContext } from "./legs";
+import { flightLeg, intercityLeg, rentalPickupLeg, roadLeg, roadLegArriving, stopRef, transitLegs, waitLeg, walkLeg, weatherFor, type LegContext } from "./legs";
 import { DEFAULT_PREFS, score } from "./scoring";
 import { buildTrip } from "./trip";
 import type { HourlyWeather, Leg, Mode, PlaceRef, PlanQuery, PlanResult, PriceDay, Source, Trip } from "./types";
@@ -59,14 +61,17 @@ const tripStore = new TtlCache<{ trip: Trip; query: PlanQuery }>(60 * 60_000, 30
 const RAIL: GtfsMode[] = ["bts", "mrt", "arl", "red"];
 const ALL_CITY: GtfsMode[] = ["bts", "mrt", "arl", "red", "bus", "boat"];
 
-export function normalizeQuery(q: Partial<PlanQuery>): PlanQuery {
+/** Query as received from URLs / API bodies: everything optional, car options partial. */
+export type PlanInput = Partial<Omit<PlanQuery, "car">> & { car?: Partial<CarOptions> };
+
+export function normalizeQuery(q: PlanInput): PlanQuery {
   const date = /^\d{4}-\d{2}-\d{2}$/.test(q.date ?? "") ? q.date! : todayBkk();
   const time = /^\d{2}:\d{2}$/.test(q.time ?? "") ? q.time! : "08:00";
   const pax = Math.min(9, Math.max(1, Math.round(Number(q.pax) || 1)));
-  return { from: String(q.from ?? ""), to: String(q.to ?? ""), date, time, mode: q.mode === "arrive" ? "arrive" : "depart", pax };
+  return { from: String(q.from ?? ""), to: String(q.to ?? ""), date, time, mode: q.mode === "arrive" ? "arrive" : "depart", pax, car: normalizeCar(q.car) };
 }
 
-export async function plan(input: Partial<PlanQuery>, d: PlanDeps = defaultDeps()): Promise<PlanResult> {
+export async function plan(input: PlanInput, d: PlanDeps = defaultDeps()): Promise<PlanResult> {
   const q = normalizeQuery(input);
   const key = JSON.stringify(q);
   let cache = planCaches.get(d);
@@ -77,7 +82,7 @@ export async function plan(input: Partial<PlanQuery>, d: PlanDeps = defaultDeps(
 }
 
 /** Look up a trip produced by an earlier plan; recompute the plan if this instance has not seen it. */
-export async function findTrip(id: string, q?: Partial<PlanQuery>, d: PlanDeps = defaultDeps()) {
+export async function findTrip(id: string, q?: PlanInput, d: PlanDeps = defaultDeps()) {
   const hit = tripStore.get(id);
   if (hit) return hit;
   if (!q) return null;
@@ -111,10 +116,10 @@ async function computePlan(q: PlanQuery, d: PlanDeps): Promise<PlanResult> {
     d.weather.hourly(to, q.mode === "depart" ? t - 2 * HOUR : t - span, q.mode === "depart" ? t + span : t + 2 * HOUR),
   ]);
   const net = d.transit.network();
-  const ctx: LegContext = { pax: q.pax, net, road: d.road, wx: [wxFrom, wxTo] };
+  const ctx: LegContext = { pax: q.pax, net, road: d.road, wx: [wxFrom, wxTo], car: q.car };
   const today = d.today ?? todayBkk();
 
-  let trips = intercity ? await intercityTrips(ctx, d, q, from, to, fromCity!, toCity!, t, today) : await cityTrips(ctx, q, from, to, t, !!fromCity?.metro);
+  let trips = intercity ? await intercityTrips(ctx, d, q, from, to, fromCity!, toCity!, t, today) : await cityTrips(ctx, q, from, to, t, !!fromCity?.metro, fromCity?.id);
 
   trips = trips.filter((tr) => tr.legs.filter((l) => l.kind === "ride").length <= 5);
   if (q.mode === "depart") trips = trips.filter((tr) => tr.depart >= t - MIN);
@@ -199,7 +204,17 @@ async function arriveBy(build: (dep: number) => Promise<Trip | null>, deadline: 
   return best;
 }
 
-async function cityTrips(ctx: LegContext, q: PlanQuery, from: PlaceRef, to: PlaceRef, t: number, metro: boolean): Promise<Trip[]> {
+/** A drive in a hire car: collect it (20 min, day rate), then drive. Rent is charged at the pickup city's rate. */
+async function rentalDrive(ctx: LegContext, q: PlanQuery, from: PlaceRef, to: PlaceRef, t: number, pickupCityId: string | undefined): Promise<Leg[]> {
+  if (q.mode === "depart") {
+    const pickup = rentalPickupLeg(ctx, from, t, pickupCityId);
+    return [pickup, await roadLeg(ctx, "rental", from, to, pickup.arrive)];
+  }
+  const drive = await roadLegArriving(ctx, "rental", from, to, t);
+  return [rentalPickupLeg(ctx, from, drive.depart - RENTAL_PICKUP_MIN * MIN, pickupCityId), drive];
+}
+
+async function cityTrips(ctx: LegContext, q: PlanQuery, from: PlaceRef, to: PlaceRef, t: number, metro: boolean, fromCityId: string | undefined): Promise<Trip[]> {
   const km = haversineKm(from, to);
   const out: Trip[] = [];
   const direct: Mode[] = ["taxi", "grab"];
@@ -213,6 +228,14 @@ async function cityTrips(ctx: LegContext, q: PlanQuery, from: PlaceRef, to: Plac
     tasks.push(
       (q.mode === "depart" ? roadLeg(ctx, m, from, to, t) : roadLegArriving(ctx, m, from, to, t)).then((leg) => buildTrip([leg], "city", "direct")),
     );
+  }
+  // own car: drive yourself (not worth suggesting for a very short hop)
+  if (q.car.own && km > 1) {
+    tasks.push((q.mode === "depart" ? roadLeg(ctx, "car", from, to, t) : roadLegArriving(ctx, "car", from, to, t)).then((leg) => buildTrip([leg], "city", "direct")));
+  }
+  // provincial cities without a metro: a hire car is a real option for longer hops (never offered in Bangkok)
+  if (!metro && km >= 8) {
+    tasks.push(rentalDrive(ctx, q, from, to, t, fromCityId).then((legs) => buildTrip(legs, "city", "direct")));
   }
   if (ctx.net && (metro || stopsNear(ctx.net, from, 1.5, new Set(ALL_CITY)).length > 0)) {
     const variants: TransitVariant[] = [
@@ -343,6 +366,9 @@ async function intercityTrips(ctx: LegContext, d: PlanDeps, q: PlanQuery, from: 
       const egressOpts: Leg[][] = [];
       const pickupAirport = c.kind === "flight";
       egressOpts.push([await roadLeg(ctx, toMetro ? "taxi" : "grab", hubOut, to, afterArrive, pickupAirport)]);
+      // collect a hire car at the arrival airport / station and drive to the destination
+      const pickup = rentalPickupLeg(ctx, hubOut, afterArrive, toCity.id);
+      egressOpts.push([pickup, await roadLeg(ctx, "rental", hubOut, to, pickup.arrive)]);
       if (toMetro) {
         const slot = Math.round(afterArrive / (30 * MIN));
         const base = await ref(transitEgress, `${hubOut.id}|${slot}`, () => transitTrip(ctx, { modes: ALL_CITY, access: "walk" }, hubOut, to, slot * 30 * MIN));
@@ -365,12 +391,14 @@ async function intercityTrips(ctx: LegContext, d: PlanDeps, q: PlanQuery, from: 
 
   // door-to-door by road
   const km = haversineKm(from, to);
-  const roadModes: Mode[] = ["car"];
-  if (km <= 250) roadModes.push("taxi");
-  for (const m of roadModes) {
+  const direct: Mode[] = km <= 250 ? ["taxi"] : [];
+  if (q.car.own) direct.push("car");
+  for (const m of direct) {
     const leg = q.mode === "depart" ? await roadLeg(ctx, m, from, to, t) : await roadLegArriving(ctx, m, from, to, t);
     results.push(buildTrip([leg], "intercity", "direct"));
   }
+  // no car of your own: the door-to-door drive is a hire car collected in the origin city
+  if (!q.car.own) results.push(buildTrip(await rentalDrive(ctx, q, from, to, t, fromCity.id), "intercity", "direct"));
   return results;
 }
 
@@ -454,10 +482,17 @@ function paretoFilter(trips: Trip[]): Trip[] {
     list.slice(0, 2).forEach((t) => keep.add(t.id));
   }
   for (const t of trips) if (keep.has(t.id)) for (const w of t.warnings) if (w.alternative?.tripId) keep.add(w.alternative.tripId);
-  return trips
-    .filter((t) => keep.has(t.id))
-    .sort((a, b) => score(a, "value", DEFAULT_PREFS) - score(b, "value", DEFAULT_PREFS))
-    .slice(0, 30);
+  // Self-drive trips usually lose to a taxi on price and would be cut; always keep the best of each kind:
+  // own car, hire car door to door, and a hire car collected at the destination.
+  const value = (t: Trip) => score(t, "value", DEFAULT_PREFS);
+  const hasRental = (t: Trip) => t.legs.some((l) => l.mode === "rental");
+  const groups = [(t: Trip) => t.mainMode === "car", (t: Trip) => hasRental(t) && t.mainMode === "rental", (t: Trip) => hasRental(t) && t.mainMode !== "rental"];
+  const forced = groups.map((g) => trips.filter(g).sort((a, b) => value(a) - value(b))[0]).filter((t): t is Trip => !!t);
+  for (const t of forced) keep.add(t.id);
+  const ranked = trips.filter((t) => keep.has(t.id)).sort((a, b) => value(a) - value(b));
+  const out = ranked.slice(0, 30);
+  for (const t of forced) if (!out.includes(t)) out.push(t);
+  return out;
 }
 
 function collectSources(trips: Trip[], wx: HourlyWeather[]): Source[] {

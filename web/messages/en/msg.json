@@ -12,11 +12,15 @@
     "taxi": "Take a metered taxi to {to} ({min} min, {km} km)",
     "grab": "Book a Grab car to {to} ({min} min, {km} km)",
     "win": "Ride a motorbike taxi (win) to {to} ({min} min, {km} km)",
-    "car": "Drive to {to} ({min} min, {km} km)",
+    "car": "Drive your own car to {to} ({min} min, {km} km) · fuel {fuel} + tolls {toll} + parking {parking}",
     "ride": "Take the {mode} {line} towards {headsign}, {stops} stops, get off at {to} ({min} min, {price})",
     "flight": "Fly {carrier} {flightNo} from {from} to {to} ({min} min)",
     "train": "Board {name} ({cls}) from {from} to {to} ({min} min)",
-    "coach": "Board the {mode} {name} ({cls}) from {from} to {to} ({min} min)"
+    "coach": "Board the {mode} {name} ({cls}) from {from} to {to} ({min} min)",
+    "carNoToll": "Drive your own car to {to} ({min} min, {km} km) · fuel {fuel} + parking {parking}",
+    "rental": "Drive the rental car to {to} ({min} min, {km} km) · fuel {fuel} + tolls {toll} + parking {parking}",
+    "rentalNoToll": "Drive the rental car to {to} ({min} min, {km} km) · fuel {fuel} + parking {parking}",
+    "rentalPickup": "Collect the rental car at {place} and sign the contract ({min} min) · rent {rent} ({days, plural, one {# day} other {# days}})"
   },
   "warn": {
     "winRain": "Motorbike taxi is the cheapest ({price}) but there is a {prob}% chance of rain at {time} — not recommended.",

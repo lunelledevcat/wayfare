@@ -20,5 +20,6 @@
     "ride": "乘车",
     "transfer": "换乘",
     "buffer": "预留"
-  }
+  },
+  "rental": "租车"
 }

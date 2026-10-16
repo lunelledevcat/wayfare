@@ -1,0 +1,21 @@
+{
+  "note": "Typical daily rate of a small saloon/compact hire car (self-drive, basic insurance), by city. Rough market ranges for the demo — ESTIMATES, NOT A QUOTATION from any rental company. Airport and one-way fees are not included.",
+  "label": "ราคาประมาณ ไม่ใช่ใบเสนอราคา",
+  "checkedAt": "2026-10-16",
+  "pickupMinutes": 20,
+  "default": { "daily": 1000, "low": 850, "high": 1500, "deposit": 3000 },
+  "cities": {
+    "bangkok": { "daily": 1000, "low": 850, "high": 1500, "deposit": 3000 },
+    "chiangmai": { "daily": 1000, "low": 850, "high": 1500, "deposit": 3000 },
+    "chiangrai": { "daily": 950, "low": 850, "high": 1400, "deposit": 3000 },
+    "pattaya": { "daily": 1150, "low": 900, "high": 1650, "deposit": 3500 },
+    "huahin": { "daily": 1150, "low": 900, "high": 1650, "deposit": 3500 },
+    "phuket": { "daily": 1500, "low": 1100, "high": 1800, "deposit": 5000 },
+    "krabi": { "daily": 1400, "low": 1000, "high": 1800, "deposit": 5000 },
+    "hatyai": { "daily": 1000, "low": 850, "high": 1450, "deposit": 3000 },
+    "khonkaen": { "daily": 900, "low": 850, "high": 1300, "deposit": 3000 },
+    "udonthani": { "daily": 900, "low": 850, "high": 1300, "deposit": 3000 },
+    "nongkhai": { "daily": 900, "low": 850, "high": 1250, "deposit": 3000 },
+    "ubon": { "daily": 900, "low": 850, "high": 1300, "deposit": 3000 }
+  }
+}

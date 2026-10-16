@@ -11,6 +11,7 @@
     "gtfs": "Public transport (GTFS)",
     "flights": "Intercity",
     "road": "Roads and walking",
+    "rental": "Rental cars",
     "weather": "Weather",
     "pricing": "How prices work",
     "scoring": "How we rank",
@@ -34,20 +35,66 @@
     "atBuild": "Imported {date}"
   },
   "sources": {
-    "gtfs": { "name": "OTP Thailand GTFS (Mobility Database mdb-1831)", "use": "Stations, routes, timetables and fares for skytrain, bus, boat and rail" },
-    "fares": { "name": "Published fare tables of each line", "use": "Station-count fares when GTFS has no price" },
-    "duffel": { "name": "Duffel API (test mode)", "use": "Domestic flights when a token is configured" },
-    "flights": { "name": "Domestic flight schedule (fallback)", "use": "Flight times and fare bands when Duffel is unavailable" },
-    "rail": { "name": "State Railway of Thailand timetable and fares", "use": "Long-distance intercity trains" },
-    "bus": { "name": "Coach and van timetables posted at bus terminals", "use": "Intercity coaches and vans" },
-    "osrm": { "name": "OSRM (OpenStreetMap road network)", "use": "Road distance and time for taxi, Grab, motorbike taxi, car and walking" },
-    "roadFares": { "name": "Taxi meter rates, motorbike taxi fare guide and Grab estimate", "use": "Road fares" },
-    "meteo": { "name": "Open-Meteo Forecast API", "use": "Hourly rain chance, rainfall, temperature and wind, up to 16 days ahead" },
-    "aq": { "name": "Open-Meteo Air Quality API", "use": "Hourly PM2.5" },
-    "climate": { "name": "Thai Meteorological Department climate normals 1991–2020", "use": "Seasonal averages when no forecast exists yet" },
-    "nominatim": { "name": "Nominatim (OpenStreetMap)", "use": "General address search" },
-    "places": { "name": "Curated places (coordinates from OpenStreetMap)", "use": "Key districts, airports and bus terminals" },
-    "holidays": { "name": "Thai public holidays 2026", "use": "Flight price adjustment over long weekends" }
+    "gtfs": {
+      "name": "OTP Thailand GTFS (Mobility Database mdb-1831)",
+      "use": "Stations, routes, timetables and fares for skytrain, bus, boat and rail"
+    },
+    "fares": {
+      "name": "Published fare tables of each line",
+      "use": "Station-count fares when GTFS has no price"
+    },
+    "duffel": {
+      "name": "Duffel API (test mode)",
+      "use": "Domestic flights when a token is configured"
+    },
+    "flights": {
+      "name": "Domestic flight schedule (fallback)",
+      "use": "Flight times and fare bands when Duffel is unavailable"
+    },
+    "rail": {
+      "name": "State Railway of Thailand timetable and fares",
+      "use": "Long-distance intercity trains"
+    },
+    "bus": {
+      "name": "Coach and van timetables posted at bus terminals",
+      "use": "Intercity coaches and vans"
+    },
+    "osrm": {
+      "name": "OSRM (OpenStreetMap road network)",
+      "use": "Road distance and time for taxi, Grab, motorbike taxi, car and walking"
+    },
+    "roadFares": {
+      "name": "Taxi meter rates, motorbike taxi fare guide and Grab estimate",
+      "use": "Road fares"
+    },
+    "meteo": {
+      "name": "Open-Meteo Forecast API",
+      "use": "Hourly rain chance, rainfall, temperature and wind, up to 16 days ahead"
+    },
+    "aq": {
+      "name": "Open-Meteo Air Quality API",
+      "use": "Hourly PM2.5"
+    },
+    "climate": {
+      "name": "Thai Meteorological Department climate normals 1991–2020",
+      "use": "Seasonal averages when no forecast exists yet"
+    },
+    "nominatim": {
+      "name": "Nominatim (OpenStreetMap)",
+      "use": "General address search"
+    },
+    "places": {
+      "name": "Curated places (coordinates from OpenStreetMap)",
+      "use": "Key districts, airports and bus terminals"
+    },
+    "holidays": {
+      "name": "Thai public holidays 2026",
+      "use": "Flight price adjustment over long weekends"
+    },
+    "rental": {
+      "name": "Estimated daily car-rental rates",
+      "use": "Rental-car options (estimates, not quotations)"
+    }
   },
   "gtfs": {
     "title": "Skytrain, bus, boat and rail (GTFS)",
@@ -144,18 +191,30 @@
     "win": "First {km} km {fare} · km {km}–5 add {to5} per km · over 5 km add {over5} per km · up to {max} km",
     "grabTitle": "Grab (estimated from distance and time, not an official price)",
     "grab": "{base} + {perKm}/km + {perMin}/min + booking fee {fee} · rush hour × {peak}",
-    "carTitle": "Private car",
-    "car": "Fuel {perKm}/km + tolls {toll} per 100 km + parking {parking}",
+    "carTitle": "Private car (editable)",
+    "car": "Fuel = distance ÷ km per litre × fuel price (defaults {kmPerL} km/L, {fuel}/L) + tolls {toll} per 100 km when the trip is over {tollKm} km and expressways are on + parking (default {parking}). Every value can be changed in the “Car and rental costs” panel and the cost is split between passengers (one car seats 5). The private car only appears when “I have a car I can drive” is switched on.",
     "checked": "Rates last checked {date}",
     "holidaysTitle": "Holidays used for pricing (2026)"
   },
   "scoring": {
     "title": "How we rank by what matters to you",
     "body": "We generate every feasible route, then keep only trips that no other trip beats on every count (Pareto) across price, total time, transfers and walking. They are then sorted by your choice. Trips marked “not recommended” because of the weather always come last. Changing your choice re-ranks instantly on your device.",
-    "fastest": { "title": "Fastest", "body": "Shortest door-to-door time; ties go to the cheaper trip." },
-    "cheapest": { "title": "Cheapest", "body": "Lowest whole-trip cost × passengers; ties go to the faster trip." },
-    "value": { "title": "Best value", "body": "Total price + time × value of time (default {rate}/h, adjustable in your profile) + weather risk × {risk} + transfers × {transfer} (per passenger)." },
-    "comfort": { "title": "Most comfortable", "body": "Comfort score 0–100: points off for transfers, walking, standing, no air-con, motorbike taxis and getting rained on; points added for sleeper trains." },
+    "fastest": {
+      "title": "Fastest",
+      "body": "Shortest door-to-door time; ties go to the cheaper trip."
+    },
+    "cheapest": {
+      "title": "Cheapest",
+      "body": "Lowest whole-trip cost × passengers; ties go to the faster trip."
+    },
+    "value": {
+      "title": "Best value",
+      "body": "Total price + time × value of time (default {rate}/h, adjustable in your profile) + weather risk × {risk} + transfers × {transfer} (per passenger)."
+    },
+    "comfort": {
+      "title": "Most comfortable",
+      "body": "Comfort score 0–100: points off for transfers, walking, standing, no air-con, motorbike taxis and getting rained on; points added for sleeper trains."
+    },
     "filters": "Extra filters: avoid motorbike taxi · walk at most X min · big luggage (no motorbike taxi or boat, walking time × 1.3) · budget up to ฿X · passengers"
   },
   "planner": {
@@ -187,5 +246,15 @@
     "hours": "{h} h before",
     "noShow": "If the passenger does not board within 2 hours of departure, the operator receives that leg's fare.",
     "operatorCancel": "Operator cancels the service: full refund, automatically."
+  },
+  "rental": {
+    "title": "Rental cars",
+    "body": "A hire car is offered (1) after a flight, train or coach, collected at the arrival airport or station, (2) as the door-to-door intercity drive when you have no car of your own, and (3) inside provincial cities without a metro for trips of 8 km or more (never in Bangkok). A {minutes}-minute pickup and paperwork step comes before the drive.",
+    "disclaimer": "All rental prices are estimates, not quotations, and do not come from any particular rental company.",
+    "city": "City",
+    "daily": "Per day",
+    "range": "Range per day",
+    "deposit": "Typical deposit",
+    "formula": "Total = day rate × days + fuel + tolls + parking (split between passengers). One-way drop-off fees and the refundable deposit are not included."
   }
 }

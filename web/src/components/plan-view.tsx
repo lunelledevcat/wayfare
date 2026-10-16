@@ -4,6 +4,7 @@ import { Map as MapIcon, List, SlidersHorizontal, Sparkles, X } from "lucide-rea
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { carToParams } from "@/lib/car";
 import { pick } from "@/lib/format";
 import { MODE_LABEL } from "@/lib/planner/labels";
 import { applyFilters, bestByPriority, DEFAULT_PREFS, rankTrips, reasonFor } from "@/lib/planner/scoring";
@@ -92,7 +93,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
   const allModes = useMemo(() => [...new Set(result.trips.flatMap((tr) => tr.modes))].filter((m) => m !== "walk"), [result.trips]);
   const filteredCount = ranked.length;
 
-  const tripHref = (tr: Trip) => `/trip/${tr.id}?${new URLSearchParams({ from: q.from, to: q.to, date: q.date, time: q.time, mode: q.mode, pax: String(q.pax), priority: prefs.priority })}`;
+  const tripHref = (tr: Trip) => `/trip/${tr.id}?${new URLSearchParams({ from: q.from, to: q.to, date: q.date, time: q.time, mode: q.mode, pax: String(q.pax), ...carToParams(q.car), priority: prefs.priority })}`;
   const goAlternative = (id: string) => {
     setHighlight(id);
     setTab("list");

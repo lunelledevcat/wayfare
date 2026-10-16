@@ -6,6 +6,7 @@ import { TripDetail } from "@/components/trip-detail";
 import { Card } from "@/components/ui/primitives";
 import { WalletButton } from "@/components/wallet/connect-button";
 import { Link } from "@/i18n/navigation";
+import { carFromParams, carToParams } from "@/lib/car";
 import { pick } from "@/lib/format";
 import { findTrip, normalizeQuery } from "@/lib/planner/plan";
 import { resolvePlace } from "@/lib/providers/places";
@@ -24,14 +25,14 @@ export default async function TripPage({ params, searchParams }: { params: Promi
   setRequestLocale(locale);
   const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "trip" });
-  const query = normalizeQuery({ from: one(sp.from), to: one(sp.to), date: one(sp.date), time: one(sp.time), mode: one(sp.mode) === "arrive" ? "arrive" : "depart", pax: Number(one(sp.pax)) || 1 });
+  const query = normalizeQuery({ from: one(sp.from), to: one(sp.to), date: one(sp.date), time: one(sp.time), mode: one(sp.mode) === "arrive" ? "arrive" : "depart", pax: Number(one(sp.pax)) || 1, car: carFromParams(sp) });
   let found: Awaited<ReturnType<typeof findTrip>> = null;
   try {
     found = await findTrip(id, query.from && query.to ? query : undefined);
   } catch (err) {
     console.error("[trip page]", err);
   }
-  const back = `/plan?${new URLSearchParams({ from: query.from, to: query.to, date: query.date, time: query.time, mode: query.mode, pax: String(query.pax), ...(one(sp.priority) ? { priority: one(sp.priority) } : {}) })}`;
+  const back = `/plan?${new URLSearchParams({ from: query.from, to: query.to, date: query.date, time: query.time, mode: query.mode, pax: String(query.pax), ...carToParams(query.car), ...(one(sp.priority) ? { priority: one(sp.priority) } : {}) })}`;
   const from = resolvePlace(query.from);
   const to = resolvePlace(query.to);
 

@@ -36,5 +36,29 @@
     "today": "今日",
     "tomorrow": "明日",
     "friday": "今週の金曜"
+  },
+  "currentLocation": "現在地",
+  "locate": "現在地を使う",
+  "locateError": {
+    "insecure": "現在地は https:// のサイトまたは localhost でのみ使えます。",
+    "denied": "位置情報へのアクセスが拒否されました。ブラウザの設定で許可するか、場所を入力してください。",
+    "unavailable": "現在地を取得できませんでした。GPS と通信を確認してもう一度お試しいただくか、場所を入力してください。"
+  },
+  "car": {
+    "own": "自分の車で行ける",
+    "ownHint": "燃料・通行料・駐車料金つきの自分で運転する選択肢を追加します",
+    "panel": "車とレンタカーの費用",
+    "edited": "変更済み",
+    "kmPerL": "燃費",
+    "unitKmPerL": "km/L",
+    "fuelPrice": "燃料価格",
+    "unitBahtPerL": "฿/L",
+    "parking": "駐車料金",
+    "rentDays": "レンタル日数",
+    "unitDays": "日",
+    "tolls": "高速道路を使う",
+    "tollsHint": "15 km を超える移動は 100 km あたり約 ฿60 の通行料で見積もります",
+    "note": "レンタカー料金は目安であり見積りではありません。1 台の費用は乗客で按分します（5 人乗り）。",
+    "reset": "初期値に戻す"
   }
 }

@@ -1,7 +1,9 @@
 import { keccak256, stringToHex } from "viem";
 import fallbackFares from "../../../data/fares/fallback.json";
+import { carRunningCost, CAR_SEATS, perPassenger, type CarOptions } from "../car";
 import { OPERATOR_BY_MODE, refundPolicy } from "../config";
 import { haversineKm, type LatLon } from "../geo";
+import { RENTAL_PICKUP_MIN, rentalPrice, rentalSource } from "../rental";
 import type { GtfsNetwork, GtfsStop } from "../providers/gtfs";
 import { isRushHour, roadFareSource, roadMinutes, roadPrice } from "../providers/road";
 import type { FlightOffer, IntercityService, RoadProvider } from "../providers/types";
@@ -18,6 +20,7 @@ export interface LegContext {
   net: GtfsNetwork | null;
   road: RoadProvider;
   wx: HourlyWeather[];
+  car: CarOptions;
 }
 
 /** Worst forecast hour during [from, to] at the forecast point nearest to `p`. */
@@ -34,7 +37,7 @@ export function weatherFor(ctx: LegContext, p: LatLon, from: number, to: number)
   return bestKm < 120 ? worstWeather(best, from, to) : undefined;
 }
 
-const VEHICLE_CAPACITY: Partial<Record<Mode, number>> = { taxi: 4, grab: 4, car: 5, win: 1 };
+const VEHICLE_CAPACITY: Partial<Record<Mode, number>> = { taxi: 4, grab: 4, car: CAR_SEATS, rental: CAR_SEATS, win: 1 };
 
 const WALK_SOURCE: Source = { id: "walk", name: "Walking time at 4.8 km/h (straight line × 1.3)", url: "/about-data#road", updatedAt: "2026-10-15", estimate: true };
 
@@ -107,11 +110,19 @@ export async function roadLeg(ctx: LegContext, mode: Mode, a: PlaceRef, b: Place
   const slow = roadSlowdown(mode, wxGuess);
   const minutes = Math.max(2, roadMinutes(mode, route, depart, slow));
   const arrive = depart + minutes * MIN;
-  const vehicle = roadPrice(mode, route.km, minutes, route.minutes, depart, pickupAirport);
+  const isCar = mode === "car" || mode === "rental";
+  const vehicle = isCar ? { amount: 0, low: 0, high: 0, estimate: true } : roadPrice(mode, route.km, minutes, route.minutes, depart, pickupAirport);
   const share = Math.max(1, Math.min(ctx.pax, VEHICLE_CAPACITY[mode] ?? 1));
   // vehicle price is shared by passengers in the same car; each extra car is charged again
   const cars = Math.ceil(ctx.pax / (VEHICLE_CAPACITY[mode] ?? 1));
   const perPax = (x: number) => Math.round((x * cars) / Math.max(ctx.pax, share));
+  // own / rental car: fuel + tolls + parking from the user's settings, split between the passengers
+  let carCost: { fuel: number; toll: number; parking: number } | null = null;
+  if (isCar) {
+    const run = carRunningCost(route.km, ctx.car);
+    carCost = { fuel: Math.round(perPassenger(run.fuel, ctx.pax)), toll: Math.round(perPassenger(run.toll, ctx.pax)), parking: Math.round(perPassenger(run.parking, ctx.pax)) };
+  }
+  const carSum = carCost ? carCost.fuel + carCost.toll + carCost.parking : 0;
   const rush = isRushHour(depart) && mode !== "win";
   const longRoad = route.km > 80;
   return {
@@ -124,7 +135,7 @@ export async function roadLeg(ctx: LegContext, mode: Mode, a: PlaceRef, b: Place
     arrive,
     minutes,
     distanceKm: route.km,
-    price: { amount: perPax(vehicle.amount), low: perPax(vehicle.low), high: perPax(vehicle.high), estimate: true },
+    price: carCost ? { amount: carSum, low: Math.round(carSum * 0.9), high: Math.round(carSum * 1.15), estimate: true } : { amount: perPax(vehicle.amount), low: perPax(vehicle.low), high: perPax(vehicle.high), estimate: true },
     payOnSite: true,
     reliability:
       mode === "win"
@@ -132,14 +143,44 @@ export async function roadLeg(ctx: LegContext, mode: Mode, a: PlaceRef, b: Place
         : rush || slow > 1
           ? { level: "low", plusMinusMin: Math.round(Math.max(10, minutes * 0.35)) }
           : { level: "medium", plusMinusMin: Math.round(Math.max(5, minutes * (longRoad ? 0.12 : 0.2))) },
-    instruction: { key: `step.${mode}`, params: { to: b.name, min: Math.round(minutes), km: Number(route.km.toFixed(1)) } },
+    instruction: carCost
+      ? { key: carCost.toll > 0 ? `step.${mode}` : `step.${mode}NoToll`, params: { to: b.name, min: Math.round(minutes), km: Number(route.km.toFixed(1)), ...carCost } }
+      : { key: `step.${mode}`, params: { to: b.name, min: Math.round(minutes), km: Number(route.km.toFixed(1)) } },
     path: route.path,
-    source: { ...roadFareSource(mode), name: `${route.source.name} · ${roadFareSource(mode).name}`, fallback: route.source.fallback },
+    source: carCost
+      ? { id: `fare-${mode}`, name: `${route.source.name} · fuel, tolls and parking from your settings`, url: "/about-data#road", updatedAt: route.source.updatedAt, estimate: true, fallback: route.source.fallback }
+      : { ...roadFareSource(mode), name: `${route.source.name} · ${roadFareSource(mode).name}`, fallback: route.source.fallback },
     weather: weatherFor(ctx, a, depart, arrive),
     weatherSlowdown: slow,
     outdoor: mode === "win",
     seated: true,
     aircon: mode !== "win",
+  };
+}
+
+/** Collecting a hire car: paperwork and key hand-over (counted as buffer time), paying the day rate. */
+export function rentalPickupLeg(ctx: LegContext, at: PlaceRef, start: number, cityId: string | undefined): Leg {
+  const rent = rentalPrice(cityId, ctx.car.rentDays);
+  const share = (x: number) => Math.round(perPassenger(x, ctx.pax));
+  const end = start + RENTAL_PICKUP_MIN * MIN;
+  return {
+    id: legId("rental-pickup", at, at, start),
+    mode: "rental",
+    kind: "buffer",
+    from: at,
+    to: at,
+    depart: start,
+    arrive: end,
+    minutes: RENTAL_PICKUP_MIN,
+    price: { amount: share(rent.amount), low: share(rent.low), high: share(rent.high), estimate: true },
+    payOnSite: true,
+    reliability: { level: "medium", plusMinusMin: 10 },
+    instruction: { key: "step.rentalPickup", params: { place: at.name, min: RENTAL_PICKUP_MIN, rent: share(rent.amount), days: ctx.car.rentDays } },
+    path: [[at.lat, at.lon]],
+    source: rentalSource,
+    outdoor: false,
+    seated: true,
+    aircon: true,
   };
 }
 

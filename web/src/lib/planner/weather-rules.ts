@@ -12,7 +12,7 @@ export const isWindy = (w?: WeatherAt) => !!w && w.gustKmh >= R.gustBoatKmh;
 export const isHot = (w?: WeatherAt) => !!w && w.feelsC >= R.hotFeelsC;
 export const isSmoggy = (w?: WeatherAt) => !!w && (w.pm25 ?? 0) > R.pm25;
 
-const ROAD_MODES: Mode[] = ["taxi", "grab", "car", "win", "bus", "coach", "van"];
+const ROAD_MODES: Mode[] = ["taxi", "grab", "car", "rental", "win", "bus", "coach", "van"];
 
 /** Multiplier for road travel time under this weather. */
 export function roadSlowdown(mode: Mode, w?: WeatherAt): number {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, LoaderCircle, MapPin, Plane, TrainFront, BusFront } from "lucide-react";
+import { Building2, LoaderCircle, LocateFixed, MapPin, Plane, TrainFront, BusFront } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
 import { pick } from "@/lib/format";
@@ -14,7 +14,23 @@ export interface PlaceValue {
 
 const KIND_ICON = { airport: Plane, station: TrainFront, terminal: BusFront, stop: BusFront, city: Building2, district: MapPin, landmark: MapPin, address: MapPin } as const;
 
-export function PlaceInput({ label, value, onChange, placeholder, autoFocus }: { label: string; value: PlaceValue | null; onChange: (v: PlaceValue | null) => void; placeholder: string; autoFocus?: boolean }) {
+export type LocateError = "insecure" | "denied" | "unavailable";
+
+/** Ask the browser for the current position; resolves to a "g:" place token or rejects with a LocateError. */
+export function locateOnce(label: string): Promise<PlaceValue> {
+  return new Promise((resolve, reject) => {
+    // geolocation only works on https:// or localhost
+    if (typeof window === "undefined" || !window.isSecureContext) return reject("insecure" as LocateError);
+    if (!navigator.geolocation) return reject("unavailable" as LocateError);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => resolve({ token: `g:${pos.coords.latitude.toFixed(5)},${pos.coords.longitude.toFixed(5)},${label}`, label }),
+      (err) => reject((err.code === err.PERMISSION_DENIED ? "denied" : "unavailable") as LocateError),
+      { enableHighAccuracy: true, timeout: 12_000, maximumAge: 60_000 },
+    );
+  });
+}
+
+export function PlaceInput({ label, value, onChange, placeholder, autoFocus, locate }: { label: string; value: PlaceValue | null; onChange: (v: PlaceValue | null) => void; placeholder: string; autoFocus?: boolean; /** show a "use my location" button */ locate?: boolean }) {
   const locale = useLocale();
   const t = useTranslations("search");
   const id = useId();
@@ -24,6 +40,24 @@ export function PlaceInput({ label, value, onChange, placeholder, autoFocus }: {
   const [active, setActive] = useState(0);
   const [loading, setLoading] = useState(false);
   const reqRef = useRef(0);
+  const [locating, setLocating] = useState(false);
+  const [locateError, setLocateError] = useState<LocateError | null>(null);
+
+  const useMyLocation = async () => {
+    setLocating(true);
+    setLocateError(null);
+    try {
+      const here = await locateOnce(t("currentLocation"));
+      setItems([]);
+      setOpen(false);
+      onChange(here);
+      setText(here.label);
+    } catch (e) {
+      setLocateError(e === "insecure" || e === "denied" ? e : "unavailable");
+    } finally {
+      setLocating(false);
+    }
+  };
 
   useEffect(() => setText(value?.label ?? ""), [value?.label]);
 
@@ -105,10 +139,27 @@ export function PlaceInput({ label, value, onChange, placeholder, autoFocus }: {
               choose(items[active]);
             } else if (e.key === "Escape") setOpen(false);
           }}
-          className="h-14 w-full rounded-xl border border-border bg-card pl-10 pr-9 text-base font-medium text-fg placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-ring"
+          className={`h-14 w-full rounded-xl border border-border bg-card pl-10 ${locate ? "pr-14" : "pr-9"} text-base font-medium text-fg placeholder:font-normal placeholder:text-muted focus:border-primary focus:outline-none focus:ring-4 focus:ring-ring`}
         />
-        {loading && <LoaderCircle className="absolute right-3 top-1/2 size-4 -translate-y-1/2 animate-spin text-muted" aria-hidden />}
+        {loading && <LoaderCircle className={`absolute ${locate ? "right-14" : "right-3"} top-1/2 size-4 -translate-y-1/2 animate-spin text-muted`} aria-hidden />}
+        {locate && (
+          <button
+            type="button"
+            onClick={useMyLocation}
+            disabled={locating}
+            aria-label={t("locate")}
+            title={t("locate")}
+            className="press absolute right-1.5 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-lg text-primary hover:bg-primary-soft disabled:opacity-60"
+          >
+            {locating ? <LoaderCircle className="size-5 animate-spin" aria-hidden /> : <LocateFixed className="size-5" aria-hidden />}
+          </button>
+        )}
       </div>
+      {locateError && (
+        <p role="alert" className="mt-1.5 rounded-lg bg-warn-soft px-3 py-2 text-sm font-medium text-warn">
+          {t(`locateError.${locateError}`)}
+        </p>
+      )}
       {open && items.length > 0 && (
         <ul id={listId} role="listbox" className="thin-scroll absolute z-50 mt-1.5 max-h-80 w-full animate-pop-in overflow-auto rounded-2xl border border-border bg-elevated p-1 shadow-lift">
           {items.map((s, i) => {

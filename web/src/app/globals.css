@@ -42,6 +42,7 @@
   --wf-mode-win: #d2306e;
   --wf-mode-walk: #5b6577;
   --wf-mode-car: #48556a;
+  --wf-mode-rental: #0f766e;
 
   /* weather colours */
   --wf-wx-sun: #e88a00;
@@ -90,6 +91,7 @@
     --wf-mode-win: #ff7aa8;
     --wf-mode-walk: #a6b0c2;
     --wf-mode-car: #a3b0c6;
+    --wf-mode-rental: #3fd0bd;
 
     --wf-wx-sun: #ffb340;
     --wf-wx-cloud: #a9b6c9;

@@ -12,11 +12,15 @@
     "taxi": "นั่งแท็กซี่มิเตอร์ไป {to} ({min} นาที, {km} กม.)",
     "grab": "เรียก Grab ไป {to} ({min} นาที, {km} กม.)",
     "win": "นั่งวินมอเตอร์ไซค์ไป {to} ({min} นาที, {km} กม.)",
-    "car": "ขับรถไป {to} ({min} นาที, {km} กม.)",
+    "car": "ขับรถของคุณไป {to} ({min} นาที, {km} กม.) · น้ำมัน {fuel} + ทางด่วน {toll} + ที่จอด {parking}",
     "ride": "ขึ้น {mode} {line} ไปทาง {headsign} {stops} สถานี ลงที่ {to} ({min} นาที, {price})",
     "flight": "บิน {carrier} {flightNo} จาก {from} ไป {to} ({min} นาที)",
     "train": "ขึ้น {name} ({cls}) จาก {from} ไป {to} ({min} นาที)",
-    "coach": "ขึ้น{mode} {name} ({cls}) จาก {from} ไป {to} ({min} นาที)"
+    "coach": "ขึ้น{mode} {name} ({cls}) จาก {from} ไป {to} ({min} นาที)",
+    "carNoToll": "ขับรถของคุณไป {to} ({min} นาที, {km} กม.) · น้ำมัน {fuel} + ที่จอด {parking}",
+    "rental": "ขับรถเช่าไป {to} ({min} นาที, {km} กม.) · น้ำมัน {fuel} + ทางด่วน {toll} + ที่จอด {parking}",
+    "rentalNoToll": "ขับรถเช่าไป {to} ({min} นาที, {km} กม.) · น้ำมัน {fuel} + ที่จอด {parking}",
+    "rentalPickup": "รับรถเช่าที่ {place} และทำสัญญา ({min} นาที) · ค่าเช่า {rent} ({days} วัน)"
   },
   "warn": {
     "winRain": "วินถูกที่สุด ({price}) แต่ช่วง {time} มีโอกาสฝน {prob}% — ไม่แนะนำ",

@@ -20,5 +20,6 @@
     "ride": "Ride",
     "transfer": "Transfer",
     "buffer": "Buffer"
-  }
+  },
+  "rental": "Rental car"
 }

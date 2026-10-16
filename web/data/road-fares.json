@@ -6,12 +6,30 @@
     "flagFall": 35,
     "flagFallKm": 1,
     "tiers": [
-      { "upToKm": 10, "perKm": 6.5 },
-      { "upToKm": 20, "perKm": 7 },
-      { "upToKm": 40, "perKm": 8 },
-      { "upToKm": 60, "perKm": 8.5 },
-      { "upToKm": 80, "perKm": 9 },
-      { "upToKm": 100000, "perKm": 10.5 }
+      {
+        "upToKm": 10,
+        "perKm": 6.5
+      },
+      {
+        "upToKm": 20,
+        "perKm": 7
+      },
+      {
+        "upToKm": 40,
+        "perKm": 8
+      },
+      {
+        "upToKm": 60,
+        "perKm": 8.5
+      },
+      {
+        "upToKm": 80,
+        "perKm": 9
+      },
+      {
+        "upToKm": 100000,
+        "perKm": 10.5
+      }
     ],
     "waitPerMin": 3,
     "airportPickupSurcharge": 50,
@@ -41,13 +59,6 @@
     "maxKm": 10,
     "rangePct": 0.2
   },
-  "car": {
-    "label": "Private car: fuel ~฿2.8/km (petrol ~฿38/L, 13.5 km/L) + tolls + parking",
-    "sourceUrl": "https://www.pttor.com/en/oil_price",
-    "perKm": 2.8,
-    "tollPer100Km": 60,
-    "parking": 60
-  },
   "speedsKmh": {
     "walk": 4.8,
     "win": 28,
@@ -58,7 +69,15 @@
   },
   "detourFactor": 1.35,
   "rushHours": [
-    { "from": "07:00", "to": "09:00", "factor": 1.6 },
-    { "from": "16:00", "to": "19:00", "factor": 1.6 }
+    {
+      "from": "07:00",
+      "to": "09:00",
+      "factor": 1.6
+    },
+    {
+      "from": "16:00",
+      "to": "19:00",
+      "factor": 1.6
+    }
   ]
 }

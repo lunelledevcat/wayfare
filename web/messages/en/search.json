@@ -36,5 +36,29 @@
     "today": "Today",
     "tomorrow": "Tomorrow",
     "friday": "This Friday"
+  },
+  "currentLocation": "My location",
+  "locate": "Use my current location",
+  "locateError": {
+    "insecure": "Current location only works on https:// sites or localhost.",
+    "denied": "Location access was blocked. Allow it in your browser settings, or type a place instead.",
+    "unavailable": "Couldn't find your location. Check GPS and your connection, then try again, or type a place."
+  },
+  "car": {
+    "own": "I have a car I can drive",
+    "ownHint": "Adds a drive-yourself option with fuel, tolls and parking",
+    "panel": "Car and rental costs",
+    "edited": "Edited",
+    "kmPerL": "Fuel economy",
+    "unitKmPerL": "km/L",
+    "fuelPrice": "Fuel price",
+    "unitBahtPerL": "฿/L",
+    "parking": "Parking",
+    "rentDays": "Rental days",
+    "unitDays": "days",
+    "tolls": "Use expressways",
+    "tollsHint": "Tolls are estimated at ฿60 per 100 km on trips over 15 km",
+    "note": "Rental prices are estimates, not quotations. One car's cost is shared between passengers (seats 5).",
+    "reset": "Reset to defaults"
   }
 }

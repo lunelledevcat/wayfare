@@ -18,8 +18,9 @@ export const MODE_LABEL: Record<Mode, LocalizedText> = {
   grab: { th: "Grab", en: "Grab", zh: "Grab", ja: "Grab" },
   win: { th: "วินมอเตอร์ไซค์", en: "Motorbike taxi", zh: "摩的", ja: "バイクタクシー" },
   car: { th: "รถส่วนตัว", en: "Private car", zh: "自驾", ja: "自家用車" },
+  rental: { th: "รถเช่า", en: "Rental car", zh: "租车", ja: "レンタカー" },
 };
 
-export const RIDE_MODES: Mode[] = ["bts", "mrt", "arl", "red", "train", "bus", "coach", "van", "boat", "flight", "taxi", "grab", "win", "car"];
-export const ROAD_MODES: Mode[] = ["taxi", "grab", "win", "car"];
+export const RIDE_MODES: Mode[] = ["bts", "mrt", "arl", "red", "train", "bus", "coach", "van", "boat", "flight", "taxi", "grab", "win", "car", "rental"];
+export const ROAD_MODES: Mode[] = ["taxi", "grab", "win", "car", "rental"];
 export const BOOKABLE_MODES: Mode[] = ["flight", "train", "coach", "van"];

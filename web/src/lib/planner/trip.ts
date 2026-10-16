@@ -34,7 +34,7 @@ export function comfortScore(legs: Leg[]): number {
     if (l.mode === "van") s -= 10;
     if (l.mode === "bus") s -= 6;
     if (l.outdoor && isRainy(l.weather) && l.minutes > 3) s -= 20;
-    if (l.mode === "car" && l.minutes > 240) s -= 15; // long self-drive
+    if ((l.mode === "car" || l.mode === "rental") && l.minutes > 240) s -= 15; // long self-drive
     if (l.mode === "train" && l.line?.classLabel?.en.includes("sleeper")) s += 8;
   }
   return Math.max(0, Math.min(100, Math.round(s)));

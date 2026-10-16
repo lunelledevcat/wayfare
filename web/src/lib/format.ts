@@ -45,7 +45,7 @@ export function renderMsg(t: Translator, ref: MsgRef, locale: string, currency: 
   const values: Record<string, string | number> = {};
   for (const [k, v] of Object.entries(ref.params ?? {})) {
     if (typeof v === "object") values[k] = pick(v, locale);
-    else if (typeof v === "number" && (k === "price" || k === "delta")) values[k] = money(v, locale, currency);
+    else if (typeof v === "number" && ["price", "delta", "fuel", "toll", "parking", "rent"].includes(k)) values[k] = money(v, locale, currency);
     else values[k] = v;
   }
   try {

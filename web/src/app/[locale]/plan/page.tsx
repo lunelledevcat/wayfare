@@ -7,6 +7,7 @@ import { PlanView } from "@/components/plan-view";
 import { SearchBox } from "@/components/search-box";
 import { SourceList } from "@/components/source-list";
 import { Card } from "@/components/ui/primitives";
+import { carFromParams } from "@/lib/car";
 import { dayLabel, pick } from "@/lib/format";
 import { plan, PlanError } from "@/lib/planner/plan";
 import { PRIORITIES, type Mode, type PlanResult, type Priority } from "@/lib/planner/types";
@@ -34,7 +35,7 @@ export default async function PlanPage({ params, searchParams }: { params: Promi
   const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "plan" });
   const te = await getTranslations({ locale, namespace: "errors" });
-  const query = { from: one(sp.from), to: one(sp.to), date: one(sp.date), time: one(sp.time), mode: one(sp.mode) === "arrive" ? ("arrive" as const) : ("depart" as const), pax: Number(one(sp.pax)) || 1 };
+  const query = { from: one(sp.from), to: one(sp.to), date: one(sp.date), time: one(sp.time), mode: one(sp.mode) === "arrive" ? ("arrive" as const) : ("depart" as const), pax: Number(one(sp.pax)) || 1, car: carFromParams(sp) };
   const priority = PRIORITIES.includes(one(sp.priority) as Priority) ? (one(sp.priority) as Priority) : undefined;
   const modes = one(sp.modes) ? (one(sp.modes).split(",") as Mode[]) : undefined;
 
@@ -57,6 +58,7 @@ export default async function PlanPage({ params, searchParams }: { params: Promi
     time: result?.query.time ?? query.time,
     mode: query.mode,
     pax: result?.query.pax ?? query.pax,
+    car: result?.query.car ?? query.car,
   };
 
   return (

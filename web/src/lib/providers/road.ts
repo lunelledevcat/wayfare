@@ -131,10 +131,6 @@ export function roadPrice(mode: Mode, km: number, minutes: number, freeFlowMinut
       if (km > 5) fare += (km - 5) * w.perKmOver5;
       return pct(Math.ceil(fare / 5) * 5, w.rangePct);
     }
-    case "car": {
-      const c = roadFares.car;
-      return pct(km * c.perKm + (km / 100) * c.tollPer100Km + c.parking, 0.15);
-    }
     default:
       return { amount: 0, low: 0, high: 0, estimate: true };
   }
@@ -147,6 +143,6 @@ export const roadLimits = {
 };
 
 export function roadFareSource(mode: Mode): Source {
-  const entry = mode === "taxi" ? roadFares.taxi : mode === "grab" ? roadFares.grab : mode === "win" ? roadFares.win : roadFares.car;
+  const entry = mode === "grab" ? roadFares.grab : mode === "win" ? roadFares.win : roadFares.taxi;
   return { id: `fare-${mode}`, name: entry.label, url: entry.sourceUrl, updatedAt: roadFares.checkedAt, estimate: true };
 }

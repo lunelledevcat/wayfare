@@ -12,11 +12,15 @@
     "taxi": "メータータクシーで {to} へ（{min} 分、{km} km）",
     "grab": "Grab の車を呼んで {to} へ（{min} 分、{km} km）",
     "win": "バイクタクシー（ウィン）で {to} へ（{min} 分、{km} km）",
-    "car": "車で {to} へ（{min} 分、{km} km）",
+    "car": "自分の車で {to} へ（{min} 分、{km} km）· 燃料 {fuel} + 通行料 {toll} + 駐車 {parking}",
     "ride": "{mode} {line}（{headsign} 方面）に乗り、{stops} 駅目の {to} で降りる（{min} 分、{price}）",
     "flight": "{carrier} {flightNo} 便で {from} から {to} へ（{min} 分）",
     "train": "{name}（{cls}）に乗車、{from} から {to} へ（{min} 分）",
-    "coach": "{mode} {name}（{cls}）に乗車、{from} から {to} へ（{min} 分）"
+    "coach": "{mode} {name}（{cls}）に乗車、{from} から {to} へ（{min} 分）",
+    "carNoToll": "自分の車で {to} へ（{min} 分、{km} km）· 燃料 {fuel} + 駐車 {parking}",
+    "rental": "レンタカーで {to} へ（{min} 分、{km} km）· 燃料 {fuel} + 通行料 {toll} + 駐車 {parking}",
+    "rentalNoToll": "レンタカーで {to} へ（{min} 分、{km} km）· 燃料 {fuel} + 駐車 {parking}",
+    "rentalPickup": "{place} でレンタカーを受け取り手続き（{min} 分）· 料金 {rent}（{days} 日）"
   },
   "warn": {
     "winRain": "バイクタクシーがいちばん安い（{price}）ですが、{time} の降水確率は {prob}% です — おすすめしません。",

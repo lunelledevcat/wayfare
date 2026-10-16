@@ -5,8 +5,10 @@ import * as m from "motion/react-m";
 import { useTranslations } from "next-intl";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { CAR_DEFAULTS, carToParams, normalizeCar, type CarOptions } from "@/lib/car";
 import { todayBkk } from "@/lib/time";
 import { cn } from "@/lib/utils";
+import { CarOptionsField } from "./car-options";
 import { DateField } from "./date-field";
 import { PlaceInput, type PlaceValue } from "./place-input";
 import { nowBkk, TimeField } from "./time-field";
@@ -21,17 +23,21 @@ export interface SearchInit {
   time?: string;
   mode?: "depart" | "arrive";
   pax?: number;
+  /** car options of the current plan (from the URL); when absent they come from localStorage */
+  car?: CarOptions;
 }
 
 /** Default departure: 30 minutes from now, rounded to 15. */
+const CAR_KEY = "wayfare.car.v1";
 const defaultTime = () => {
   const [h, mm] = nowBkk().split(":").map(Number);
   const r = Math.ceil((h * 60 + mm + 30) / 15) * 15;
   return `${String(Math.floor(r / 60) % 24).padStart(2, "0")}:${String(r % 60).padStart(2, "0")}`;
 };
 
-export function buildPlanUrl(v: { from: string; to: string; date: string; time: string; mode: string; pax: number; priority?: string; modes?: string }) {
+export function buildPlanUrl(v: { from: string; to: string; date: string; time: string; mode: string; pax: number; priority?: string; modes?: string; car?: CarOptions }) {
   const p = new URLSearchParams({ from: v.from, to: v.to, date: v.date, time: v.time, mode: v.mode, pax: String(v.pax) });
+  if (v.car) for (const [k, val] of Object.entries(carToParams(v.car))) p.set(k, val);
   if (v.priority) p.set("priority", v.priority);
   if (v.modes) p.set("modes", v.modes);
   return `/plan?${p}`;
@@ -66,6 +72,7 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
   const [time, setTime] = useState(init?.time ?? "");
   const [mode, setMode] = useState<"depart" | "arrive">(init?.mode ?? "depart");
   const [pax, setPax] = useState(init?.pax ?? 1);
+  const [car, setCarState] = useState<CarOptions>(init?.car ?? CAR_DEFAULTS);
   const [error, setError] = useState<string | null>(null);
   const [turns, setTurns] = useState(0);
   const [pending, start] = useTransition();
@@ -74,7 +81,26 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
   useEffect(() => {
     setDate((d) => d || todayBkk());
     setTime((x) => x || defaultTime());
+    // remembered car settings (only when the URL did not carry any)
+    if (!init?.car) {
+      try {
+        const saved = localStorage.getItem(CAR_KEY);
+        if (saved) setCarState(normalizeCar(JSON.parse(saved)));
+      } catch {
+        /* storage unavailable or corrupt: keep defaults */
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const setCar = (c: CarOptions) => {
+    setCarState(c);
+    try {
+      localStorage.setItem(CAR_KEY, JSON.stringify(c));
+    } catch {
+      /* storage unavailable */
+    }
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +108,7 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
     if (!to) return setError(t("needTo"));
     if (from.token === to.token) return setError(t("same"));
     setError(null);
-    start(() => router.push(buildPlanUrl({ from: from.token, to: to.token, date: date || todayBkk(), time: time || defaultTime(), mode, pax, priority })));
+    start(() => router.push(buildPlanUrl({ from: from.token, to: to.token, date: date || todayBkk(), time: time || defaultTime(), mode, pax, priority, car })));
   };
 
   return (
@@ -92,7 +118,7 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
       className={cn("rounded-[20px] border border-border bg-elevated shadow-lift", compact ? "p-4" : "p-4 md:p-6")}
     >
       <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-end">
-        <PlaceInput label={t("from")} placeholder={t("fromPlaceholder")} value={from} onChange={setFrom} />
+        <PlaceInput label={t("from")} placeholder={t("fromPlaceholder")} value={from} onChange={setFrom} locate />
         <m.button
           type="button"
           onClick={() => {
@@ -129,6 +155,10 @@ export function SearchBox({ init, compact = false, priority }: { init?: SearchIn
         {date ? <DateField label={t("date")} value={date} onChange={setDate} /> : <div className="h-[78px]" aria-hidden />}
         <TimeField label={mode === "arrive" ? t("arriveTime") : t("time")} value={time} onChange={setTime} />
         <PaxStepper label={t("pax")} value={pax} onChange={setPax} />
+      </div>
+
+      <div className="mt-4">
+        <CarOptionsField value={car} onChange={setCar} />
       </div>
 
       <Button type="submit" size="lg" disabled={pending} className="mt-4 w-full text-lg">

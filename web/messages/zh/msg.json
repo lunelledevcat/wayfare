@@ -12,11 +12,15 @@
     "taxi": "乘计价出租车前往 {to}（{min} 分钟，{km} 公里）",
     "grab": "叫 Grab 车前往 {to}（{min} 分钟，{km} 公里）",
     "win": "乘摩的（win）前往 {to}（{min} 分钟，{km} 公里）",
-    "car": "开车前往 {to}（{min} 分钟，{km} 公里）",
+    "car": "自驾前往 {to}（{min} 分钟，{km} 公里）· 油费 {fuel} + 过路费 {toll} + 停车费 {parking}",
     "ride": "乘{mode} {line}，往 {headsign} 方向，坐 {stops} 站，在 {to} 下车（{min} 分钟，{price}）",
     "flight": "乘坐 {carrier} {flightNo} 从 {from} 飞往 {to}（{min} 分钟）",
     "train": "乘 {name}（{cls}）从 {from} 前往 {to}（{min} 分钟）",
-    "coach": "乘{mode} {name}（{cls}）从 {from} 前往 {to}（{min} 分钟）"
+    "coach": "乘{mode} {name}（{cls}）从 {from} 前往 {to}（{min} 分钟）",
+    "carNoToll": "自驾前往 {to}（{min} 分钟，{km} 公里）· 油费 {fuel} + 停车费 {parking}",
+    "rental": "驾驶租来的车前往 {to}（{min} 分钟，{km} 公里）· 油费 {fuel} + 过路费 {toll} + 停车费 {parking}",
+    "rentalNoToll": "驾驶租来的车前往 {to}（{min} 分钟，{km} 公里）· 油费 {fuel} + 停车费 {parking}",
+    "rentalPickup": "在 {place} 取租车并办理手续（{min} 分钟）· 租金 {rent}（{days} 天）"
   },
   "warn": {
     "winRain": "摩的最便宜（{price}），但 {time} 降雨概率为 {prob}%——不推荐。",

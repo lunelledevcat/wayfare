@@ -6,6 +6,8 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ModeIcon } from "@/components/mode-icon";
 import { Badge, Card } from "@/components/ui/primitives";
+import { CAR_DEFAULTS, TOLL_MIN_KM, TOLL_PER_100KM } from "@/lib/car";
+import { cities } from "@/lib/places-data";
 import { buffers, co2PerKm, DEFAULT_TIME_VALUE, OPERATOR_BY_MODE, refundPolicy, THB_PER_USDC, weatherRules as R } from "@/lib/config";
 import { pick, toIntl } from "@/lib/format";
 import type { Mode } from "@/lib/planner/types";
@@ -15,6 +17,7 @@ import gtfsMeta from "../../../../data/gtfs/meta.json";
 import holidays from "../../../../data/holidays-th-2026.json";
 import bus from "../../../../data/intercity-bus.json";
 import rail from "../../../../data/intercity-rail.json";
+import carRental from "../../../../data/car-rental.json";
 import roadFares from "../../../../data/road-fares.json";
 import climate from "../../../../data/weather-climate.json";
 
@@ -31,7 +34,7 @@ const VALUE_TRANSFER_WEIGHT = 15;
 type Status = "live" | "estimate" | "fallback" | "liveOrFallback";
 const STATUS_TONE = { live: "good", estimate: "warn", fallback: "neutral", liveOrFallback: "primary" } as const;
 
-const SECTIONS = ["sources", "gtfs", "flights", "road", "weather", "pricing", "scoring", "planner", "chain"] as const;
+const SECTIONS = ["sources", "gtfs", "flights", "road", "rental", "weather", "pricing", "scoring", "planner", "chain"] as const;
 const DAYS = ["mon", "tue", "wed", "thu", "fri", "sat", "sun", "holiday"] as const;
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
@@ -107,6 +110,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
     { id: "bus", url: bus.sourceUrl, status: "estimate", updated: date(bus.checkedAt) },
     { id: "osrm", url: "https://project-osrm.org/", status: "liveOrFallback", updated: onRequest },
     { id: "roadFares", url: roadFares.taxi.sourceUrl, status: "estimate", updated: date(roadFares.checkedAt) },
+    { id: "rental", url: "#rental", status: "estimate", updated: date(carRental.checkedAt) },
     { id: "meteo", url: "https://open-meteo.com/en/docs", status: "liveOrFallback", updated: onRequest },
     { id: "aq", url: "https://open-meteo.com/en/docs/air-quality-api", status: "live", updated: onRequest },
     { id: "climate", url: climate.sourceUrl, status: "fallback", updated: "1991–2020" },
@@ -295,6 +299,33 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
               </ul>
             </Section>
 
+            {/* Rental cars */}
+            <Section id="rental" title={t("rental.title")}>
+              <p>{t("rental.body", { minutes: carRental.pickupMinutes })}</p>
+              <p className="rounded-xl bg-warn-soft p-3 text-sm font-semibold text-warn">{t("rental.disclaimer")}</p>
+              <Table
+                head={[t("rental.city"), t("rental.daily"), t("rental.range"), t("rental.deposit")]}
+                rows={cities.map((c) => {
+                  const rate = (carRental.cities as Record<string, { daily: number; low: number; high: number; deposit: number }>)[c.id] ?? carRental.default;
+                  return [
+                    <span key="c" className="font-semibold">
+                      {pick(c.name, locale)}
+                    </span>,
+                    <span key="d" className="tabular">
+                      {baht(rate.daily)}
+                    </span>,
+                    <span key="r" className="tabular">
+                      {baht(rate.low)}–{baht(rate.high)}
+                    </span>,
+                    <span key="p" className="tabular">
+                      {baht(rate.deposit)}
+                    </span>,
+                  ];
+                })}
+              />
+              <p className="text-sm text-muted">{t("rental.formula")}</p>
+            </Section>
+
             {/* Weather */}
             <Section id="weather" title={t("weather.title")}>
               <p>{t("weather.body")}</p>
@@ -362,7 +393,7 @@ export default async function AboutDataPage({ params }: { params: Promise<{ loca
                   <div>
                     <h3 className="font-bold">{t("pricing.carTitle")}</h3>
                     <p className="text-sm">
-                      {t("pricing.car", { perKm: baht(roadFares.car.perKm), toll: baht(roadFares.car.tollPer100Km), parking: baht(roadFares.car.parking) })}
+                      {t("pricing.car", { kmPerL: CAR_DEFAULTS.kmPerL, fuel: baht(CAR_DEFAULTS.fuelPrice), toll: baht(TOLL_PER_100KM), tollKm: TOLL_MIN_KM, parking: baht(CAR_DEFAULTS.parking) })}
                     </p>
                   </div>
                   <p className="text-sm text-muted">{t("pricing.checked", { date: date(roadFares.checkedAt) })}</p>

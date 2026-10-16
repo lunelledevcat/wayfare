@@ -19,6 +19,7 @@ const ICONS: Record<Mode, Icon> = {
   grab: CarIcon,
   win: MotorbikeIcon,
   car: CarIcon,
+  rental: CarIcon,
 };
 
 /** Colour always paired with an icon (meaning never carried by colour alone). */
@@ -38,6 +39,7 @@ export const MODE_COLOR: Record<Mode, string> = {
   grab: "var(--wf-mode-taxi)",
   win: "var(--wf-mode-win)",
   car: "var(--wf-mode-car)",
+  rental: "var(--wf-mode-rental)",
 };
 
 export function ModeIcon({ mode, className, label, color }: { mode: Mode; className?: string; label?: string; color?: string | null }) {
