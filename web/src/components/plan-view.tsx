@@ -321,6 +321,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
               <m.div key={tr.id} layout="position" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: EASE, delay: Math.min(i, 10) * 0.04, layout: SPRING }}>
               <TripCard
                 trip={tr}
+                index={i + 1}
                 tags={tagsFor(tr.id)}
                 pax={q.pax}
                 href={tripHref(tr)}

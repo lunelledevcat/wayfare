@@ -141,5 +141,7 @@
   },
   "errorTitle": "วางแผนทริปนี้ไม่ได้",
   "newSearch": "ค้นหาใหม่",
-  "compareDismiss": "ปิดข้อความ"
+  "compareDismiss": "ปิดข้อความ",
+  "method": "วิธีที่ {n}",
+  "routeLabel": "เส้นทางตามลำดับพาหนะ"
 }

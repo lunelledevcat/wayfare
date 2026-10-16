@@ -141,5 +141,7 @@
   },
   "errorTitle": "无法规划此行程",
   "newSearch": "重新搜索",
-  "compareDismiss": "关闭"
+  "compareDismiss": "关闭",
+  "method": "方案 {n}",
+  "routeLabel": "按顺序的交通方式"
 }

@@ -37,5 +37,11 @@
   "alt": {
     "instead": "Take {mode} instead ({sign}{delta}, stays dry).",
     "insteadBoat": "Take {mode} instead ({sign}{delta})."
+  },
+  "route": {
+    "alight": "Get off at {place}",
+    "then": "change to {mode}",
+    "finish": "finish by {mode}",
+    "walk": "walk {min} min"
   }
 }

@@ -141,5 +141,7 @@
   },
   "errorTitle": "We couldn't plan this trip",
   "newSearch": "New search",
-  "compareDismiss": "Dismiss"
+  "compareDismiss": "Dismiss",
+  "method": "Option {n}",
+  "routeLabel": "Route by vehicle, in order"
 }

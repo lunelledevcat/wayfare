@@ -37,5 +37,11 @@
   "alt": {
     "instead": "แนะนำ {mode} แทน ({sign}{delta}, ไม่เปียก)",
     "insteadBoat": "แนะนำ {mode} แทน ({sign}{delta})"
+  },
+  "route": {
+    "alight": "ลงที่ {place}",
+    "then": "ต่อ{mode}",
+    "finish": "ไปปลายทางด้วย{mode}",
+    "walk": "เดิน {min} นาที"
   }
 }

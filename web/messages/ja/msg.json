@@ -37,5 +37,11 @@
   "alt": {
     "instead": "代わりに{mode}を利用（{sign}{delta}、濡れません）。",
     "insteadBoat": "代わりに{mode}を利用（{sign}{delta}）。"
+  },
+  "route": {
+    "alight": "{place} で降りる",
+    "then": "{mode}に乗り換え",
+    "finish": "最後は{mode}で目的地へ",
+    "walk": "徒歩 {min} 分"
   }
 }

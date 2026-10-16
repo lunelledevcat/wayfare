@@ -4,7 +4,8 @@ import { ArrowRight, ChevronRight, Footprints, Repeat, TriangleAlert, Info, Ban 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { bkkDate } from "@/lib/time";
-import type { Priority, Trip, Warning } from "@/lib/planner/types";
+import { routeModes, stepSummary } from "@/lib/planner/steps";
+import type { Mode, Priority, Trip, Warning } from "@/lib/planner/types";
 import { cn } from "@/lib/utils";
 import { PriorityIcon } from "./icons";
 import { CountUp } from "./count-up";
@@ -41,6 +42,7 @@ export function WarningLine({ w, onAlternative }: { w: Warning; onAlternative?: 
 
 export function TripCard({
   trip,
+  index,
   tags,
   pax,
   href,
@@ -50,6 +52,8 @@ export function TripCard({
   highlight,
 }: {
   trip: Trip;
+  /** 1-based position in the list currently shown */
+  index: number;
   tags: Priority[];
   pax: number;
   href: string;
@@ -60,8 +64,11 @@ export function TripCard({
 }) {
   const t = useTranslations("plan");
   const tm = useTranslations("mode");
-  const { price, time, dur } = useFmt();
-  const rides = trip.legs.filter((l) => l.kind === "ride");
+  const { price, time, dur, msg } = useFmt();
+  // vehicles in order (as words, with an icon), plus the key points of the journey
+  const modes = routeModes(trip);
+  const modeLeg = (m: Mode) => trip.legs.find((l) => l.kind === "ride" && l.mode === m);
+  const summary = stepSummary(trip).map(msg).join(" → ");
   const nextDay = bkkDate(trip.arrive) !== bkkDate(trip.depart);
   const weatherPoints = trip.legs.filter((l) => l.weather && (l.kind === "ride" || l.mode === "walk") && l.minutes >= 3).slice(0, 4);
   const shownWarnings = trip.warnings.filter((w) => w.level !== "info").slice(0, 2);
@@ -73,6 +80,7 @@ export function TripCard({
       aria-label={`${time(trip.depart)}–${time(trip.arrive)}, ${price(trip.cost.amount * pax)}`}
     >
       <div className="flex flex-wrap items-center gap-1.5">
+        <span className="mr-1 text-base font-extrabold text-primary">{t("method", { n: index })}</span>
         {tags.map((p) => (
           <Badge key={p} tone={p === "cheapest" ? "good" : "primary"}>
             <PriorityIcon priority={p} className="size-3.5" /> {t(`priority.${p}`)}
@@ -83,7 +91,7 @@ export function TripCard({
             <Ban aria-hidden /> {t("notRecommended")}
           </Badge>
         )}
-        <label className="press ml-auto inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg px-2 text-sm text-muted hover:bg-subtle">
+        <label className="press ml-auto inline-flex min-h-12 cursor-pointer items-center gap-2 rounded-lg px-2 text-sm text-muted hover:bg-subtle">
           <input type="checkbox" checked={compareOn} onChange={(e) => onCompare(e.target.checked)} className="size-4 accent-[var(--wf-primary)]" />
           {t("compare")}
         </label>
@@ -91,15 +99,16 @@ export function TripCard({
 
       <div className="mt-3 grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
         <div className="min-w-0">
-          <ol className="flex flex-wrap items-center gap-1" aria-label={rides.map((l) => tm(l.mode)).join(" → ")}>
-            {rides.map((l, i) => (
-              <li key={l.id} className="flex items-center gap-1">
+          <ol className="flex flex-wrap items-center gap-x-1 gap-y-1.5" aria-label={t("routeLabel")}>
+            {modes.map((m, i) => (
+              <li key={`${m}-${i}`} className="flex items-center gap-1">
                 {i > 0 && <ChevronRight className="size-4 text-muted" aria-hidden />}
-                <ModeIcon mode={l.mode} color={l.line?.color} className="size-8" />
-                <span className="hidden text-xs font-medium text-muted sm:inline">{l.line?.short && l.mode !== "taxi" && l.mode !== "grab" ? l.line.short : tm(l.mode)}</span>
+                <ModeIcon mode={m} color={modeLeg(m)?.line?.color} className="size-7" />
+                <span className="text-sm font-semibold">{tm(m)}</span>
               </li>
             ))}
           </ol>
+          {summary && <p className="mt-1.5 line-clamp-2 text-sm text-muted">{summary}</p>}
           <p className="mt-3 text-2xl font-bold tabular">
             {time(trip.depart)} <span className="text-muted">–</span> {time(trip.arrive)}
             {nextDay && <sup className="ml-1 text-xs font-semibold text-warn">{t("nextDay")}</sup>}

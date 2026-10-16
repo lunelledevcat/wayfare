@@ -141,5 +141,7 @@
   },
   "errorTitle": "この旅程を計画できませんでした",
   "newSearch": "新しく検索",
-  "compareDismiss": "閉じる"
+  "compareDismiss": "閉じる",
+  "method": "プラン {n}",
+  "routeLabel": "乗り物の順番"
 }

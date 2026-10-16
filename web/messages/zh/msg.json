@@ -37,5 +37,11 @@
   "alt": {
     "instead": "改乘{mode}（{sign}{delta}，不淋雨）。",
     "insteadBoat": "改乘{mode}（{sign}{delta}）。"
+  },
+  "route": {
+    "alight": "在 {place} 下车",
+    "then": "换乘{mode}",
+    "finish": "最后乘{mode}到达",
+    "walk": "步行 {min} 分钟"
   }
 }
