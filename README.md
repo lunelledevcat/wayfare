@@ -17,7 +17,7 @@ U-Hackathon 2026 · Web3 track
 
 ## The solution / วิธีแก้
 
-- **One search, every mode** — BTS, MRT, Airport Rail Link, Red Line, buses, boats, trains, coaches, vans, domestic flights, taxi, Grab, motorbike taxi, walking — door to door.
+- **One search, every mode** — BTS, MRT, Airport Rail Link, Red Line, buses, boats, trains, coaches, vans, domestic flights, taxi, Grab, motorbike taxi, **your own car and rental cars**, walking — door to door. Start from **your current location** with one tap.
 - **Pick what matters**: ⚡ fastest · 💰 cheapest · ⭐ best value (price + your time + weather risk) · 🛋️ most comfortable. Results re-rank instantly on the client.
 - **Every minute itemised**: walk · wait · ride · transfer · buffer, with start/end times, reliability (“very punctual” vs “±20 min traffic”) and **“leave home at 13:20”** for arrive-by searches.
 - **That day's prices** and the **total trip cost** × passengers, plus a **7-day price chart** (“going on Thursday is ฿420 cheaper”).
@@ -64,6 +64,8 @@ flowchart LR
 | Domestic flights | Duffel API test mode if `DUFFEL_TEST_TOKEN`; else schedule model (`data/flights.json`) with day/holiday/advance/time-of-day factors | **Estimate** without token (badged) |
 | Road distance & time | OSRM; fallback straight line × 1.35 | Real when OSRM reachable, else **backup** (badged) |
 | Taxi / win / Grab prices | DLT taxi meter, BMA win table, Grab distance+time estimate | Formula real, Grab **estimate** |
+| Own car | Your own fuel economy, fuel price, tolls (฿60/100 km) and parking, all editable | Formula from **your settings** |
+| Rental cars | Day rates per city in `web/data/car-rental.json` (฿850–1,800/day, small saloon) | **Estimate, not a quotation** from any company |
 | Hourly weather, PM2.5 | **Open-Meteo** Forecast + Air Quality | **Real**; TMD seasonal normals beyond 16 days or offline |
 | Places | Curated list + GTFS stations + **Nominatim/OSM** | Real |
 | Thai holidays 2026 | Cabinet / BoT holiday calendar | Real |
@@ -148,6 +150,21 @@ Environment variables to set in Vercel → Settings → Environment Variables (P
 | Results | Trip detail | Mobile |
 |---|---|---|
 | ![plan](docs/screenshots/plan.png) | ![trip](docs/screenshots/trip.png) | ![mobile](docs/screenshots/plan-mobile.png) |
+
+## Cars: your own and rented
+
+- **My location:** the target button in the "From" field uses the browser's geolocation (https or localhost only) and shows a specific message if the page is not secure, permission is denied, or the position cannot be found.
+- **I have a car:** switch it on to get a drive-yourself option. Fuel (km/L, ฿/L), tolls, parking and rental days are editable in the "Car and rental costs" panel, shared in the URL (`car=1&kmpl=&fuel=&toll=&park=&rent=`, defaults omitted) and remembered in the browser. Cost is split between passengers (one car seats 5).
+- **Rental cars:** offered after a flight/train/coach (collect at the destination airport or station, 20-minute pickup step), as the door-to-door drive when you have no own car, and in provincial cities without a metro for trips of 8 km or more. Prices are estimates, not quotations. Details in `DECISIONS.md` and `/about-data#rental`.
+
+## Roadmap
+
+Not built yet — where Wayfare goes after the hackathon:
+
+- **Saved plans** — keep a trip plan and come back to it later.
+- **Price-drop alerts** — notify you when a flight (or other ticket) gets cheaper, so you can buy during the dip.
+- **Personal-assistant reminders** — heads-ups before you travel (leave-now, weather changes, documents and things to pack), like a personal secretary.
+- **Partners** — sell tickets through the site with operators, discount codes and loyalty points.
 
 ## Status
 
