@@ -38,7 +38,7 @@
   "notRecommended": "おすすめしません",
   "seeAlternative": "代わりの手段を見る",
   "trips": "{n, plural, one {# 通りの行き方} other {# 通りの行き方}}",
-  "noMatch": "条件に合う旅程はありません。",
+  "noMatch": "条件に合う旅程がありません。条件をひとつゆるめてみてください。",
   "resetFilters": "絞り込みをクリア",
   "range": "{low}–{high}",
   "approx": "約 {price}",
@@ -139,7 +139,7 @@
     "refundNone": "現地払い — オンライン返金なし",
     "refundPartial": "事業者都合の運休は無料。出発 {h} 時間前までの自己都合キャンセルは手数料 {fee}%"
   },
-  "errorTitle": "この旅程を計画できませんでした",
+  "errorTitle": "この旅程は作成できませんでした",
   "newSearch": "新しく検索",
   "compareDismiss": "閉じる",
   "method": "プラン {n}",

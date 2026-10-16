@@ -5,7 +5,7 @@
     "wait": "Wait for the {mode} at {place} ({min} min)",
     "transferWait": "Change to the {mode} at {place} ({min} min)",
     "buffer": "Allow {min} min at {place}",
-    "bufferFlight": "Check in and pass security at {place} — be there {min} min before departure",
+    "bufferFlight": "Check in and clear security at {place}. Be there {min} min before departure",
     "bufferStation": "Arrive at {place} {min} min early to find your platform and board",
     "deplaneFlight": "Leave the plane and collect bags at {place} ({min} min)",
     "deplane": "Get off at {place} ({min} min)",
@@ -23,20 +23,20 @@
     "rentalPickup": "Collect the rental car at {place} and sign the contract ({min} min) · rent {rent} ({days, plural, one {# day} other {# days}})"
   },
   "warn": {
-    "winRain": "Motorbike taxi is the cheapest ({price}) but there is a {prob}% chance of rain at {time} — not recommended.",
-    "winHeavyRain": "Heavy rain or thunderstorms expected at {time} ({mm} mm/h) — motorbike taxi is not recommended.",
-    "walkHeavyRain": "{min} min walk in heavy rain at {time} ({prob}% chance, {mm} mm/h) — not recommended.",
-    "walkUmbrella": "{prob}% chance of rain at {time} — bring an umbrella for the {min} min walk.",
-    "walkHeat": "Feels like {feels}°C — the {min} min walk will be hot. Carry water.",
-    "walkPm25": "PM2.5 is {pm25} µg/m³ — wear a mask for the {min} min walk.",
-    "boatWind": "Gusts up to {gust} km/h at {time} — boat not recommended.",
-    "boatRain": "Heavy rain at {time} — boats may be delayed or crowded.",
-    "roadSlow": "Rain expected at {time} ({prob}%) — roads about {pct}% slower; extra time already added.",
-    "flightStorm": "Thunderstorms forecast — we added {extra} min to the airport buffer."
+    "winRain": "Motorbike taxi is the cheapest ({price}), but there's a {prob}% chance of rain at {time}. Not recommended.",
+    "winHeavyRain": "Heavy rain or thunderstorms likely at {time} ({mm} mm/h). Skip the motorbike taxi.",
+    "walkHeavyRain": "A {min} min walk in heavy rain at {time} ({prob}% chance, {mm} mm/h). Not recommended.",
+    "walkUmbrella": "{prob}% chance of rain at {time}. Bring an umbrella for the {min} min walk.",
+    "walkHeat": "It'll feel like {feels}°C, so the {min} min walk will be hot. Carry water.",
+    "walkPm25": "PM2.5 is {pm25} µg/m³. Wear a mask for the {min} min walk.",
+    "boatWind": "Gusts up to {gust} km/h at {time}. Boat not recommended.",
+    "boatRain": "Heavy rain at {time}. Boats may run late or be crowded.",
+    "roadSlow": "Rain likely at {time} ({prob}%), so roads run about {pct}% slower. We've already added the extra time.",
+    "flightStorm": "Thunderstorms in the forecast. We added {extra} min to your airport buffer."
   },
   "alt": {
-    "instead": "Take {mode} instead ({sign}{delta}, stays dry).",
-    "insteadBoat": "Take {mode} instead ({sign}{delta})."
+    "instead": "Try {mode} instead ({sign}{delta}, stays dry).",
+    "insteadBoat": "Try {mode} instead ({sign}{delta})."
   },
   "route": {
     "alight": "Get off at {place}",

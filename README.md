@@ -11,11 +11,17 @@ U-Hackathon 2026 · Web3 track
 
 ## The problem / ปัญหา
 
-**EN** — Planning even a simple trip in Thailand (say Asok → Chiang Mai) means opening 5–6 sites: the BTS/MRT fare table, the SRT timetable, a coach operator, airline sites, a taxi app and a weather app — then doing the maths yourself. Nobody tells you which option is actually best *on that day*, how long each step really takes, when to leave home, or that the cheap motorbike taxi is a bad idea because it will be raining at 17:00.
+**EN** — Planning even a simple trip in Thailand, say Asok to Chiang Mai, means juggling five or six sites: the BTS/MRT fares, the train timetable, a coach operator, airline sites, a taxi app and a weather app. Then you do the maths yourself. And still nobody tells you which option is actually best *on that day*, how long each step really takes, when to leave home, or that the cheap motorbike taxi is a bad idea because it'll be pouring at 17:00.
 
-**TH** — แค่จะเดินทางจากอโศกไปเชียงใหม่ ต้องเปิดเว็บแยกกัน 5–6 เว็บ (ตารางค่าโดยสารรถไฟฟ้า ตารางรถไฟ รถทัวร์ สายการบิน แอปเรียกรถ และพยากรณ์อากาศ) แล้วคิดเลขเอง ไม่มีใครบอกว่าทางไหนดีที่สุด *ในวันนั้น* ใช้เวลาจริงกี่นาที ต้องออกจากบ้านกี่โมง หรือเตือนว่าวินที่ถูกที่สุดไม่ควรนั่งเพราะช่วงนั้นฝนตก
+**TH** — แค่จะไปเชียงใหม่จากอโศก ก็ต้องเปิดเว็บ 5-6 เว็บ ทั้งค่ารถไฟฟ้า ตารางรถไฟ รถทัวร์ สายการบิน แอปเรียกรถ และพยากรณ์อากาศ แล้วนั่งคิดเลขเอง สุดท้ายก็ยังไม่รู้ว่าวันนั้นทางไหนดีที่สุด แต่ละช่วงใช้เวลาจริงเท่าไร ต้องออกจากบ้านกี่โมง หรือรู้ไม่ทันว่าวินที่ถูกที่สุดจะเปียกฝนตอนห้าโมงเย็น
 
 ## The solution / วิธีแก้
+
+Search once and Wayfare lines up every way to get there, from your door to theirs. You pick what matters (fastest, cheapest, best value or most comfortable) and it tells you what to take, when to leave, and what the day will cost, with the weather already checked. Then you can book every bookable leg in one payment.
+
+ค้นหาครั้งเดียว Wayfare เทียบทุกวิธีให้ตั้งแต่หน้าบ้านถึงที่หมาย คุณเลือกว่าอะไรสำคัญ (เร็ว ถูก คุ้ม หรือสบาย) แล้วเราบอกว่าควรไปทางไหน ออกกี่โมง ทั้งทริปจ่ายเท่าไร พร้อมเช็คอากาศให้แล้ว จากนั้นจองทุกช่วงที่จองได้ด้วยการจ่ายครั้งเดียว
+
+What's in it:
 
 - **One search, every mode** — BTS, MRT, Airport Rail Link, Red Line, buses, boats, trains, coaches, vans, domestic flights, taxi, Grab, motorbike taxi, **your own car and rental cars**, walking — door to door. Start from **your current location** with one tap.
 - **Pick what matters**: ⚡ fastest · 💰 cheapest · ⭐ best value (price + your time + weather risk) · 🛋️ most comfortable. Results re-rank instantly on the client.
@@ -79,11 +85,6 @@ Details: [`DECISIONS.md`](DECISIONS.md) and the in-app page `/th/about-data`.
 - **What:** every bookable leg (flight, intercity train, coach, van, boat) of a trip is paid in **one transaction** to `WayfareBooking` on Avalanche C-Chain (Fuji testnet). The contract escrows money per leg, mints one ERC-721 ticket per leg per passenger (`WayfareTicket`, on-chain SVG), releases the leg's money to the operator the moment the QR is scanned at check-in, and **refunds the holder automatically** if the operator cancels. Every transaction in the UI links to Snowtrace; the landing page, booking success screen and footer carry a "Built on Avalanche C-Chain" badge.
 - **Why:** multi-operator trips today mean several payments, several refund policies and paper or app-specific tickets. A shared escrow contract gives passengers one payment and guaranteed refunds, and gives small operators instant settlement without a payment processor. Avalanche C-Chain offers EVM tooling (Hardhat, viem, wagmi), sub-second finality that makes check-in feel instant at the door, and fees low enough for per-ticket actions.
 
-### ElevenLabs — spoken trip briefings
-- **What:** `POST /api/voice` (server-side, `ELEVENLABS_API_KEY` never reaches the browser) turns text into speech with ElevenLabs' multilingual models (`eleven_multilingual_v2`; Thai uses `eleven_v3`, which supports Thai). The trip page has **"ฟังสรุปทริป / Listen to trip summary"**: when to leave home, each step, the total cost and the weather warnings, in the language the user picked (th/en/zh/ja). In the app's *My trips* tab, each **weather-change alert** has a listen button. Identical text is served from a server cache (and a browser cache), requests are length-capped and rate-limited per IP.
-- **Why:** travellers read the plan once and then are on the move — walking to the station, carrying bags, in the rain. Hearing "leave at 13:20, rain 70 % at the Mo Chit transfer" is safer and more accessible (low vision, low literacy, tourists in their own language) than reading small text.
-- **Graceful fallback:** without a key, or if ElevenLabs fails, the voice buttons are hidden (or show a short note) and everything else works unchanged.
-
 ## Smart contracts (Avalanche C-Chain)
 
 | Contract | Purpose |
@@ -142,7 +143,6 @@ Environment variables to set in Vercel → Settings → Environment Variables (P
 | `NEXTAUTH_SECRET` | `openssl rand -base64 32` |
 | `NEXTAUTH_URL` | `https://<your-domain>` |
 | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_D1_DATABASE_ID`, `CLOUDFLARE_API_TOKEN` | storing users in D1 (token needs *Account → D1 → Edit*) |
-| `ELEVENLABS_API_KEY` *(optional)* | voice briefings |
 | `DUFFEL_TEST_TOKEN`, `OSRM_URL`, `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID` *(optional)* | live flights, own routing server, mobile wallets |
 
 ## Screenshots
@@ -168,7 +168,7 @@ Not built yet — where Wayfare goes after the hackathon:
 
 ## Status
 
-Done: all seven phases — real GTFS + Open-Meteo data layer with fallbacks, planner with 4 priorities, itemised times, leave-by time, daily prices and total cost, weather warnings with alternatives, 7-day price chart, comparison mode, map, one-transaction booking with NFT tickets + QR, passenger cancel / transfer, operator QR check-in, cancel-and-refund, no-show claim, Thai/English (Chinese/Japanese machine-assisted, need native review), PWA manifest.
-Not done: Fuji deployment (needs keys/AVAX), live Duffel offers (needs token), service worker/offline mode, Lighthouse audit numbers.
+What works today: all seven phases — real GTFS + Open-Meteo data layer with fallbacks, planner with 4 priorities, itemised times, leave-by time, daily prices and total cost, weather warnings with alternatives, 7-day price chart, comparison mode, map, one-transaction booking with NFT tickets + QR, passenger cancel / transfer, operator QR check-in, cancel-and-refund, no-show claim, Thai/English (Chinese/Japanese machine-assisted, need native review), PWA manifest.
+Still to do: Fuji deployment (needs keys/AVAX), live Duffel offers (needs token), service worker/offline mode, Lighthouse audit numbers.
 
 License: MIT (code). GTFS data © OTP Thailand; map data © OpenStreetMap contributors; weather by Open-Meteo (CC BY 4.0).

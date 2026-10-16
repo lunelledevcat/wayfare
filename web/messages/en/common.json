@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Wayfare — every way to travel, compared in one place",
-    "description": "Compare trains, buses, boats, flights, taxis and motorbike taxis door to door with real timetables, today's prices and the weather. Book every leg in one payment."
+    "title": "Wayfare: every way to travel, side by side",
+    "description": "Compare trains, buses, boats, flights, taxis and motorbike taxis from your door to theirs, with real timetables, today's prices and the weather. Book every leg in one payment."
   },
   "language": "Language",
   "mainNav": "Main navigation",
@@ -44,7 +44,7 @@
     "bkkPattaya": "Bangkok → Pattaya"
   },
   "footer": {
-    "tagline": "Every way to travel, compared in one place — with the weather already checked.",
+    "tagline": "Every way to travel, side by side, with the weather already checked.",
     "product": "Product",
     "plan": "Plan a trip",
     "app": "My trips & tickets",
@@ -60,7 +60,7 @@
     "listen": "Listen",
     "loading": "Preparing audio…",
     "stop": "Stop",
-    "unavailable": "Audio isn't available right now — everything else still works."
+    "unavailable": "Audio isn't available right now. Everything else still works."
   },
   "avalanche": {
     "built": "Built on Avalanche C-Chain",
@@ -73,7 +73,7 @@
     "login": "Log in",
     "logout": "Log out",
     "account": "{name}'s account",
-    "error": "Sign-in didn't work. Please try again.",
+    "error": "Sign-in didn't work. Give it another try.",
     "notConfigured": "Google login isn't set up on this server yet.",
     "privacy": "We only store your Google email, name and profile picture."
   }

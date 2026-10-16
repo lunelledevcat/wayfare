@@ -38,7 +38,7 @@
   "notRecommended": "不推荐",
   "seeAlternative": "查看替代方案",
   "trips": "{n, plural, one {# 种走法} other {# 种走法}}",
-  "noMatch": "没有符合筛选条件的行程。",
+  "noMatch": "没有符合条件的行程，试试放宽一个筛选条件。",
   "resetFilters": "清除筛选",
   "range": "{low}–{high}",
   "approx": "约 {price}",
@@ -139,7 +139,7 @@
     "refundNone": "现场支付——无在线退款",
     "refundPartial": "运营商取消免费退款；你在出发前 {h} 小时以前取消收取 {fee}% 手续费"
   },
-  "errorTitle": "无法规划此行程",
+  "errorTitle": "这趟行程暂时规划不了",
   "newSearch": "重新搜索",
   "compareDismiss": "关闭",
   "method": "方案 {n}",

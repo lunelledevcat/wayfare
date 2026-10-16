@@ -10,9 +10,9 @@
     "comfort": "Most comfortable"
   },
   "priorityHint": {
-    "fastest": "Least door-to-door time",
+    "fastest": "Least time, door to door",
     "cheapest": "Lowest total cost",
-    "value": "Price + your time + weather risk",
+    "value": "Balances price, your time and weather risk",
     "comfort": "Fewer changes, less walking, stays dry"
   },
   "best": "Best for you",
@@ -22,7 +22,7 @@
     "pricier": "{price} more",
     "cheaper": "{price} cheaper",
     "samePrice": "same price",
-    "weatherOk": "weather has no effect",
+    "weatherOk": "rain won't matter",
     "weatherRisk": "check the weather notes"
   },
   "leaveAt": "Leave at {time}",
@@ -38,7 +38,7 @@
   "notRecommended": "Not recommended",
   "seeAlternative": "See alternative",
   "trips": "{n, plural, one {# way to go} other {# ways to go}}",
-  "noMatch": "No trip matches these filters.",
+  "noMatch": "Nothing matches these filters. Try loosening one.",
   "resetFilters": "Clear filters",
   "range": "{low}–{high}",
   "approx": "about {price}",
@@ -93,8 +93,8 @@
     "destination": "Destination",
     "rain": "Rain {prob}%",
     "temp": "{min}–{max}°C",
-    "seasonal": "No forecast yet for this date — showing seasonal averages.",
-    "better": "Leave at {time} to avoid the rain (rain chance {prob}% instead of {now}%).",
+    "seasonal": "No forecast for this date yet. Showing typical weather for the season.",
+    "better": "Leave at {time} to dodge the rain ({prob}% chance instead of {now}%).",
     "source": "Forecast: {source}",
     "windy": "Gusts {kmh} km/h",
     "hot": "Very hot, feels like {c}°C",
@@ -108,14 +108,14 @@
   "calendar": {
     "title": "Prices around your date",
     "reference": "Cheapest {mode} trip per day",
-    "cheaperOn": "Going on {day} is {price} cheaper.",
-    "bestDay": "Your date is already the cheapest in this week.",
+    "cheaperOn": "Going on {day} would save you {price}.",
+    "bestDay": "Your date is already the cheapest this week.",
     "holiday": "Holiday",
     "na": "–"
   },
   "map": "Map",
   "list": "List",
-  "mapUnavailable": "Map could not be loaded.",
+  "mapUnavailable": "Couldn't load the map.",
   "sources": "Data sources for this search",
   "compareTable": {
     "depart": "Leave",
@@ -136,10 +136,10 @@
       "medium": "Medium",
       "high": "High"
     },
-    "refundNone": "Pay on site — no online refund",
-    "refundPartial": "Free if the operator cancels; {fee}% fee if you cancel up to {h} h before"
+    "refundNone": "Pay on site, no online refund",
+    "refundPartial": "Full refund if the operator cancels. If you cancel up to {h} h before, a {fee}% fee applies"
   },
-  "errorTitle": "We couldn't plan this trip",
+  "errorTitle": "Couldn't plan this trip",
   "newSearch": "New search",
   "compareDismiss": "Dismiss",
   "method": "Option {n}",

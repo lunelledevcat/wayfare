@@ -3,7 +3,7 @@
   "from": "出发地",
   "to": "目的地",
   "fromPlaceholder": "车站、地点或地址",
-  "toPlaceholder": "去哪里？",
+  "toPlaceholder": "要去哪里？",
   "swap": "交换出发地和目的地",
   "when": "时间",
   "depart": "出发时间",

@@ -20,7 +20,7 @@
   "scanButton": "Scan QR to check in",
   "services": "Services and passengers",
   "empty": "No bookings yet",
-  "emptyBody": "When people book your services, they will show up here.",
+  "emptyBody": "When people book your services, they'll show up here.",
   "departs": "Departs {day} {time}",
   "passengers": "{n, plural, one {# passenger} other {# passengers}}",
   "escrow": "Held until boarding",
@@ -43,7 +43,7 @@
   "scan": {
     "title": "Scan QR to check in",
     "body": "Point the camera at the QR in the passenger's app. We confirm they really hold the ticket.",
-    "cameraError": "Couldn't open the camera. Allow camera access, or paste the QR text / ticket number below.",
+    "cameraError": "Couldn't open the camera. Allow camera access, or paste the QR text or ticket number below.",
     "cameraOff": "Turn camera off",
     "cameraOn": "Turn camera on",
     "manual": "Or paste QR text / ticket number",

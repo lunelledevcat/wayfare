@@ -1,17 +1,17 @@
 {
   "meta": {
-    "title": "Wayfare — every way to travel, compared in one place"
+    "title": "Wayfare: every way to travel, side by side"
   },
   "hero": {
-    "badge": "Real timetables · prices for your day · hourly weather",
-    "title": "What is the best way to get there?",
-    "titleAccent": "Let Wayfare work it out",
-    "subtitle": "Compare skytrain, bus, boat, taxi, motorbike taxi, train, coach and flights door to door. See when to leave, how long every step takes and what the whole trip costs, then book every leg in one payment.",
+    "badge": "Real timetables · today's prices · hourly rain forecast",
+    "title": "Not sure how to get there?",
+    "titleAccent": "We'll compare every way, rain included",
+    "subtitle": "Skytrain, bus, boat, taxi, train, coach, flight. We line them all up from your door to theirs, so you know when to leave, how long each step takes and what the whole trip costs. Then book every leg in one payment.",
     "trySearch": "Try"
   },
   "modes": {
-    "title": "Browse by way of travel",
-    "subtitle": "Tap to see a sample route using that mode",
+    "title": "How do you want to go?",
+    "subtitle": "Tap one to see a sample route",
     "seeMore": "See more",
     "hint": {
       "metro": "BTS · MRT · Airport Rail Link · Red Line",
@@ -27,42 +27,42 @@
   "highlights": {
     "title": "Why Wayfare",
     "compare": {
-      "title": "Every option in one place",
-      "body": "No more juggling websites and doing the maths yourself. One search ranks every way to travel by what matters to you."
+      "title": "Every option, one search",
+      "body": "No more six tabs and a calculator. Search once and see every way to go, sorted by what matters to you."
     },
     "realtime": {
       "title": "Real times and prices for your day",
-      "body": "Walking, waiting, riding, transfers and buffers broken down, with prices for the day and time you travel."
+      "body": "See how long you'll walk, wait and ride, and what it costs on the day you're actually travelling."
     },
     "weather": {
-      "title": "Weather already checked",
-      "body": "If rain is expected on part of your trip, we warn you first and suggest a dry alternative."
+      "title": "Know before it rains",
+      "body": "Rain on the way? We tell you before you leave and suggest a dry option."
     }
   },
   "how": {
-    "title": "Four simple steps",
+    "title": "How it works",
     "search": {
       "title": "Search",
-      "body": "Enter where from, where to, date, time and passengers."
+      "body": "Tell us where from, where to, when, and how many of you."
     },
     "priority": {
       "title": "Pick what matters",
-      "body": "Fastest, cheapest, best value or most comfortable. Results re-rank instantly."
+      "body": "Fastest, cheapest, best value or most comfortable. The list re-sorts as you tap."
     },
     "best": {
-      "title": "See the best plan",
-      "body": "Every step timed, total cost, the weather and exactly when to leave home."
+      "title": "See your plan",
+      "body": "Every step timed, the total cost, the weather, and when to leave home."
     },
     "book": {
-      "title": "Book once, pay once",
-      "body": "Book every bookable leg in one payment, keep all tickets in the app and get refunded automatically if a service is cancelled."
+      "title": "Book it in one go",
+      "body": "Pay once for every leg you can book. Tickets land in the app, and you're refunded automatically if a service is cancelled."
     }
   },
   "compare": {
-    "title": "Three plans for the same journey",
+    "title": "One trip, three ways to do it",
     "subtitle": "Asok → Chiang Mai · {date} · leaving 08:00 · 1 passenger",
     "sample": "Sample from a real search",
-    "recommended": "Recommended",
+    "recommended": "Our pick",
     "label": {
       "cheapest": "Cheapest",
       "fastest": "Fastest",
@@ -72,32 +72,32 @@
     "perPerson": "per person",
     "mainMode": "Main leg by {mode}",
     "edge": {
-      "cheapest": "{amount} cheaper than the fastest option",
-      "fastest": "{duration} faster than the cheapest option",
-      "value": "Balances price and time (time valued at {rate} per hour)"
+      "cheapest": "{amount} cheaper than the fastest",
+      "fastest": "{duration} faster than the cheapest",
+      "value": "A fair balance of price and time (your time valued at {rate} an hour)"
     },
     "transfers": "{n, plural, =0 {No transfers} one {# transfer} other {# transfers}}",
     "walk": "{min, plural, =0 {Almost no walking} other {# min walking in total}}",
-    "weatherOk": "Weather does not affect this trip",
-    "weatherRisk": "Some weather risk, check the warnings before you go",
+    "weatherOk": "Weather won't get in the way",
+    "weatherRisk": "Some weather risk. Check the warnings before you go",
     "bookOnChain": "Book {amount} ahead in one payment",
-    "refundFull": "Full refund if cancelled",
+    "refundFull": "Full refund if you cancel",
     "refundPartial": "Cancel up to {hours} h before departure for a {pct}% refund",
     "refundNone": "Pay on the spot, no booking needed",
     "cta": "View this plan"
   },
   "operator": {
-    "eyebrow": "For transport operators",
+    "eyebrow": "Run a transport service?",
     "title": "Get paid the moment you scan a ticket",
-    "body": "Passengers pay upfront into escrow. Scan the ticket at boarding and the fare goes straight to you. Cancel a service and every passenger is refunded automatically.",
-    "cta": "Go to operator page"
+    "body": "Passengers pay up front and the money waits in escrow. Scan their ticket when they board and it's yours. Cancel a trip and everyone is refunded automatically.",
+    "cta": "Open operator page"
   },
   "stats": {
-    "title": "Live on the Avalanche blockchain",
+    "title": "Live from the Avalanche test network",
     "trips": "Trips booked",
     "tickets": "Tickets issued",
     "refunds": "Refunded automatically",
-    "note": "Live figures from the Avalanche contract (Fuji test network)"
+    "note": "Live numbers from our contract on Avalanche Fuji (a test network)"
   },
   "dataFrom": {
     "title": "Data from",
@@ -105,6 +105,6 @@
     "openMeteo": "Open-Meteo (weather forecast and PM2.5)",
     "osm": "OpenStreetMap (OSRM and Nominatim)",
     "duffel": "Duffel (flights, test mode)",
-    "more": "See every source and how we calculate"
+    "more": "See all sources and how we calculate"
   }
 }

@@ -1,6 +1,6 @@
 {
   "pending": "Confirming on the blockchain…",
-  "waitingWallet": "Please confirm in your wallet…",
+  "waitingWallet": "Confirm in your wallet…",
   "steps": {
     "quote": "Getting today's price…",
     "switch": "Switching to Avalanche…",
@@ -22,7 +22,7 @@
   "tryAgain": "Try again",
   "faucet": "Get free test money",
   "faucetDone": "Test money added: 1,000",
-  "faucetHint": "Test money has no real value. You can get it once per hour.",
+  "faucetHint": "Test money has no real value. You can get it once an hour.",
   "balance": "Test balance",
   "switch": "Switch to Avalanche",
   "connectFirst": "Connect your wallet to book",
