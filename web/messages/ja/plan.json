@@ -98,7 +98,12 @@
     "source": "予報：{source}",
     "windy": "突風 {kmh} km/h",
     "hot": "猛暑・体感 {c}°C",
-    "pm25": "PM2.5 {v} µg/m³"
+    "pm25": "PM2.5 {v} µg/m³",
+    "avgRain": "平均降水 {prob}%",
+    "window": "{from}–{to}",
+    "tempOne": "{t}°C",
+    "showHourly": "1時間ごとに表示",
+    "hideHourly": "1時間ごとを隠す"
   },
   "calendar": {
     "title": "選んだ日付前後の料金",

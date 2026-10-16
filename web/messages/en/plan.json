@@ -98,7 +98,12 @@
     "source": "Forecast: {source}",
     "windy": "Gusts {kmh} km/h",
     "hot": "Very hot, feels like {c}°C",
-    "pm25": "PM2.5 {v} µg/m³"
+    "pm25": "PM2.5 {v} µg/m³",
+    "avgRain": "Rain avg {prob}%",
+    "window": "{from}–{to}",
+    "tempOne": "{t}°C",
+    "showHourly": "Show hourly",
+    "hideHourly": "Hide hourly"
   },
   "calendar": {
     "title": "Prices around your date",

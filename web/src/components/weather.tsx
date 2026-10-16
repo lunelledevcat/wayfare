@@ -1,7 +1,10 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { useState } from "react";
 import { clock, pick } from "@/lib/format";
+import type { WeatherOverview } from "@/lib/planner/weather-summary";
 import type { HourlyWeather, WeatherAt } from "@/lib/planner/types";
 import { weatherRules } from "@/lib/config";
 import { cn } from "@/lib/utils";
@@ -66,6 +69,55 @@ export function WeatherSummary({ label, w, from, to }: { label: string; w: Hourl
         ))}
       </div>
       {!w.forecastAvailable && <p className="mt-2 text-xs text-warn">{t("seasonal")}</p>}
+    </div>
+  );
+}
+
+/**
+ * One summary card for the travel window (average rain, temperature range, worst-hour icon),
+ * with the hour-by-hour detail for both ends behind a "show hourly" button (closed by default).
+ */
+export function WeatherOverviewCard({ overview, origin, destination }: { overview: WeatherOverview; origin: HourlyWeather; destination: HourlyWeather }) {
+  const locale = useLocale();
+  const t = useTranslations("plan.weather");
+  const [open, setOpen] = useState(false);
+  const { all } = overview;
+  const Icon = weatherIcon(all.worst);
+  const temp = all.tempMin === all.tempMax ? t("tempOne", { t: all.tempMin }) : t("temp", { min: all.tempMin, max: all.tempMax });
+  return (
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
+      <div className="flex items-center gap-3">
+        <Icon className={cn("size-10 shrink-0", rainTone(all.rain))} />
+        <div className="min-w-0 flex-1">
+          <p className="font-bold tabular">
+            <span className={rainTone(all.rain)}>{t("avgRain", { prob: all.rain })}</span>
+            <span className="text-muted"> · </span>
+            {temp}
+            <span className="text-muted"> · </span>
+            <span className="whitespace-nowrap">{t("window", { from: clock(overview.from, locale), to: clock(overview.to, locale) })}</span>
+          </p>
+          <p className="mt-0.5 text-sm text-muted tabular">
+            {t("origin")} {t("rain", { prob: overview.origin.rain })} · {t("destination")} {t("rain", { prob: overview.destination.rain })}
+          </p>
+        </div>
+      </div>
+      {overview.seasonal && <p className="mt-2 text-xs text-warn">{t("seasonal")}</p>}
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls="wx-hourly"
+        onClick={() => setOpen((o) => !o)}
+        className="press mt-3 inline-flex min-h-12 items-center gap-1 rounded-xl px-3 text-sm font-semibold text-primary hover:bg-primary-soft focus-visible:ring-4 focus-visible:ring-ring"
+      >
+        {open ? t("hideHourly") : t("showHourly")}
+        <ChevronDown className={cn("size-4 transition-transform duration-200", open && "rotate-180")} aria-hidden />
+      </button>
+      {open && (
+        <div id="wx-hourly" className="mt-2 grid animate-pop-in gap-3 md:grid-cols-2">
+          <WeatherSummary label={t("origin")} w={origin} from={overview.from} to={overview.from + 4 * 3600_000} />
+          <WeatherSummary label={t("destination")} w={destination} from={Math.max(overview.from, overview.to - 4 * 3600_000)} to={overview.to} />
+        </div>
+      )}
     </div>
   );
 }

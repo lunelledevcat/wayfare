@@ -98,7 +98,12 @@
     "source": "预报：{source}",
     "windy": "阵风 {kmh} 公里/小时",
     "hot": "酷热，体感 {c}°C",
-    "pm25": "PM2.5 {v} µg/m³"
+    "pm25": "PM2.5 {v} µg/m³",
+    "avgRain": "平均降雨 {prob}%",
+    "window": "{from}–{to}",
+    "tempOne": "{t}°C",
+    "showHourly": "查看逐小时",
+    "hideHourly": "收起逐小时"
   },
   "calendar": {
     "title": "你所选日期前后的价格",

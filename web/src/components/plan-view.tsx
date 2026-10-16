@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { carToParams } from "@/lib/car";
 import { pick } from "@/lib/format";
 import { MODE_LABEL } from "@/lib/planner/labels";
+import { summarizeWeather } from "@/lib/planner/weather-summary";
 import { applyFilters, bestByPriority, DEFAULT_PREFS, rankTrips, reasonFor } from "@/lib/planner/scoring";
 import { PRIORITIES, type Mode, type PlanResult, type Preferences, type Priority, type Trip } from "@/lib/planner/types";
 import { bkkSecOfDay } from "@/lib/time";
@@ -25,7 +26,7 @@ import { EASE, SPRING } from "./ui/motion";
 import { Segmented } from "./ui/segmented";
 import { Card, Skeleton } from "./ui/primitives";
 import { useFmt } from "./use-fmt";
-import { WeatherSummary } from "./weather";
+import { WeatherOverviewCard } from "./weather";
 import { CompareTable } from "./compare-table";
 
 const PriceChart = dynamic(() => import("./price-chart"), { ssr: false, loading: () => <Skeleton className="h-56" /> });
@@ -114,11 +115,13 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
     setExtra({ windows: [], maxTransfers: null });
   };
 
-  // derived only from the plan result (no Date.now()) so server and client render the same
-  const requested = result.weather.origin.hours[0]?.time ?? 0;
-  const startWindow = result.trips.length ? Math.min(...result.trips.map((tr) => tr.depart)) : requested;
-  const travelFrom = startWindow;
-  const travelTo = Math.max(...result.trips.map((tr) => tr.arrive), travelFrom);
+  // weather over the real travel window of the best trip (derived from the plan result only, so server and client agree)
+  const windowTrip = top ?? ranked[0] ?? result.trips[0];
+  const wxFrom = windowTrip?.depart ?? result.weather.origin.hours[0]?.time ?? 0;
+  const overview = useMemo(
+    () => summarizeWeather(result.weather.origin, result.weather.destination, wxFrom, windowTrip?.arrive ?? wxFrom + 3600_000),
+    [result.weather, wxFrom, windowTrip?.arrive],
+  );
 
   const toggleWindow = (w: DayWindow) => setExtra((x) => ({ ...x, windows: x.windows.includes(w) ? x.windows.filter((y) => y !== w) : [...x.windows, w] }));
   const filters = (
@@ -246,10 +249,7 @@ export function PlanView({ result, initialPriority, initialModes }: { result: Pl
         <h2 id="wx" className="mb-2 font-bold">
           {t("weather.title")}
         </h2>
-        <div className="grid gap-3 md:grid-cols-2">
-          <WeatherSummary label={t("weather.origin")} w={result.weather.origin} from={startWindow} to={startWindow + 4 * 3600_000} />
-          <WeatherSummary label={t("weather.destination")} w={result.weather.destination} from={Math.min(travelTo, travelFrom + 30 * 3600_000) - 2 * 3600_000} to={Math.min(travelTo, travelFrom + 30 * 3600_000) + 2 * 3600_000} />
-        </div>
+        <WeatherOverviewCard overview={overview} origin={result.weather.origin} destination={result.weather.destination} />
         {result.betterDeparture && (
           <p className="mt-2 rounded-xl bg-warn-soft px-3 py-2 text-sm font-semibold text-warn">
             {t("weather.better", { time: result.betterDeparture.time, prob: result.betterDeparture.precipProb, now: result.betterDeparture.currentProb })}

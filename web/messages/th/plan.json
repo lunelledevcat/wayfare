@@ -98,7 +98,12 @@
     "source": "พยากรณ์: {source}",
     "windy": "ลมกระโชก {kmh} กม./ชม.",
     "hot": "ร้อนจัด รู้สึก {c}°C",
-    "pm25": "PM2.5 {v} µg/m³"
+    "pm25": "PM2.5 {v} µg/m³",
+    "avgRain": "ฝนเฉลี่ย {prob}%",
+    "window": "ช่วง {from}–{to}",
+    "tempOne": "{t}°C",
+    "showHourly": "ดูรายชั่วโมง",
+    "hideHourly": "ซ่อนรายชั่วโมง"
   },
   "calendar": {
     "title": "ราคาช่วงวันที่เลือก",
